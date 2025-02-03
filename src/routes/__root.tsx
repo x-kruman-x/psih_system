@@ -1,17 +1,15 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { QueryClient } from "@tanstack/react-query";
+import {
+  createRootRouteWithContext,
+  Outlet,
+} from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
-export const Route = createRootRoute({
-  // beforeLoad: ({ context: {queryClient} }) => {console.log('проверка auth')},
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   component: () => (
     <>
-      {/* <div className="p-2 flex gap-2">
-        <Link to='/orders' className="[&.active]:font-bold">
-          orders
-        </Link>{' '}
-       
-      </div>
-      <hr /> */}
       <Outlet />
       <TanStackRouterDevtools />
     </>
@@ -20,8 +18,7 @@ export const Route = createRootRoute({
     return (
       <div>
         <p>This is the notFoundComponent configured on root route</p>
-        {/* <Link to="/">Start Over</Link> */}
       </div>
-    )
+    );
   },
-})
+});

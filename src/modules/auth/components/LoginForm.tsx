@@ -3,18 +3,19 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { LoginContainer } from "../ui/LoginContainer";
 import { Text } from "../../../shared/UI/Text";
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
-import { authApi } from "../api/api";
+import { useAuthApi } from "../api/api";
 
 export function LoginForm() {
   const queryClient = useQueryClient()
+  const {validateLoginQueryOptions} = useAuthApi()
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [enabled, setEnabled] = useState(false);
 
   const { error } = useQuery({
-    ...authApi.validateLoginQueryOptions(login, password),
+    ...validateLoginQueryOptions(login, password),
     enabled: enabled, 
-    retry: 2,
+    retry: false,
   });
 
   //TODO: сделать уведомление

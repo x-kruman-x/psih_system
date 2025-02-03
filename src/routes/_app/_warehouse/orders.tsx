@@ -1,16 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Table } from "../../../modules/tables/Table";
+import { Table } from "../../../modules/warehouse/orders/components/Table";
+import { ordersApi } from "../../../modules/warehouse/orders/api/api";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/_app/_warehouse/orders")({
+  loader: ({ context: { queryClient } }) =>
+    queryClient.ensureQueryData(ordersApi.getOrdersQueryOptions()),
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { error, isError } = useSuspenseQuery(
+    ordersApi.getOrdersQueryOptions()
+  );
+
+  if (isError) {
+    console.error(error);
+  }
+
+  // if (isSuccess) {
+  //   console.log(data);
+  // }
   return (
-    <div>
-      <p className="border border-black">заказы</p>
-      {/* {import.meta.env.VITE_API_BASE_URL} */}
+    <>
       <Table />
-    </div>
+    </>
   );
 }

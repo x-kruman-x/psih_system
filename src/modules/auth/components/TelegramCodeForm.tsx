@@ -2,13 +2,14 @@ import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { LoginContainer } from "../ui/LoginContainer";
 import { Text } from "../../../shared/UI/Text";
 import { useQuery } from "@tanstack/react-query";
-import { authApi } from "../api/api";
+import { useAuthApi } from "../api/api";
 import { authDataType } from "../types/types";
 import { useState } from "react";
 import { TextLink } from "../../../shared/UI/TextLink";
 import { useTimer } from "../hooks/useTimer";
 
 export function TelegramCodeForm() {
+  const {messageFromBotQueryOptions, getTokensQueryOptions} = useAuthApi()
   const { timer, isTimerActive, resetTimer } = useTimer(120);
   const [code, setCode] = useState("");
 
@@ -18,7 +19,7 @@ export function TelegramCodeForm() {
 
   //TODO: сделать уведомление об отправке сообщения и ошибке
   const { refetch: refetchMessage } = useQuery({
-    ...authApi.messageFromBotQueryOptions(
+    ...messageFromBotQueryOptions(
       authData?.enteredLogin ?? "",
       authData?.enteredPassword ?? ""
     ),
@@ -27,10 +28,11 @@ export function TelegramCodeForm() {
   });
 
   const { error } = useQuery({
-    ...authApi.getTokensQueryOptions(authData?.enteredLogin ?? "", code),
+    ...getTokensQueryOptions(authData?.enteredLogin ?? "", code),
     enabled: !!code,
     refetchOnWindowFocus: false,
-    retry: false
+    retry: false,
+    refetchOnMount: false
   });
 
   if (error) {

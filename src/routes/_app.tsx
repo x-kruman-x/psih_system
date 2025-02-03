@@ -1,14 +1,30 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { AppNavigation } from "../modules/app-navigation/AppNavigation";
 
-export const Route = createFileRoute('/_app')({
+type AuthData = {
+  isAuth: boolean;
+};
+
+export const Route = createFileRoute("/_app")({
+  beforeLoad: ({ context: { queryClient }, location }) => {
+    console.log(queryClient.getQueryData<AuthData>(["auth"])?.isAuth)
+    if (queryClient.getQueryData<AuthData>(["auth"])?.isAuth != true) {
+      throw redirect({
+        to: "/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   return (
-      <div>
-        навигация по приложению
-        <Outlet />
-      </div>
-    );
+    <>
+      <AppNavigation />
+      <Outlet />
+    </>
+  );
 }
