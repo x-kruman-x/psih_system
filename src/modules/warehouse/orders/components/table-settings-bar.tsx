@@ -1,41 +1,47 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
 import { Text } from "../../../../shared/UI/Text";
 import { OrdersType } from "../types/tableTypes";
 import { Table } from "@tanstack/react-table";
+import { BorderedElement } from "../../../../shared/UI/BorderedElement";
 
-export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
+export function TableSettingsBar({
+  table,
+  selectedIds,
+}: {
+  table: Table<OrdersType>;
+  selectedIds: string[];
+}) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
+  const handleClick = () => {
     setIsDropdownVisible((prev) => !prev);
   };
 
-  //TODO: доделать
+  const handleOutsideClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
 
-  //   const handleOutsideClick = (event: MouseEvent) => {
-  //     const target = event.target as HTMLElement;
-  //     if (!target.closest(".dropdown")) {
-  //     //   setIsDropdownVisible(false);
-  //         console.log(!target.closest(".dropdown"))
-  //     }
-  //   };
+    if (target.closest(".settingsButton") || target.closest(".dropdown")) {
+      return;
+    }
 
-  //   useEffect(() => {
-  //     if (isDropdownVisible) {
-  //       document.addEventListener("click", handleOutsideClick);
-  //     } else {
-  //       document.removeEventListener("click", handleOutsideClick);
-  //     }
+    setIsDropdownVisible(false);
+  };
 
-  //     return () => {
-  //       document.removeEventListener("click", handleOutsideClick);
-  //     };
-  //   }, [isDropdownVisible]);
+  useEffect(() => {
+    if (isDropdownVisible) {
+      document.addEventListener("click", handleOutsideClick);
+    } else {
+      document.removeEventListener("click", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isDropdownVisible]);
 
   return (
-    <div className="py-[6px] px-[30px] flex justify-between border-b border-solid border-black sticky top-[89px] backdrop-blur-[6px]">
+    <div className="py-[6px] px-[30px] flex justify-between border-b border-solid border-black sticky top-[89px] backdrop-blur-[6px] z-20">
       <div className="w-[250px] flex justify-between">
         <button className="text-[#494949]">
           <Text>Поиск</Text>
@@ -44,10 +50,20 @@ export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
           <Text>Фильтр</Text>
         </button>
       </div>
+      {selectedIds.length !== 0 ? (
+        <div className="flex items-center gap-[30px] absolute left-[48%]">
+          {selectedIds.length}
+          <HoverBorderedEl as="button">
+            <Text>Удалить</Text>
+          </HoverBorderedEl>
+        </div>
+      ) : (
+        ""
+      )}
       <HoverBorderedEl
         as="button"
         onClick={handleClick}
-        className="text-[#494949] relative"
+        className="text-[#494949] relative settingsButton"
       >
         <Text>Настройки</Text>
         {isDropdownVisible && (
@@ -58,7 +74,7 @@ export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
             {table.getAllLeafColumns().map((column) => {
               return (
                 <div key={column.id}>
-                    {/* TODO: сделать кастомный чекбокс*/}
+                  {/* TODO: сделать кастомный чекбокс*/}
                   <label className="flex justify-between">
                     <input
                       {...{
@@ -67,7 +83,9 @@ export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
                         onChange: column.getToggleVisibilityHandler(),
                       }}
                     />{" "}
-                    <div className="grow"><Text>{column.id}</Text></div>
+                    <div className="grow">
+                      <Text>{column.id}</Text>
+                    </div>
                   </label>
                 </div>
               );
