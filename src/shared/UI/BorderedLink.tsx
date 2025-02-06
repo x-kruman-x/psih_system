@@ -14,7 +14,12 @@ export function BorderedLink({
   return (
     <Link
       to={to}
-      className={`p-[6px] border-solid border-[1px] border-transparent rounded-md hover:border-black active:border-black ${className}`}
+      className={`p-[6px] border-solid border-[1px] border-transparent rounded-md [&.active]:border-black hover:border-black ${className}`}
+    //   activeProps={{
+    //     style: {
+    //         border: 'black',
+    //     },
+    //   }}
     >
       {children}
     </Link>

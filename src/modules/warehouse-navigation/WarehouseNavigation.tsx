@@ -3,8 +3,7 @@ import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function WarehouseNavigation() {
   return (
-    <nav className="flex justify-center items-center gap-[25px] py-[5px] border-b border-black sticky top-[47px] backdrop-blur-[6px]">
-      {/* TODO: сделать активные ссылки */}
+    <nav className=" flex justify-center items-center gap-[25px] py-[5px] border-b border-black sticky top-[47px] backdrop-blur-[6px] z-20">
       <BorderedLink to="/orders">
         <Text>ЗАКАЗЫ</Text>
       </BorderedLink>

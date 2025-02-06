@@ -36,7 +36,7 @@ export const Table = () => {
   });
   return (
     <>
-      <TableSettingsBar table={table} />
+      <TableSettingsBar table={table} selectedIds={Object.keys(rowSelection)}/>
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
