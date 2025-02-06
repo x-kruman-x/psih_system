@@ -5,25 +5,19 @@ import { TelegramCodeForm } from "./TelegramCodeForm";
 import { authDataType } from "../types/types";
 
 export function ValidateWrapper() {
-   const {validateLoginQueryOptions} = useAuthApi()
+  const { validateLoginQueryOptions } = useAuthApi();
 
-    const { data: authData } = useQuery<authDataType>({
-        queryKey: ["auth"],
-        enabled: false,
-    });
+  const { data: authData } = useQuery<authDataType>({
+    queryKey: ["auth"],
+    enabled: false,
+  });
 
-    const { data: isValidated } = useQuery({
-        ...validateLoginQueryOptions(
-            authData?.enteredLogin ?? "",
-            authData?.enteredPassword ?? ""
-        ),
-        enabled: !!authData, 
-    });
-
-    return (
-        <>
-            {!isValidated ? <LoginForm/> : <TelegramCodeForm/>}
-        </>
-    )
+  const { data: isValidated } = useQuery({
+    ...validateLoginQueryOptions(
+      authData?.enteredLogin ?? "",
+      authData?.enteredPassword ?? ""
+    ),
+    enabled: !!authData,
+  });
+  return <>{!isValidated ? <LoginForm /> : <TelegramCodeForm />}</>;
 }
-

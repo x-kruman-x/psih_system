@@ -4,7 +4,7 @@ import { Text } from "../../../../shared/UI/Text";
 import { OrdersType } from "../types/tableTypes";
 import { Table } from "@tanstack/react-table";
 
-export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
+export function TableSettingsBar({ table, selectedRow }: { table: Table<OrdersType>, selectedRow:  }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -12,7 +12,7 @@ export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
     setIsDropdownVisible((prev) => !prev);
   };
 
-  //TODO: доделать
+  //TODO: доделать клик не по настройкам
 
   //   const handleOutsideClick = (event: MouseEvent) => {
   //     const target = event.target as HTMLElement;
@@ -35,7 +35,7 @@ export function TableSettingsBar({ table }: { table: Table<OrdersType> }) {
   //   }, [isDropdownVisible]);
 
   return (
-    <div className="py-[6px] px-[30px] flex justify-between border-b border-solid border-black sticky top-[89px] backdrop-blur-[6px]">
+    <div className="py-[6px] px-[30px] flex justify-between border-b border-solid border-black sticky top-[88px] backdrop-blur-[6px]">
       <div className="w-[250px] flex justify-between">
         <button className="text-[#494949]">
           <Text>Поиск</Text>
