@@ -66,7 +66,10 @@ export function useColumns(table: string) {
       accessorKey: "status",
       header: () => <Text className="!text-[#8D8D8D]">статус</Text>,
       cell: (props) => (
-        <StatusCell status={props.getValue<string>()} />
+        <StatusCell
+          status={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+        />
       ),
     },
     {

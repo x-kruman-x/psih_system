@@ -3,7 +3,9 @@ import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
 import { Text } from "../../../../shared/UI/Text";
 import { OrdersType } from "../types/tableTypes";
 import { Table } from "@tanstack/react-table";
-import { BorderedElement } from "../../../../shared/UI/BorderedElement";
+import { useDeleteOrders } from "../hooks/use-delete-orders";
+import { stringToNumber } from "../../../../shared/utils/stringToNumber";
+import { ordersApi } from "../api/api";
 
 export function TableSettingsBar({
   table,
@@ -13,6 +15,8 @@ export function TableSettingsBar({
   selectedIds: string[];
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const deleteOrders = useDeleteOrders();
 
   const handleClick = () => {
     setIsDropdownVisible((prev) => !prev);
@@ -53,7 +57,17 @@ export function TableSettingsBar({
       {selectedIds.length !== 0 ? (
         <div className="flex items-center gap-[30px] absolute left-[48%]">
           {selectedIds.length}
-          <HoverBorderedEl as="button">
+          <HoverBorderedEl
+            as="button"
+            // disabled={() => deleteOrders.getIsPending(stringToNumber(selectedIds))}
+            //TODO: отсортировать выбранные id
+            onClick={() =>
+              deleteOrders.handleDeleteOrders(stringToNumber(selectedIds))
+            }
+            // onClick={() =>
+            //   console.log(ordersApi.getOrdersQueryOptions().queryKey)
+            // }
+          >
             <Text>Удалить</Text>
           </HoverBorderedEl>
         </div>

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_app/_warehouse/orders")({
 });
 
 function RouteComponent() {
-  const { error, isError } = useSuspenseQuery(
+  const { data, error, isError } = useSuspenseQuery(
     ordersApi.getOrdersQueryOptions()
   );
 
@@ -23,7 +23,7 @@ function RouteComponent() {
   // }
   return (
     <>
-      <Table />
+      <Table data={data} />
     </>
   );
 }

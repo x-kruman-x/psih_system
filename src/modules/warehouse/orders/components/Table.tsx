@@ -1,21 +1,14 @@
-import { useQueryClient } from "@tanstack/react-query";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { ordersApi } from "../api/api";
 import { OrdersType } from "../types/tableTypes";
 import { useColumns } from "../../../../hooks/useColumns";
 import { TableSettingsBar } from "./table-settings-bar";
 
-export const Table = () => {
-  const queryClient = useQueryClient();
-
-  const [data, _setData] = useState<OrdersType[]>(
-    () => queryClient.getQueryData([ordersApi.basekey, "getOrders"]) ?? []
-  );
+export const Table = ({ data }: { data: OrdersType[] }) => {
   const columns = useColumns('orderTable')
 
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -29,7 +22,7 @@ export const Table = () => {
       columnVisibility,
       rowSelection
     },
-    getRowId: (originalRow) => originalRow.id,
+    getRowId: (originalRow) => originalRow.id.toString(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
