@@ -2,12 +2,15 @@ import { queryOptions } from "@tanstack/react-query";
 import { instance } from "../../../../shared/API/base";
 
 async function getOrders() {
-    console.log('запрос на получение orders')
     return instance.get(`/api/orders/`);
 }
 
 async function deleteOrders(idsArr: number[]) {
     return instance.delete('/api/orders/multiple/', { data: idsArr } )
+}
+
+async function patchOrder(orderId: number, key: string, newValue: any) {
+    return instance.patch(`/api/orders/?order_id=${orderId}`, { [key]: newValue })
 }
 
 export const ordersApi = {
@@ -24,5 +27,11 @@ export const ordersApi = {
 
     deleteOrders: (idsArr: number[]) => {
         return deleteOrders(idsArr)
-    }
+    },
+    updateOrderStatus: (orderId: number, newValue: any) => {
+        return patchOrder(orderId, 'status', newValue)
+    },
+    updateOrderTag: (orderId: number, newValue: any) => {
+        return patchOrder(orderId, 'tag', newValue)
+    },
 }

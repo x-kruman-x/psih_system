@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDateTime } from "../shared/utils/formateDateTime";
 import { OrdersType } from "../modules/warehouse/orders/types/tableTypes";
-import { Checkbox } from "../shared/UI/CheckBox";
+import { CustomCheckbox } from "../shared/UI/CustomCheckBox";
 import { Text } from "../shared/UI/Text";
 import { Link } from "@tanstack/react-router";
-import { StatusCell } from "../modules/status-cell/StatusCell";
+import { SelectCell } from "../shared/component/selectCell";
 
 export function useColumns(table: string) {
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
@@ -21,7 +21,7 @@ export function useColumns(table: string) {
         <div
           className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row.getIsSelected())}`}
         >
-          <Checkbox
+          <CustomCheckbox
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
@@ -66,9 +66,11 @@ export function useColumns(table: string) {
       accessorKey: "status",
       header: () => <Text className="!text-[#8D8D8D]">статус</Text>,
       cell: (props) => (
-        <StatusCell
-          status={props.getValue<string>()}
+        <SelectCell
+          currentValue={props.getValue<string>()}
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType='status'
         />
       ),
     },
@@ -77,11 +79,12 @@ export function useColumns(table: string) {
       accessorKey: "tag",
       header: () => <Text className="!text-[#8D8D8D]">тег</Text>,
       cell: (props) => (
-        <Text
-          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
-        >
-          {props.getValue<string>()}
-        </Text>
+        <SelectCell
+          currentValue={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType='tag'
+        />
       ),
     },
     {

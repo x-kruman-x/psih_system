@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ordersApi } from "../api/api";
-import { OrdersType } from "../types/tableTypes";
 
 export function useDeleteOrders() {
   const queryClient = useQueryClient();
@@ -10,18 +9,9 @@ export function useDeleteOrders() {
     async onError(error) {
       console.error("Failed to delete orders:", error);
     },
-    // async onSuccess(data, deletedIds: number[]) {
-    //   await queryClient.setQueryData(
-    //     ordersApi.getOrdersQueryOptions().queryKey,
-    //     (orders: OrdersType[]) => orders?.filter((item) => !deletedIds.includes(item.id))
-    //   );
-    //   console.log(data)
-    // },
-    async onSettled(data) {
-      await queryClient.invalidateQueries({ queryKey: [ordersApi.basekey, 'getOrders'] });
-      const updatedData = queryClient.getQueryData<OrdersType[]>([ordersApi.basekey, 'getOrders'])
-      console.log(updatedData)
-    },
+    async onSettled() {
+      await queryClient.invalidateQueries({ queryKey: [ordersApi.basekey, "getOrders"] });
+    }
   });
   deleteOrdersMutation.variables
   return {

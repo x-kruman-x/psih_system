@@ -5,14 +5,14 @@ import { OrdersType } from "../types/tableTypes";
 import { Table } from "@tanstack/react-table";
 import { useDeleteOrders } from "../hooks/use-delete-orders";
 import { stringToNumber } from "../../../../shared/utils/stringToNumber";
-import { ordersApi } from "../api/api";
+import { CustomCheckbox } from "../../../../shared/UI/CustomCheckBox";
 
 export function TableSettingsBar({
   table,
-  selectedIds,
+  selectedIds
 }: {
   table: Table<OrdersType>;
-  selectedIds: string[];
+  selectedIds: string[]
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -55,18 +55,14 @@ export function TableSettingsBar({
         </button>
       </div>
       {selectedIds.length !== 0 ? (
-        <div className="flex items-center gap-[30px] absolute left-[48%]">
+        <div className="flex items-center gap-[30px] absolute left-1/2 -translate-x-1/2">
           {selectedIds.length}
           <HoverBorderedEl
             as="button"
-            // disabled={() => deleteOrders.getIsPending(stringToNumber(selectedIds))}
-            //TODO: отсортировать выбранные id
-            onClick={() =>
+            //TODO: удалять массив id
+            onClick={() =>{
               deleteOrders.handleDeleteOrders(stringToNumber(selectedIds))
-            }
-            // onClick={() =>
-            //   console.log(ordersApi.getOrdersQueryOptions().queryKey)
-            // }
+            }}
           >
             <Text>Удалить</Text>
           </HoverBorderedEl>
@@ -88,11 +84,9 @@ export function TableSettingsBar({
             {table.getAllLeafColumns().map((column) => {
               return (
                 <div key={column.id}>
-                  {/* TODO: сделать кастомный чекбокс*/}
                   <label className="flex justify-between">
-                    <input
+                    <CustomCheckbox
                       {...{
-                        type: "checkbox",
                         checked: column.getIsVisible(),
                         onChange: column.getToggleVisibilityHandler(),
                       }}

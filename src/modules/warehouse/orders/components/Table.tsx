@@ -7,20 +7,23 @@ import { useState } from "react";
 import { OrdersType } from "../types/tableTypes";
 import { useColumns } from "../../../../hooks/useColumns";
 import { TableSettingsBar } from "./table-settings-bar";
+import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
+import { Text } from "../../../../shared/UI/Text";
 
 export const Table = ({ data }: { data: OrdersType[] }) => {
-  const columns = useColumns('orderTable')
+  const columns = useColumns("orderTable");
 
   const [columnVisibility, setColumnVisibility] = useState({});
 
-  const [rowSelection, setRowSelection] = useState({})
+  const [rowSelection, setRowSelection] = useState({});
+  const selectedIds = rowSelection ? Object.keys(rowSelection) : [];
 
   const table = useReactTable({
     data,
     columns,
     state: {
       columnVisibility,
-      rowSelection
+      rowSelection,
     },
     getRowId: (originalRow) => originalRow.id.toString(),
     onColumnVisibilityChange: setColumnVisibility,
@@ -28,35 +31,41 @@ export const Table = ({ data }: { data: OrdersType[] }) => {
     getCoreRowModel: getCoreRowModel(),
   });
   return (
-    <>
-      <TableSettingsBar table={table} selectedIds={Object.keys(rowSelection)}/>
+    <div className="relative">
+      <TableSettingsBar table={table} selectedIds={selectedIds} />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => {
-              return (
-                <th key={header.id} colSpan={header.colSpan} className="w-1/6 py-[5px] border-r border-solid border-black last:border-none">
-                  {header.isPlaceholder ? null : (
-                    <>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                      
-                    </>
-                  )}
-                </th>
-              )
-            })}
-          </tr>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    className="w-1/6 py-[5px] border-r border-solid border-black last:border-none"
+                  >
+                    {header.isPlaceholder ? null : (
+                      <>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
           ))}
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="group">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="w-1/6 text-center border-r border-solid border-black last:border-none">
+                <td
+                  key={cell.id}
+                  className="w-1/6 text-center border-r border-solid border-black last:border-none"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -64,6 +73,18 @@ export const Table = ({ data }: { data: OrdersType[] }) => {
           ))}
         </tbody>
       </table>
-    </>
+      <HoverBorderedEl
+        as="button"
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-white z-20"
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <Text>НАВЕРХ</Text>
+      </HoverBorderedEl>
+    </div>
   );
 };

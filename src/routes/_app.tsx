@@ -1,9 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AppNavigation } from "../modules/app-navigation/AppNavigation";
-
-type AuthData = {
-  isAuth: boolean;
-};
+import { AuthData } from "../modules/auth/types/types";
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: ({ context: { queryClient }, location }) => {
