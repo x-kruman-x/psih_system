@@ -1,0 +1,21 @@
+export type orderType = {
+  full_name: string;
+  status: string;
+  tag: string | null;
+  channel: string | null;
+  address: string;
+  task: string | null;
+  note: string | null;
+  comment: string | null;
+  storage: string | null;
+  project: string | null;
+  phone_number: string | null;
+  email: string | null;
+  id: number;
+  messages: string | null;
+  discount: number;
+  promo: string | null;
+  order_date: string;
+  modifications_in_order: object[];
+  files: object[];
+};

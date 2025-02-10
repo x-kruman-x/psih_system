@@ -4,10 +4,11 @@ import { SelectButton } from "../UI/status-button/SelectButton";
 import { SelectButtonListElement } from "../UI/status-button/SelectButton-listElement";
 
 type SelectCellProps = {
-  currentValue: string;
+  currentValue: string | null;
   buttonStyle?: string;
   orderId: number;
   btnType: "status" | "tag";
+  wFull?: boolean;
 };
 
 export function SelectCell({
@@ -15,6 +16,7 @@ export function SelectCell({
   buttonStyle,
   orderId,
   btnType,
+  wFull = false,
 }: SelectCellProps) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -52,7 +54,7 @@ export function SelectCell({
   }, [isOpenMenu]);
 
   return (
-    <div className="mx-4 relative">
+    <div className={`mx-4 relative ${!wFull ? '' : 'w-full'}`}>
       <SelectButton
         onClick={handleMenu}
         text={buttonContent?.text}
@@ -67,9 +69,10 @@ export function SelectCell({
               key={content.id}
               text={content.text}
               backgroundColor={content.backgroundColor}
-              onClick={() =>
+              onClick={() =>{
                 updateFunc(orderId, content.text)
-              }
+                setIsOpenMenu(false)
+              }}
             />
           ))}
         </div>

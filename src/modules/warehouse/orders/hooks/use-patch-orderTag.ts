@@ -18,7 +18,6 @@ export function usePatchOrderTag() {
       console.error(error);
     },
     onSettled: (data) => {
-      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
   });

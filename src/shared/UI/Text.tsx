@@ -3,11 +3,12 @@ import React from 'react';
 type TextProps = {
   children: React.ReactNode;
   className?: string;
+  isGray?: boolean;
 };
 
-export const Text = ({ children, className = "" }: TextProps) => {
+export const Text = ({ children, className = "", isGray = false }: TextProps) => {
   return (
-    <p className={`text-black text-[13px] leading-[17px] ${className}`}>
+    <p className={`${!isGray ? 'text-black' : 'text-[#8D8D8D]'} text-[13px] leading-[17px] ${className}`}>
       {children}
     </p>
   );

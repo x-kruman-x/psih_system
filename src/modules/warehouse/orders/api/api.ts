@@ -5,6 +5,10 @@ async function getOrders() {
     return instance.get(`/api/orders/`);
 }
 
+async function getOrderById(id: string) {
+    return instance.get(`/api/orders/${id}`)
+}
+
 async function deleteOrders(idsArr: number[]) {
     return instance.delete('/api/orders/multiple/', { data: idsArr } )
 }
@@ -20,6 +24,15 @@ export const ordersApi = {
             queryKey: [ordersApi.basekey, 'getOrders'],
             queryFn: async() => {
                 const resp = await getOrders()
+                return resp.data
+            }
+        })
+    },
+    getOrderQueryOptions: (id: string) => {
+        return queryOptions({
+            queryKey: [ordersApi.basekey, 'getOrder', id],
+            queryFn: async() => {
+                const resp = await getOrderById(id)
                 return resp.data
             }
         })

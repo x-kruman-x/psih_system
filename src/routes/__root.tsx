@@ -11,6 +11,7 @@ export const Route = createRootRouteWithContext<{
 }>()({
   component: () => (
     <>
+      {/* TODO: разобраться с навигацией */}
       {/* <Navigate to="/orders" /> */}
       <Outlet />
       <TanStackRouterDevtools />
