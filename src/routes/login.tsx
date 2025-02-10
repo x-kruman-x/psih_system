@@ -8,9 +8,9 @@ export const Route = createFileRoute("/login")({
       throw redirect({ to: "/orders" });
     }
   },
-  component: RouteComponent,
+  component: Login,
 });
 
-function RouteComponent() {
+function Login() {
   return <ValidateWrapper />;
 }

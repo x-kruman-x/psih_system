@@ -30,7 +30,12 @@ export function useColumns(table: string) {
             className="ml-[6px]"
           />
           <div className="grow">
-            <Link to="">
+            <Link
+              to="/orders/$orderId/edit"
+              params={{
+                orderId: row.original.id.toString(),
+              }}
+            >
               <Text>{row.original.id}</Text>
             </Link>
           </div>
@@ -70,7 +75,7 @@ export function useColumns(table: string) {
           currentValue={props.getValue<string>()}
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
-          btnType='status'
+          btnType="status"
         />
       ),
     },
@@ -83,7 +88,7 @@ export function useColumns(table: string) {
           currentValue={props.getValue<string>()}
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
-          btnType='tag'
+          btnType="tag"
         />
       ),
     },
