@@ -1,19 +1,18 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDateTime } from "../shared/utils/formateDateTime";
-import { OrdersType } from "../modules/warehouse/orders/types/tableTypes";
 import { CustomCheckbox } from "../shared/UI/CustomCheckBox";
 import { Text } from "../shared/UI/Text";
 import { Link } from "@tanstack/react-router";
 import { SelectCell } from "../shared/component/selectCell";
 
-export function useColumns(table: string) {
+export function useColumns<T extends Record<string, any>>(table: string): ColumnDef<T>[]   {
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
 
   const returnBorderStyle = (isSelected: boolean) => {
     return isSelected ? "border-black" : "border-transparent";
   };
 
-  const orderColumns: ColumnDef<OrdersType>[] = [
+  const orderColumns: ColumnDef<T>[] = [
     {
       id: "Номер",
       header: () => <Text className="pl-[23px] !text-[#8D8D8D]">номер</Text>,
@@ -75,7 +74,7 @@ export function useColumns(table: string) {
           currentValue={props.getValue<string>()}
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
-          btnType="status"
+          btnType='status'
         />
       ),
     },

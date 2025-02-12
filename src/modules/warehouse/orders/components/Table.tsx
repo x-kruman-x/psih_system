@@ -4,13 +4,13 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { OrdersType } from "../types/tableTypes";
 import { useColumns } from "../../../../hooks/useColumns";
 import { TableSettingsBar } from "./table-settings-bar";
 import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
 import { Text } from "../../../../shared/UI/Text";
+import { configTableType } from "../types/columnTableTypes";
 
-export const Table = ({ data }: { data: OrdersType[] }) => {
+export const Table = <T extends Record<string, any>>({ data, configTable }: { data: T[], configTable: configTableType }) => {
   const columns = useColumns("orderTable");
 
   const [columnVisibility, setColumnVisibility] = useState({});

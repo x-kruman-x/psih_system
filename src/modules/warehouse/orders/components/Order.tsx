@@ -3,7 +3,7 @@ import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
 import { Text } from "../../../../shared/UI/Text";
 import { EditDataDialog } from "./edit-data-dialog";
 import { OrderDataContainer } from "./order-data-container";
-import { orderType } from "../types/orderTypes";
+import { orderType } from "../types/ordersTableTypes";
 import { SelectCell } from "../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../shared/utils/formateDateTime";
 

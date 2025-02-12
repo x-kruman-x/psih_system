@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
 import { Text } from "../../../../shared/UI/Text";
-import { OrdersType } from "../types/tableTypes";
 import { Table } from "@tanstack/react-table";
 import { useDeleteOrders } from "../hooks/use-delete-orders";
 import { stringToNumber } from "../../../../shared/utils/stringToNumber";
 import { CustomCheckbox } from "../../../../shared/UI/CustomCheckBox";
 
-export function TableSettingsBar({
+export function TableSettingsBar<T extends Record<string, any>>({
   table,
   selectedIds
 }: {
-  table: Table<OrdersType>;
+  table: Table<T>;
   selectedIds: string[]
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);

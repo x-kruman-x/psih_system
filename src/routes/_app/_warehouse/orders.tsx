@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Table } from "../../../modules/warehouse/orders/components/Table";
 import { ordersApi } from "../../../modules/warehouse/orders/api/api";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { OrdersType } from "../../../modules/warehouse/orders/types/ordersTableTypes";
 
 export const Route = createFileRoute("/_app/_warehouse/orders")({
   loader: ({ context: { queryClient } }) =>
@@ -23,7 +24,7 @@ function RouteComponent() {
   // }
   return (
     <>
-      <Table data={data} />
+      <Table<OrdersType> data={data || []} configTable="orderTable"/>
     </>
   );
 }
