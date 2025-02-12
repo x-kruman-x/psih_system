@@ -25,5 +25,14 @@ export type orderType = {
   promo: string | null;
   order_date: string;
   modifications_in_order: object[];
-  files: object[];
+  files: [
+    {
+      id: number;
+      url: string;
+      image: boolean;
+      size: string | null;
+      user: object | null;
+      created_at: string | null;
+    },
+  ];
 };

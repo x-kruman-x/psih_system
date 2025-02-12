@@ -24,7 +24,7 @@ function RouteComponent() {
   // }
   return (
     <>
-      <Table<OrdersType> data={data || []} configTable="orderTable"/>
+      <Table<OrdersType> data={data || []} configTable='orderTable' />
     </>
   );
 }

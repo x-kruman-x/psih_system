@@ -19,10 +19,10 @@ export function OrderDataContainer({
   border = false,
 }: OrderDataContainerProps) {
   return (
-    <div className="flex flex-col gap-3 group">
+    <div className="flex flex-col gap-3 group/orderDataContainer">
       <Text
         isGray={true}
-        className={`${isHiddenText ? "opacity-0 group-hover:opacity-100" : ""} transition`}
+        className={`${isHiddenText ? "opacity-0 group-hover/orderDataContainer:opacity-100" : ""} transition`}
       >
         {hiddenText}
       </Text>

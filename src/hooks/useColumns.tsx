@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { SelectCell } from "../shared/component/selectCell";
 
 export function useColumns<T extends Record<string, any>>(table: string): ColumnDef<T>[]   {
+  const contentThStyle = `!text-[#8D8D8D]`;
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
 
   const returnBorderStyle = (isSelected: boolean) => {
@@ -15,7 +16,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
   const orderColumns: ColumnDef<T>[] = [
     {
       id: "Номер",
-      header: () => <Text className="pl-[23px] !text-[#8D8D8D]">номер</Text>,
+      header: () => <Text className={`pl-[23px] ${contentThStyle}`}>номер</Text>,
       cell: ({ row }) => (
         <div
           className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row.getIsSelected())}`}
@@ -44,7 +45,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     {
       id: "Дата",
       accessorKey: "order_date",
-      header: () => <Text className="!text-[#8D8D8D]">дата</Text>,
+      header: () => <Text className={contentThStyle}>дата</Text>,
       cell: (props) => (
         <Text
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
@@ -56,7 +57,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     {
       id: "Поставщик",
       accessorKey: "full_name",
-      header: () => <Text className="!text-[#8D8D8D]">покупатель</Text>,
+      header: () => <Text className={contentThStyle}>покупатель</Text>,
       cell: (props) => (
         <Text
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
@@ -68,7 +69,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     {
       id: "Статус",
       accessorKey: "status",
-      header: () => <Text className="!text-[#8D8D8D]">статус</Text>,
+      header: () => <Text className={contentThStyle}>статус</Text>,
       cell: (props) => (
         <SelectCell
           currentValue={props.getValue<string>()}
@@ -81,7 +82,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     {
       id: "Тег",
       accessorKey: "tag",
-      header: () => <Text className="!text-[#8D8D8D]">тег</Text>,
+      header: () => <Text className={contentThStyle}>тег</Text>,
       cell: (props) => (
         <SelectCell
           currentValue={props.getValue<string>()}
@@ -94,7 +95,7 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     {
       id: "Сумма",
       accessorKey: "amount",
-      header: () => <Text className="!text-[#8D8D8D]">сумма</Text>,
+      header: () => <Text className={contentThStyle}>сумма</Text>,
       cell: (props) => (
         <Text
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}

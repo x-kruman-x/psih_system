@@ -11,7 +11,7 @@ import { Text } from "../../../../shared/UI/Text";
 import { configTableType } from "../types/columnTableTypes";
 
 export const Table = <T extends Record<string, any>>({ data, configTable }: { data: T[], configTable: configTableType }) => {
-  const columns = useColumns("orderTable");
+  const columns = useColumns(configTable);
 
   const [columnVisibility, setColumnVisibility] = useState({});
 

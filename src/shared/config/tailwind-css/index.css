@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+	width: 7px;               /* ширина scrollbar */
+}
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+	background: transparent;        /* цвет дорожки */
+}
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.3);    /* цвет плашки */
+	border-radius: 7px;       /* закругления плашки */
+}
