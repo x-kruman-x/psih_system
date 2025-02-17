@@ -50,13 +50,11 @@ async function getTokens(username: string, code: string) {
 }
 
 export async function refreshToken() {
-  try {
     const response = await refreshInstance.post("/api/jwt/refresh/")
     console.log('refresh')
     localStorage.setItem("access_token", response.data.access_token);
-  } catch(e) {
-    console.error(e)
-  }
+    return response
+  
 }
 
 export const useAuthApi = () => {
@@ -102,20 +100,17 @@ export const useAuthApi = () => {
       });
     },
 
-    // refreshTokenValidationOptions: () => {
-    //   return queryOptions({
-    //     queryKey: [basekey, 'refresh'],
-    //     queryFn: async() => {
-    //       const response = await refreshToken()
-    //       localStorage.setItem("access_token", response.data.access_token);
-
-    //       console.log(response.data);
-
-    //       queryClient.setQueryData(["auth"], {
-    //         isAuth: true,
-    //       });
-    //     }
-    //   })
-    // },
+    refreshTokenValidationOptions: () => {
+      return queryOptions({
+        queryKey: [basekey, 'refresh'],
+        queryFn: async() => {
+          const response = await refreshToken()
+          queryClient.setQueryData(["auth"], {
+            isAuth: true,
+          });
+          return response.data
+        }
+      })
+    },
   };
 };

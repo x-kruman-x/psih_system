@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../shared/UI/Text";
+import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
+import { Text } from "../../../../../shared/UI/Text";
 import { OrderDataContainer } from "./order-data-container";
 
 export function EditDataDialog() {

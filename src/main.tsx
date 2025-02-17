@@ -26,8 +26,11 @@ declare module "@tanstack/react-router" {
 
 if (localStorage.getItem("access_token")) {
   await refreshToken();
+  queryClient.setQueryDefaults(['auth'], {
+    gcTime: Infinity
+  });
   queryClient.setQueryData(["auth"], {
-    isAuth: true,
+    isAuth: true
   });
 }
 

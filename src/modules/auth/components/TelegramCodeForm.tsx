@@ -32,7 +32,8 @@ export function TelegramCodeForm() {
     enabled: !!code,
     refetchOnWindowFocus: false,
     retry: false,
-    refetchOnMount: false
+    refetchOnMount: false,
+    gcTime: Infinity
   });
 
   if (error) {

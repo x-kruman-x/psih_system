@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../shared/UI/Text";
+import HoverBorderedEl from "../UI/HoverBorderedEl";
+import { Text } from "../UI/Text";
 import { Table } from "@tanstack/react-table";
-import { useDeleteOrders } from "../hooks/use-delete-orders";
-import { stringToNumber } from "../../../../shared/utils/stringToNumber";
-import { CustomCheckbox } from "../../../../shared/UI/CustomCheckBox";
+import { useDeleteOrders } from "../../modules/warehouse/orders/hooks/use-delete-orders";
+import { stringToNumber } from "../utils/stringToNumber";
+import { CustomCheckbox } from "../UI/CustomCheckBox";
 
 export function TableSettingsBar<T extends Record<string, any>>({
   table,

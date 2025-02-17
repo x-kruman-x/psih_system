@@ -18,11 +18,11 @@ export function usePatchOrderTag() {
       console.error(error);
     },
     onSettled: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.invalidateQueries({ queryKey: ordersApi.getOrdersQueryOptions().queryKey });
     },
   });
 
   return {
-    handleUpdateOrderTag: updateOrderTagMutation.mutate,
+    handleUpdateOrderTag: updateOrderTagMutation.mutateAsync,
   };
 }

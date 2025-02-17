@@ -15,3 +15,8 @@ div::-webkit-scrollbar-thumb {
 	background-color: rgba(0, 0, 0, 0.3);    /* цвет плашки */
 	border-radius: 7px;       /* закругления плашки */
 }
+@layer base {
+  :root {
+		--radius: 0.5rem
+	}
+}

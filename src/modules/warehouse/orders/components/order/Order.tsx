@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import HoverBorderedEl from "../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../shared/UI/Text";
+import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
+import { Text } from "../../../../../shared/UI/Text";
 import { EditDataDialog } from "./edit-data-dialog";
 import { OrderDataContainer } from "./order-data-container";
-import { orderType } from "../types/ordersTableTypes";
-import { SelectCell } from "../../../../shared/component/selectCell";
-import { formatDateTime } from "../../../../shared/utils/formateDateTime";
-import { FileContainer } from "../../../../shared/component/files/fileContainer";
+import { orderType } from "../../types/ordersTableTypes";
+import { SelectCell } from "../../../../../shared/component/selectCell";
+import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
+import { FileContainer } from "../../../../../shared/component/files/fileContainer";
+import { CardSettingsBar } from "@/shared/component/card-settings-bar";
 
 type OrderProps = {
   orderData: orderType;
@@ -15,7 +16,7 @@ type OrderProps = {
 export function Order({ orderData }: OrderProps) {
   return (
     <>
-    
+      <CardSettingsBar pageType={'order'} />
       <div className="grid grid-cols-3 grid-rows-2 border-b border-black border-solid">
         <div className="row-span-2 px-20 pb-[23px] border-r border-black border-solid group/title">
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
@@ -78,9 +79,7 @@ export function Order({ orderData }: OrderProps) {
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
             <Text isGray={true}>файлы</Text>
           </h2>
-          <FileContainer files={orderData.files}/>
-          {/* TODO: сделать кнопку для загрузки файлов */}
-          <input type="file" />
+          <FileContainer files={orderData.files} orderId={orderData.id}/>
         </div>
       </div>
       {/* TODO: доделать таблицу с товарами в заказе */}

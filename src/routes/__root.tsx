@@ -9,14 +9,15 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
 }>()({
-  component: () => (
-    <>
-      {/* TODO: разобраться с навигацией */}
-      {/* <Navigate to="/orders" /> */}
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
+  component: () => {
+    return (
+      <>
+        <Navigate to="/orders" />
+        <Outlet />
+        <TanStackRouterDevtools />
+      </>
+    );
+  },
   notFoundComponent: () => {
     return (
       <div>
@@ -25,3 +26,5 @@ export const Route = createRootRouteWithContext<{
     );
   },
 });
+
+

@@ -4,7 +4,7 @@ import { AuthData } from "../modules/auth/types/types";
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: ({ context: { queryClient }, location }) => {
-    console.log(queryClient.getQueryData<AuthData>(["auth"])?.isAuth)
+    console.log(queryClient.getQueryData<AuthData>(["auth"])?.isAuth);
     if (queryClient.getQueryData<AuthData>(["auth"])?.isAuth != true) {
       throw redirect({
         to: "/login",

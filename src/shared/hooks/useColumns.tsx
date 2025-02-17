@@ -1,9 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDateTime } from "../shared/utils/formateDateTime";
-import { CustomCheckbox } from "../shared/UI/CustomCheckBox";
-import { Text } from "../shared/UI/Text";
+import { formatDateTime } from "../utils/formateDateTime";
+import { CustomCheckbox } from "../UI/CustomCheckBox";
+import { Text } from "../UI/Text";
 import { Link } from "@tanstack/react-router";
-import { SelectCell } from "../shared/component/selectCell";
+import { SelectCell } from "../component/selectCell";
 
 export function useColumns<T extends Record<string, any>>(table: string): ColumnDef<T>[]   {
   const contentThStyle = `!text-[#8D8D8D]`;

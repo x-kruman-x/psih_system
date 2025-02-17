@@ -17,13 +17,12 @@ export function usePatchOrderStatus() {
     onError: (error) => {
       console.error(error);
     },
-    onSettled: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: ordersApi.getOrdersQueryOptions().queryKey });
     },
   });
 
   return {
-    handleUpdateOrderStatus: updateOrderStatusMutation.mutate,
+    handleUpdateOrderStatus: updateOrderStatusMutation.mutateAsync,
   };
 }

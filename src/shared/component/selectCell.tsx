@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useConfigSelectCell } from "../../hooks/useConfigSelectCell";
+import { useConfigSelectCell } from "../hooks/useConfigSelectCell";
 import { SelectButton } from "../UI/status-button/SelectButton";
 import { SelectButtonListElement } from "../UI/status-button/SelectButton-listElement";
 
@@ -25,7 +25,7 @@ export function SelectCell({
   const buttonContent = selectCellContent.find(
     (content) => content.text === currentValue
   );
-
+  
   const handleMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
@@ -69,9 +69,16 @@ export function SelectCell({
               key={content.id}
               text={content.text}
               backgroundColor={content.backgroundColor}
-              onClick={() =>{
-                updateFunc(orderId, content.text)
-                setIsOpenMenu(false)
+              onClick={async () => {
+                try {
+                  //TODO: обновление страницы при изменении селекта поменять, обновляется всегда только orders
+                  // функция обновления в зависимости от страницы
+                  // не patch order tag, а patch tag
+                  await updateFunc(orderId, content.text);
+                  setIsOpenMenu(false);
+                } catch (error) {
+                  console.error("Ошибка при обновлении:", error);
+                }
               }}
             />
           ))}

@@ -5,11 +5,11 @@ export default function getImgName(inputString: string) {
       return '';
     }
   
-    const dotIndex = inputString.indexOf('.', underscoreIndex);
+    // const dotIndex = inputString.indexOf('.', underscoreIndex);
   
-    if (dotIndex === -1) {
-      return '';
-    }
+    // if (dotIndex === -1) {
+    //   return '';
+    // }
   
-    return inputString.substring(underscoreIndex + 1, dotIndex);
+    return inputString.substring(underscoreIndex + 1);
   }
