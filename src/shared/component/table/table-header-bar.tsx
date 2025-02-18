@@ -11,7 +11,7 @@ export function TableHeaderBar<T extends Record<string, any>>({
   selectedIds: string[];
 }) {
   const { isFilterOpen } = useFilterToggle();
-  console.log(isFilterOpen)
+
   return !isFilterOpen ? (
     <TableSettings table={table} selectedIds={selectedIds} />
   ) : (

@@ -1,15 +1,25 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { isFilterType } from "../types/isFilterTypes";
 
 export function useFilterToggle() {
-    const queryClient = useQueryClient();
-  
-    const toggleFilter = async() => {
-      await queryClient.setQueryData(["isFilterOpen"], (previousState: any) => ({
+  const queryClient = useQueryClient();
+
+  const { data: filterState } = useQuery<isFilterType>({
+    queryKey: ["isFilter"],
+    queryFn: async () => {
+      return { isFilterOpen: false };
+    },
+    staleTime: Infinity,
+  });
+
+  const toggleFilter = async () => {
+    await queryClient.setQueryData<isFilterType>(
+      ["isFilter"],
+      (previousState) => ({
         isFilterOpen: !(previousState?.isFilterOpen ?? false),
-      }));
-    };
-    
-    const isFilterOpen = queryClient.getQueryData(["isFilterOpen"])?.isFilterOpen;
-    
-    return { isFilterOpen, toggleFilter };
-  }
+      })
+    );
+  };
+
+  return { isFilterOpen: filterState?.isFilterOpen ?? false, toggleFilter };
+}
