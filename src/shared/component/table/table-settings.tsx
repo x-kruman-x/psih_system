@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import HoverBorderedEl from "../UI/HoverBorderedEl";
-import { Text } from "../UI/Text";
+import HoverBorderedEl from "../../UI/HoverBorderedEl";
+import { Text } from "../../UI/Text";
 import { Table } from "@tanstack/react-table";
-import { useDeleteOrders } from "../../modules/warehouse/orders/hooks/use-delete-orders";
-import { stringToNumber } from "../utils/stringToNumber";
-import { CustomCheckbox } from "../UI/CustomCheckBox";
+import { useDeleteOrders } from "../../../modules/warehouse/orders/hooks/use-delete-orders";
+import { stringToNumber } from "../../utils/stringToNumber";
+import { CustomCheckbox } from "../../UI/CustomCheckBox";
+import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
 
-export function TableSettingsBar<T extends Record<string, any>>({
+export function TableSettings<T extends Record<string, any>>({
   table,
   selectedIds
 }: {
@@ -14,6 +15,7 @@ export function TableSettingsBar<T extends Record<string, any>>({
   selectedIds: string[]
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const { toggleFilter } = useFilterToggle();
 
   const deleteOrders = useDeleteOrders();
 
@@ -49,7 +51,7 @@ export function TableSettingsBar<T extends Record<string, any>>({
         <button className="text-[#494949]">
           <Text>Поиск</Text>
         </button>
-        <button className="text-[#494949]">
+        <button className="text-[#494949]" onClick={toggleFilter}>
           <Text>Фильтр</Text>
         </button>
       </div>

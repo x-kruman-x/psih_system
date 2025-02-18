@@ -4,11 +4,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useColumns } from "../hooks/useColumns";
-import { TableSettingsBar } from "./table-settings-bar";
-import HoverBorderedEl from "../UI/HoverBorderedEl";
-import { Text } from "../UI/Text";
-import { configTableType } from "../types/columnTableTypes";
+import { useColumns } from "../../hooks/useColumns";
+import { TableSettings } from "./table-settings";
+import HoverBorderedEl from "../../UI/HoverBorderedEl";
+import { Text } from "../../UI/Text";
+import { configTableType } from "../../types/columnTableTypes";
+import { TableHeaderBar } from "./table-header-bar";
 
 export const Table = <T extends Record<string, any>>({ data, configTable }: { data: T[], configTable: configTableType }) => {
   const columns = useColumns(configTable);
@@ -32,7 +33,7 @@ export const Table = <T extends Record<string, any>>({ data, configTable }: { da
   });
   return (
     <div className="relative">
-      <TableSettingsBar table={table} selectedIds={selectedIds} />
+      <TableHeaderBar table={table} selectedIds={selectedIds} />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Table } from "../../../shared/component/Table";
+import { Table } from "../../../shared/component/table/table";
 import { ordersApi } from "../../../modules/warehouse/orders/api/api";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { OrdersType } from "../../../modules/warehouse/orders/types/ordersTableTypes";
