@@ -1,14 +1,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../../shared/UI/Text";
-import { OrderDataContainer } from "./order-data-container";
+import { Typography } from "../../../../../shared/UI/Text";
+import { DataContainerWithHidddenText } from "./order-data-container";
 
 export function EditDataDialog() {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
         <HoverBorderedEl>
-          <Text>Редактировать</Text>
+          <Typography>Редактировать</Typography>
         </HoverBorderedEl>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -17,51 +17,51 @@ export function EditDataDialog() {
           <Dialog.Title className="border-b border-solid border-black flex items-center px-4 py-2 relative">
             <Dialog.Close>
               <button className="border border-solid border-black rounded-md p-[6px]">
-                <Text>Закрыть</Text>
+                <Typography>Закрыть</Typography>
               </button>
             </Dialog.Close>
-            <Text className="absolute left-1/2 -translate-x-1/2">ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ</Text>
+            <Typography className="absolute left-1/2 -translate-x-1/2">ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ</Typography>
           </Dialog.Title>
           <Dialog.Description>
-            <Text className="text-center">способ доставки</Text>
+            <Typography className="text-center">способ доставки</Typography>
           </Dialog.Description>
           <div className="flex flex-col justify-center items-center mt-[190px]">
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="страна"
                 infoText="Россия"
                 isHiddenText={false}
                 border={true}
               />
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="город"
                 infoText="Москва"
                 isHiddenText={false}
                 border={true}
               />
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="улица"
                 infoText="Кащенко"
                 isHiddenText={false}
                 border={true}
               />
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="дом"
                 infoText="6"
                 isHiddenText={false}
                 border={true}
               />
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="квартира | офис"
                 infoText="666"
                 isHiddenText={false}
                 border={true}
               />
             </div>
-            <Text className="text-center mt-[30px] text-[#494949]">
+            <Typography className="text-center mt-[30px] text-[#494949]">
               Кащенко 666
-            </Text>
-            <Text className="text-center mt-[66px]">Трек номер - 63936</Text>
+            </Typography>
+            <Typography className="text-center mt-[66px]">Трек номер - 63936</Typography>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

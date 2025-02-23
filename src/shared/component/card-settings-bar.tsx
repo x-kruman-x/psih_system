@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../UI/HoverBorderedEl";
-import { Text } from "../UI/Text";
+import { Typography } from "../UI/Text";
 import { Sheet } from "lucide-react";
 import {
   SheetTrigger,
@@ -25,14 +25,14 @@ export function CardSettingsBar({ pageType }: EditPageSettingsBar) {
         leftEl: (
           <HoverBorderedEl>
             <Link to="">
-              <Text>CDEK</Text>
+              <Typography>CDEK</Typography>
             </Link>
           </HoverBorderedEl>
         ),
         rightEl: (
           <HoverBorderedEl>
             <Link to="">
-              <Text>Почта России</Text>
+              <Typography>Почта России</Typography>
             </Link>
           </HoverBorderedEl>
         ),
@@ -61,26 +61,33 @@ export function CardSettingsBar({ pageType }: EditPageSettingsBar) {
       // };
       break;
     case "party":
+      configObj = {
+        gap: '',
+        linkPath: "/parties",
+        leftEl: null,
+        rightEl: null,
+        navStyle: '',
+      };
+      break
   }
 
   const containerStyle = `flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid`;
-  switch (pageType) {
-    case "order":
-      return (
-        <div className={containerStyle}>
-          <div className={`flex ${configObj?.gap}`}>
-            <HoverBorderedEl>
-              <Link to={configObj?.linkPath}>
-                <Text>Назад</Text>
-              </Link>
-            </HoverBorderedEl>
-            <div className="flex gap-10">
-              {configObj?.leftEl}
-              {configObj?.rightEl}
-            </div>
-          </div>
-          <div className={configObj?.navStyle}>Заказ - 666</div>
-          {/* <Sheet>
+
+  return (
+    <div className={containerStyle}>
+      <div className={`flex ${configObj?.gap}`}>
+        <HoverBorderedEl>
+          <Link to={configObj?.linkPath}>
+            <Typography>Назад</Typography>
+          </Link>
+        </HoverBorderedEl>
+        <div className="flex gap-10">
+          {configObj?.leftEl}
+          {configObj?.rightEl}
+        </div>
+      </div>
+      <div className={configObj?.navStyle}>Заказ - 666</div>
+      {/* <Sheet>
             <SheetTrigger>Open</SheetTrigger>
             <SheetContent>
               <SheetHeader>
@@ -92,12 +99,9 @@ export function CardSettingsBar({ pageType }: EditPageSettingsBar) {
               </SheetHeader>
             </SheetContent>
           </Sheet> */}
-          <HoverBorderedEl>
-            <Text>Настройки</Text>
-          </HoverBorderedEl>
-        </div>
-      );
-    case "product":
-    case "party":
-  }
+      <HoverBorderedEl>
+        <Typography>Настройки</Typography>
+      </HoverBorderedEl>
+    </div>
+  );
 }

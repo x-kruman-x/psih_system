@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "../../assets/img/logo.svg";
-import { Text } from "../../shared/UI/Text";
+import { Typography } from "../../shared/UI/Text";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function AppNavigation() {
@@ -10,22 +10,22 @@ export function AppNavigation() {
         <img className="h-[36px] w-[20px]" src={logo} alt="logo" />
       </Link>
       <BorderedLink to="/orders">
-        <Text>СКЛАД</Text>
+        <Typography>СКЛАД</Typography>
       </BorderedLink>
       <BorderedLink to="">
-        <Text>СООБЩЕНИЯ</Text>
+        <Typography>СООБЩЕНИЯ</Typography>
       </BorderedLink>
       <BorderedLink to="">
-        <Text>САЙТ</Text>
+        <Typography>САЙТ</Typography>
       </BorderedLink>
       <BorderedLink to="">
-        <Text>АНАЛИТИКА</Text>
+        <Typography>АНАЛИТИКА</Typography>
       </BorderedLink>
       <BorderedLink to="">
-        <Text>ЗАДАЧИ</Text>
+        <Typography>ЗАДАЧИ</Typography>
       </BorderedLink>
       <BorderedLink to="">
-        <Text>ВХОД</Text>
+        <Typography>ВХОД</Typography>
       </BorderedLink>
     </nav>
   );

@@ -5,7 +5,7 @@ export function useUploadOrderFile() {
   const queryClient = useQueryClient();
 
   const uploadOrderFileMutation = useMutation({
-    mutationFn: async({
+    mutationFn: async ({
       orderId,
       formData,
     }: {
@@ -15,11 +15,17 @@ export function useUploadOrderFile() {
       return await ordersApi.uploadOrderFile(orderId, formData);
     },
     onError: (error) => {
-        console.error(error);
-    }
+      console.error(error);
+    },
   });
 
   return {
-    handleUploadOrderFile: uploadOrderFileMutation.mutateAsync
-  }
+    handleUploadOrderFile: uploadOrderFileMutation.mutateAsync,
+    updateOrderPage: () =>
+      queryClient.invalidateQueries({
+        queryKey: ordersApi.getOrderQueryOptions(
+          String(uploadOrderFileMutation.variables?.orderId)
+        ).queryKey,
+      }),
+  };
 }

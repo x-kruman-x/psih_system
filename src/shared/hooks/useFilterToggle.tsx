@@ -13,7 +13,7 @@ export function useFilterToggle() {
   });
 
   const toggleFilter = async () => {
-    await queryClient.setQueryData<isFilterType>(
+    queryClient.setQueryData<isFilterType>(
       ["isFilter"],
       (previousState) => ({
         isFilterOpen: !(previousState?.isFilterOpen ?? false),

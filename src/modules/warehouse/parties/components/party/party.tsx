@@ -1,0 +1,82 @@
+import { CardSettingsBar } from "@/shared/component/card-settings-bar";
+import { PartyType } from "../../types/partiesTableTypes";
+import { SelectCell } from "@/shared/component/selectCell";
+import { Typography } from "@/shared/UI/Text";
+import { formatDateTime } from "@/shared/utils/formateDateTime";
+import { DataContainerWithHidddenText } from "@/modules/warehouse/orders/components/order/order-data-container";
+import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
+import { Link } from "lucide-react";
+import { FileContainer } from "@/shared/component/files/fileContainer";
+
+type PartyProps = {
+  partyData: PartyType;
+};
+
+export function Party({ partyData }: PartyProps) {
+  return (
+    <>
+      <CardSettingsBar pageType={"party"} />
+      <div className="grid grid-cols-3">
+        <div className="px-[30px] pb-[25px] flex flex-col border-b border-r border-black border-solid group/title">
+          <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
+            <Typography isGray={true}>дополнительная информация</Typography>
+          </h2>
+          <div className="h-full flex flex-col justify-between">
+            <div className="flex justify-between">
+              <SelectCell
+                currentValue={partyData.status}
+                orderId={partyData.id}
+                btnType={"status"}
+                wFull={true}
+              />
+              <SelectCell
+                currentValue={partyData.tag}
+                orderId={partyData.id}
+                btnType={"tag"}
+                wFull={true}
+              />
+            </div>
+            <Typography isGray={true} className="text-center">
+              {formatDateTime(partyData.party_date)}
+            </Typography>
+          </div>
+        </div>
+        <div className="border-b border-r border-black border-solid px-20 pb-[30px] group/title">
+          <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
+            <Typography isGray={true}>данные заказа</Typography>
+          </h2>
+          <div className="flex justify-center">
+            <HoverBorderedEl>
+              <Typography>Дарков Владислав</Typography>
+            </HoverBorderedEl>
+          </div>
+          <div className="grid grid-cols-2 grid-rows-2">
+            <div className="flex flex-col gap-2 items-start row-span-2">
+              <DataContainerWithHidddenText
+                hiddenText="email"
+                infoText="dotdarkk@gmail.com"
+              />
+              <DataContainerWithHidddenText
+                hiddenText="телефон"
+                infoText="89639366661"
+              />
+            </div>
+            <div className="flex justify-end items-end">
+              <HoverBorderedEl>
+                {/* <Link to=""> */}
+                <Typography>Сообщения</Typography>
+                {/* </Link> */}
+              </HoverBorderedEl>
+            </div>
+          </div>
+        </div>
+        <div className="col-start-3 row-start-1 row-span-2 group/title px-[50px] pb-[20px] border-b border-r border-black border-solid">
+          <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
+            <Typography isGray={true}>файлы</Typography>
+          </h2>
+          <FileContainer files={partyData.files} id={partyData.id} savePlace='party'/>
+        </div>
+      </div>
+    </>
+  );
+}

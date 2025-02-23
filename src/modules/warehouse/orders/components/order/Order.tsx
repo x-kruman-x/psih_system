@@ -1,16 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../../shared/UI/Text";
+import { Typography } from "../../../../../shared/UI/Text";
 import { EditDataDialog } from "./edit-data-dialog";
-import { OrderDataContainer } from "./order-data-container";
-import { orderType } from "../../types/ordersTableTypes";
+import { DataContainerWithHidddenText } from "./order-data-container";
+import { OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
 import { FileContainer } from "../../../../../shared/component/files/fileContainer";
 import { CardSettingsBar } from "@/shared/component/card-settings-bar";
 
 type OrderProps = {
-  orderData: orderType;
+  orderData: OrderType;
 };
 
 export function Order({ orderData }: OrderProps) {
@@ -20,20 +20,20 @@ export function Order({ orderData }: OrderProps) {
       <div className="grid grid-cols-3 grid-rows-2 border-b border-black border-solid">
         <div className="row-span-2 px-20 pb-[23px] border-r border-black border-solid group/title">
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
-            <Text isGray={true}>информация доставки</Text>
+            <Typography isGray={true}>информация доставки</Typography>
           </h2>
           <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-            <OrderDataContainer hiddenText="страна" infoText="Россия" />
-            <OrderDataContainer hiddenText="город" infoText="Москва" />
-            <OrderDataContainer hiddenText="страна" infoText="Россия" />
-            <OrderDataContainer hiddenText="улица" infoText="Кащенко" />
-            <OrderDataContainer hiddenText="дом" infoText="6" />
-            <OrderDataContainer hiddenText="квартира | офис" infoText="666" />
+            <DataContainerWithHidddenText hiddenText="страна" infoText="Россия" />
+            <DataContainerWithHidddenText hiddenText="город" infoText="Москва" />
+            <DataContainerWithHidddenText hiddenText="страна" infoText="Россия" />
+            <DataContainerWithHidddenText hiddenText="улица" infoText="Кащенко" />
+            <DataContainerWithHidddenText hiddenText="дом" infoText="6" />
+            <DataContainerWithHidddenText hiddenText="квартира | офис" infoText="666" />
           </div>
-          <Text className="text-center mt-[30px] text-[#494949]">
+          <Typography className="text-center mt-[30px] text-[#494949]">
             Кащенко 666
-          </Text>
-          <Text className="text-center mt-[66px]">63936</Text>
+          </Typography>
+          <Typography className="text-center mt-[66px]">63936</Typography>
           {/* TODO: доделать изменение данных */}
           <div className="flex justify-center mt-[66px]">
             <EditDataDialog />
@@ -41,25 +41,25 @@ export function Order({ orderData }: OrderProps) {
         </div>
         <div className="border-b border-r border-black border-solid px-20 pb-[30px] group/title">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
-            <Text isGray={true}>данные заказа</Text>
+            <Typography isGray={true}>данные заказа</Typography>
           </h2>
           <div className="flex justify-center">
             <HoverBorderedEl>
-              <Text>Дарков Владислав</Text>
+              <Typography>Дарков Владислав</Typography>
             </HoverBorderedEl>
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
             <div className="flex flex-col gap-2 items-start row-span-2">
-              <OrderDataContainer
+              <DataContainerWithHidddenText
                 hiddenText="email"
                 infoText="dotdarkk@gmail.com"
               />
-              <OrderDataContainer hiddenText="телефон" infoText="89639366661" />
+              <DataContainerWithHidddenText hiddenText="телефон" infoText="89639366661" />
             </div>
             <div className="flex justify-end items-end">
               <HoverBorderedEl>
                 <Link to="">
-                  <Text>Сообщения</Text>
+                  <Typography>Сообщения</Typography>
                 </Link>
               </HoverBorderedEl>
             </div>
@@ -67,19 +67,19 @@ export function Order({ orderData }: OrderProps) {
         </div>
         <div className="col-start-2 row-start-2 border-r border-black border-solid px-[35px] pb-[30px] flex flex-col justify-between group/title">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
-            <Text isGray={true}>дополнительная информация</Text>
+            <Typography isGray={true}>дополнительная информация</Typography>
           </h2>
           <div className="flex items-center justify-between">
             <SelectCell currentValue={orderData.status} orderId={orderData.id} btnType={"status"} wFull={true} />
             <SelectCell currentValue={orderData.tag} orderId={orderData.id} btnType={"tag"} wFull={true} />
           </div>
-          <Text isGray={true} className="text-center">{formatDateTime(orderData.order_date)}</Text>
+          <Typography isGray={true} className="text-center">{formatDateTime(orderData.order_date)}</Typography>
         </div>
         <div className="col-start-3 row-start-1 row-span-2 group/title px-[50px] pb-[20px]">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
-            <Text isGray={true}>файлы</Text>
+            <Typography isGray={true}>файлы</Typography>
           </h2>
-          <FileContainer files={orderData.files} orderId={orderData.id}/>
+          <FileContainer files={orderData.files} id={orderData.id} savePlace='order'/>
         </div>
       </div>
       {/* TODO: доделать таблицу с товарами в заказе */}

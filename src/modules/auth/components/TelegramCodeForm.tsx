@@ -1,6 +1,6 @@
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { LoginContainer } from "../ui/LoginContainer";
-import { Text } from "../../../shared/UI/Text";
+import { Typography } from "../../../shared/UI/Text";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthApi } from "../api/api";
 import { authDataType } from "../types/types";
@@ -49,7 +49,6 @@ export function TelegramCodeForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
     const enteredCode = formData.get("code")?.toString() ?? "";
     setCode(enteredCode);
@@ -59,8 +58,8 @@ export function TelegramCodeForm() {
     <LoginContainer>
       <div className="w-full">
         <div className="text-center mb-[26px] flex flex-col">
-          <Text className="mb-[9px]">ДВУХФАКТОРНАЯ АУТЕНТИФИКАЦИЯ</Text>
-          <Text className="mb-[3px]">мы отправили код на ваш телеграм</Text>
+          <Typography className="mb-[9px]">ДВУХФАКТОРНАЯ АУТЕНТИФИКАЦИЯ</Typography>
+          <Typography className="mb-[3px]">мы отправили код на ваш телеграм</Typography>
           <TextLink href="https://t.me/psihsystembot" newTab={true}>
             @PSIHSYSTEMBOT [-]
           </TextLink>
@@ -77,12 +76,12 @@ export function TelegramCodeForm() {
               {`${"0" + Math.floor(timer / 60)}:${timer % 60 < 10 ? "0" + (timer % 60) : timer % 60}`}
             </p>
           ) : (
-            <Text>отправить код повторно</Text>
+            <Typography>отправить код повторно</Typography>
           )}
         </BorderedElement>
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="w-full mb-[9px]">
-            <Text className="mb-[3px]">код</Text>
+            <Typography className="mb-[3px]">код</Typography>
             <BorderedElement className="w-full" name="code" />
           </div>
           <BorderedElement
@@ -90,9 +89,9 @@ export function TelegramCodeForm() {
             as="button"
             className="group w-full hover:bg-black hover:transition hover:duration-150"
           >
-            <Text className="group-hover:text-white hover:transition hover:duration-150">
+            <Typography className="group-hover:text-white hover:transition hover:duration-150">
               ок
-            </Text>
+            </Typography>
           </BorderedElement>
         </form>
       </div>

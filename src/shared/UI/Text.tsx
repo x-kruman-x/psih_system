@@ -6,7 +6,7 @@ type TextProps = {
   isGray?: boolean;
 };
 
-export const Text = ({ children, className = "", isGray = false }: TextProps) => {
+export const Typography = ({ children, className = "", isGray = false }: TextProps) => {
   return (
     <p className={`${!isGray ? 'text-black' : 'text-[#8D8D8D]'} text-[13px] leading-[17px] ${className}`}>
       {children}

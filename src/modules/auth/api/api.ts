@@ -54,7 +54,6 @@ export async function refreshToken() {
     console.log('refresh')
     localStorage.setItem("access_token", response.data.access_token);
     return response
-  
 }
 
 export const useAuthApi = () => {

@@ -1,3 +1,4 @@
+import { savePlaceType } from "@/shared/types/savePlaceTypes";
 import { FileCard } from "./fileCard";
 import { UploadButton } from "./upload-btn";
 
@@ -10,16 +11,16 @@ type FilesContainerProps = {
   created_at: string | null;
 };
 
-export function FileContainer({ files, orderId }: { files: FilesContainerProps[], orderId: number }) {
-  // TODO: фотографии с изобраажением приходит с isImg = false
+export function FileContainer({ files, id, savePlace }: { files: FilesContainerProps[], id: number, savePlace: savePlaceType }) {
+  // TODO: фотографии с изображением приходит с isImg = false
   return (
-    <div className="flex flex-col gap-[20px]">
-      <div className="flex flex-wrap gap-[10px] h-[370px] overflow-y-auto">
+    <div className="flex flex-col justify-between gap-[20px]">
+      <div className="flex flex-wrap gap-[10px] max-h-[370px] overflow-y-auto">
         {files.map((file) => (
           <FileCard key={file.id} isImg={file.image} url={file.url} />
         ))}
       </div>
-      <UploadButton savePlace='order' orderId={orderId} />
+      <UploadButton savePlace={savePlace} id={id} />
     </div>
   );
 }

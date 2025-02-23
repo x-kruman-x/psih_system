@@ -1,11 +1,15 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDateTime } from "../utils/formateDateTime";
 import { CustomCheckbox } from "../UI/CustomCheckBox";
-import { Text } from "../UI/Text";
+import { Typography } from "../UI/Text";
 import { Link } from "@tanstack/react-router";
 import { SelectCell } from "../component/selectCell";
+import { filterIncludesSome } from "../utils/filterIncludesSome";
+import { configTableType } from "../types/columnTableTypes";
 
-export function useColumns<T extends Record<string, any>>(table: string): ColumnDef<T>[]   {
+export function useColumns<T extends Record<string, any>>(
+  configTable: configTableType
+): ColumnDef<T>[] {
   const contentThStyle = `!text-[#8D8D8D]`;
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
 
@@ -13,10 +17,13 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
     return isSelected ? "border-black" : "border-transparent";
   };
 
-  const orderColumns: ColumnDef<T>[] = [
+  const ordersColumns: ColumnDef<T>[] = [
     {
       id: "Номер",
-      header: () => <Text className={`pl-[23px] ${contentThStyle}`}>номер</Text>,
+      accessorKey: "id",
+      header: () => (
+        <Typography className={`pl-[23px] ${contentThStyle}`}>номер</Typography>
+      ),
       cell: ({ row }) => (
         <div
           className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row.getIsSelected())}`}
@@ -36,53 +43,57 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
                 orderId: row.original.id.toString(),
               }}
             >
-              <Text>{row.original.id}</Text>
+              <Typography>{row.original.id}</Typography>
             </Link>
           </div>
         </div>
       ),
+      filterFn: filterIncludesSome,
     },
     {
       id: "Дата",
       accessorKey: "order_date",
-      header: () => <Text className={contentThStyle}>дата</Text>,
+      header: () => <Typography className={contentThStyle}>дата</Typography>,
       cell: (props) => (
-        <Text
+        <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
         >
           {formatDateTime(props.getValue<string>())}
-        </Text>
+        </Typography>
       ),
+      filterFn: filterIncludesSome,
     },
     {
-      id: "Поставщик",
+      id: "Покупатель",
       accessorKey: "full_name",
-      header: () => <Text className={contentThStyle}>покупатель</Text>,
+      header: () => <Typography className={contentThStyle}>покупатель</Typography>,
       cell: (props) => (
-        <Text
+        <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
         >
           {props.getValue<string>()}
-        </Text>
+        </Typography>
       ),
+      filterFn: filterIncludesSome,
     },
     {
       id: "Статус",
       accessorKey: "status",
-      header: () => <Text className={contentThStyle}>статус</Text>,
+      header: () => <Typography className={contentThStyle}>статус</Typography>,
       cell: (props) => (
         <SelectCell
           currentValue={props.getValue<string>()}
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
-          btnType='status'
+          btnType="status"
         />
       ),
+      filterFn: filterIncludesSome,
     },
     {
       id: "Тег",
       accessorKey: "tag",
-      header: () => <Text className={contentThStyle}>тег</Text>,
+      header: () => <Typography className={contentThStyle}>тег</Typography>,
       cell: (props) => (
         <SelectCell
           currentValue={props.getValue<string>()}
@@ -91,24 +102,130 @@ export function useColumns<T extends Record<string, any>>(table: string): Column
           btnType="tag"
         />
       ),
+      filterFn: filterIncludesSome,
     },
     {
       id: "Сумма",
       accessorKey: "amount",
-      header: () => <Text className={contentThStyle}>сумма</Text>,
+      header: () => <Typography className={contentThStyle}>сумма</Typography>,
       cell: (props) => (
-        <Text
+        <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
         >
           {props.getValue<number>() || 0}
-        </Text>
+        </Typography>
       ),
-    },
+      filterFn: filterIncludesSome,
+    }
   ];
 
-  switch (table) {
+  const partiesColumns: ColumnDef<T>[] = [
+    {
+      id: "Номер",
+      accessorKey: "id",
+      header: () => (
+        <Typography className={`pl-[23px] ${contentThStyle}`}>номер</Typography>
+      ),
+      cell: ({ row }) => (
+        <div
+          className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row.getIsSelected())}`}
+        >
+          <CustomCheckbox
+            {...{
+              checked: row.getIsSelected(),
+              disabled: !row.getCanSelect(),
+              onChange: row.getToggleSelectedHandler(),
+            }}
+            className="ml-[6px]"
+          />
+          <div className="grow">
+            <Link
+              to="/parties/$partyId/edit"
+              params={{
+                partyId: row.original.id.toString(),
+              }}
+            >
+              <Typography>{row.original.id}</Typography>
+            </Link>
+          </div>
+        </div>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Дата",
+      accessorKey: "party_date",
+      header: () => <Typography className={contentThStyle}>дата</Typography>,
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          {formatDateTime(props.getValue<string>())}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Поставщик",
+      accessorKey: "agent_name",
+      header: () => <Typography className={contentThStyle}>покупатель</Typography>,
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Статус",
+      accessorKey: "status",
+      header: () => <Typography className={contentThStyle}>статус</Typography>,
+      cell: (props) => (
+        <SelectCell
+          currentValue={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType="status"
+        />
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Тег",
+      accessorKey: "tag",
+      header: () => <Typography className={contentThStyle}>тег</Typography>,
+      cell: (props) => (
+        <SelectCell
+          currentValue={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType="tag"
+        />
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Сумма",
+      accessorKey: "amount",
+      header: () => <Typography className={contentThStyle}>сумма</Typography>,
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<number>() || 0}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    }
+  ]
+
+  switch (configTable) {
     case "orderTable":
-      return orderColumns;
+      return ordersColumns;
+    case "partiesTable":
+      return partiesColumns
     default:
       return [];
   }

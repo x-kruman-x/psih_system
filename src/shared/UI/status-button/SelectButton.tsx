@@ -1,4 +1,4 @@
-import { Text } from "../Text";
+import { Typography } from "../Text";
 import arrow from "../../../assets/img/arrow.svg";
 
 type SelectButtonProps = {
@@ -22,7 +22,7 @@ export const SelectButton = ({
       className={`w-full flex justify-between items-center py-[7px] px-4 mb-[11px] border border-solid rounded-md group-hover:border-black ${className}`}
     >
       <div className={`w-6 h-1 rounded-[1px] ${backgroundColor}`}></div>
-      <Text>{text}</Text>
+      <Typography>{text}</Typography>
       <img className={`w-[15px] ${imgStyle}`} src={arrow} alt="arrow" />
     </button>
   );

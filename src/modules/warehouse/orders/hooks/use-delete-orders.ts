@@ -15,7 +15,7 @@ export function useDeleteOrders() {
   });
   deleteOrdersMutation.variables
   return {
-    handleDeleteOrders: deleteOrdersMutation.mutate,
+    handleDelete: deleteOrdersMutation.mutate,
     getIsPending: (id: number[]): boolean => {
       return deleteOrdersMutation.isPending && deleteOrdersMutation.variables === id;
     }

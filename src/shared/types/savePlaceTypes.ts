@@ -1,0 +1,1 @@
+export type savePlaceType = "order" | "product" | "party";

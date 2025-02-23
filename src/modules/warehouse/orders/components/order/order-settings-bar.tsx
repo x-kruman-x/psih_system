@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../../shared/UI/Text";
+import { Typography } from "../../../../../shared/UI/Text";
 
 type EditPageSettingsBar = {
   pageType: "order" | "product" | "party";
@@ -15,18 +15,18 @@ export function EditPageSettingsBar({ pageType }: EditPageSettingsBar) {
           <div className="flex gap-[170px]">
             <HoverBorderedEl>
               <Link to="/orders">
-                <Text>Назад</Text>
+                <Typography>Назад</Typography>
               </Link>
             </HoverBorderedEl>
             <div className="flex gap-10">
               <HoverBorderedEl>
                 <Link to="">
-                  <Text>CDEK</Text>
+                  <Typography>CDEK</Typography>
                 </Link>
               </HoverBorderedEl>
               <HoverBorderedEl>
                 <Link to="">
-                  <Text>Почта России</Text>
+                  <Typography>Почта России</Typography>
                 </Link>
               </HoverBorderedEl>
             </div>

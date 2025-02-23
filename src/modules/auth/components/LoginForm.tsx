@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { LoginContainer } from "../ui/LoginContainer";
-import { Text } from "../../../shared/UI/Text";
+import { Typography } from "../../../shared/UI/Text";
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { useAuthApi } from "../api/api";
 
@@ -41,15 +41,15 @@ export function LoginForm() {
     <LoginContainer>
       <div className="w-full">
         <div className="text-center mb-[26px]">
-          <Text>ВХОД</Text>
+          <Typography>ВХОД</Typography>
         </div>
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="w-full">
-            <Text className="mb-[3px]">логин</Text>
+            <Typography className="mb-[3px]">логин</Typography>
             <BorderedElement className="w-full" name="login" />
           </div>
           <div className="w-full mb-[29px]">
-            <Text className="mb-[3px]">пароль</Text>
+            <Typography className="mb-[3px]">пароль</Typography>
             <BorderedElement
               className="w-full"
               type="password"
@@ -61,9 +61,9 @@ export function LoginForm() {
             as="button"
             className="group w-full hover:bg-black hover:transition hover:duration-150"
           >
-            <Text className="group-hover:text-white hover:transition hover:duration-150">
+            <Typography className="group-hover:text-white hover:transition hover:duration-150">
               ок
-            </Text>
+            </Typography>
           </BorderedElement>
         </form>
       </div>

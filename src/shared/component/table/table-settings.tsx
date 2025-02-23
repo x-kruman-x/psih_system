@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Text } from "../../UI/Text";
+import { Typography } from "../../UI/Text";
 import { Table } from "@tanstack/react-table";
-import { useDeleteOrders } from "../../../modules/warehouse/orders/hooks/use-delete-orders";
 import { stringToNumber } from "../../utils/stringToNumber";
 import { CustomCheckbox } from "../../UI/CustomCheckBox";
 import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
+import { configTableType } from "@/shared/types/columnTableTypes";
+import { useDeleteRows } from "@/shared/hooks/useDeleteRows";
 
 export function TableSettings<T extends Record<string, any>>({
   table,
-  selectedIds
+  selectedIds,
+  configTable
 }: {
   table: Table<T>;
   selectedIds: string[]
+  configTable: configTableType;
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const { toggleFilter } = useFilterToggle();
 
-  const deleteOrders = useDeleteOrders();
+  const deleteRows = useDeleteRows(configTable)
 
   const handleClick = () => {
     setIsDropdownVisible((prev) => !prev);
@@ -49,10 +52,10 @@ export function TableSettings<T extends Record<string, any>>({
     <div className="py-[6px] px-[30px] flex justify-between border-b border-solid border-black sticky top-[89px] backdrop-blur-[6px] z-20">
       <div className="w-[250px] flex justify-between">
         <button className="text-[#494949]">
-          <Text>Поиск</Text>
+          <Typography>Поиск</Typography>
         </button>
         <button className="text-[#494949]" onClick={toggleFilter}>
-          <Text>Фильтр</Text>
+          <Typography>Фильтр</Typography>
         </button>
       </div>
       {selectedIds.length !== 0 ? (
@@ -62,10 +65,10 @@ export function TableSettings<T extends Record<string, any>>({
             as="button"
             //TODO: удалять массив id
             onClick={() =>{
-              deleteOrders.handleDeleteOrders(stringToNumber(selectedIds))
+              deleteRows(stringToNumber(selectedIds))
             }}
           >
-            <Text>Удалить</Text>
+            <Typography>Удалить</Typography>
           </HoverBorderedEl>
         </div>
       ) : (
@@ -76,7 +79,7 @@ export function TableSettings<T extends Record<string, any>>({
         onClick={handleClick}
         className="text-[#494949] relative settingsButton"
       >
-        <Text>Настройки</Text>
+        <Typography>Настройки</Typography>
         {isDropdownVisible && (
           <div
             className="dropdown absolute w-[143px] top-full right-0 mt-[13px] py-[10px] px-[8px] bg-[#FFFFFF] border border-[#707070] rounded-md backdrop-blur-xl flex flex-col gap-[10px]"
@@ -93,7 +96,7 @@ export function TableSettings<T extends Record<string, any>>({
                       }}
                     />{" "}
                     <div className="grow">
-                      <Text>{column.id}</Text>
+                      <Typography>{column.id}</Typography>
                     </div>
                   </label>
                 </div>

@@ -1,5 +1,5 @@
 import getImgName from "../../utils/getImgName";
-import { Text } from "../../UI/Text";
+import { Typography } from "../../UI/Text";
 import logo from '../../../assets/img/logo.svg'
 
 type FileCardProps = {
@@ -13,7 +13,7 @@ export function FileCard({ isImg, url }: FileCardProps) {
         <div className="w-[95px] h-[95px] border border-black border-solid rounded-md">
             {isImg ? <img src={url} alt="img" /> : <img className="w-full h-full" src={logo} alt="img" />}
         </div>
-        <Text className="text-ellipsis">{getImgName(url)}</Text>
+        <Typography className="text-ellipsis">{getImgName(url)}</Typography>
     </div>
     
   );

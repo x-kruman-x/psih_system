@@ -1,5 +1,5 @@
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Text } from "../../../../../shared/UI/Text";
+import { Typography } from "../../../../../shared/UI/Text";
 
 type OrderDataContainerProps = {
   hiddenText: string;
@@ -9,7 +9,7 @@ type OrderDataContainerProps = {
   border?: boolean;
 };
 
-export function OrderDataContainer({
+export function DataContainerWithHidddenText({
   hiddenText,
   infoText,
   button = false,
@@ -20,17 +20,17 @@ export function OrderDataContainer({
 }: OrderDataContainerProps) {
   return (
     <div className="flex flex-col gap-3 group/orderDataContainer">
-      <Text
+      <Typography
         isGray={true}
         className={`${isHiddenText ? "opacity-0 group-hover/orderDataContainer:opacity-100" : ""} transition`}
       >
         {hiddenText}
-      </Text>
+      </Typography>
       <HoverBorderedEl
         className={`text-center group-hover:border-black transition ${border ? "!border-black" : ""}`}
       >
         {!button ? (
-          <Text>{infoText}</Text>
+          <Typography>{infoText}</Typography>
         ) : (
           <button>
             <img src="" alt="" />

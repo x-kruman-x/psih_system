@@ -1,16 +1,17 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useConfigUploadBtn } from "../../hooks/useConfigUploadBtn";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Text } from "../../UI/Text";
+import { Typography } from "../../UI/Text";
 import { ordersApi } from "../../../modules/warehouse/orders/api/api";
+import { savePlaceType } from "@/shared/types/savePlaceTypes";
 
 type UploadButtonProps = {
-  orderId: number;
-  savePlace: "order" | "product";
+  id: number;
+  savePlace: savePlaceType;
 }
 // TODO:уведомление
-export function UploadButton({savePlace, orderId}: UploadButtonProps) {
-  const uploadFunc = useConfigUploadBtn(savePlace)
+export function UploadButton({savePlace, id}: UploadButtonProps) {
+  const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace)
   const queryClient = useQueryClient()
 
   if (!uploadFunc) {
@@ -33,7 +34,7 @@ export function UploadButton({savePlace, orderId}: UploadButtonProps) {
       formData.append("file", file);
   
       try {
-        await uploadFunc(orderId, formData);
+        await uploadFunc(id, formData);
       } catch (error) {
         console.error(`Ошибка при загрузке файла ${file.name}:`, error);
       }
@@ -41,7 +42,7 @@ export function UploadButton({savePlace, orderId}: UploadButtonProps) {
   
     try {
       await Promise.all(uploadPromises);
-      queryClient.invalidateQueries({ queryKey: ordersApi.getOrderQueryOptions(orderId.toString()).queryKey });
+      await refreshPageFunc();
     } catch (error) {
       console.error("Произошла ошибка при загрузке некоторых файлов:", error);
     }
@@ -60,7 +61,7 @@ export function UploadButton({savePlace, orderId}: UploadButtonProps) {
           className="cursor-pointer"
           htmlFor="fileInput"
         >
-          <Text>Загрузить</Text>
+          <Typography>Загрузить</Typography>
         </label>
       </HoverBorderedEl>
     </div>

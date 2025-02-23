@@ -6,7 +6,7 @@ export type OrdersType = {
   tag: string;
 };
 
-export type orderType = {
+export type OrderType = {
   full_name: string;
   status: string;
   tag: string | null;
@@ -33,6 +33,6 @@ export type orderType = {
       size: string | null;
       user: object | null;
       created_at: string | null;
-    },
+    }
   ];
 };
