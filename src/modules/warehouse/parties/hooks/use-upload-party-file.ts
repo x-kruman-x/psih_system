@@ -17,19 +17,15 @@ export function useUploadPartyFile() {
     onError: (error) => {
       console.error(error);
     },
-
-    onSettled: () => {
-      console.log(uploadPartyFileMutation.variables);
-    },
+    onSettled: (data) => console.log(data),
   });
 
   return {
     handleUploadPartyFile: uploadPartyFileMutation.mutateAsync,
-    updatePartyPage: async() =>{
-      await queryClient.invalidateQueries({
-        queryKey: [partiesApi.basekey, "getParty", String(uploadPartyFileMutation.variables?.partyId)]
-      })
-      console.log('страница обновилась')
-    }
+    updatePartyPage: queryClient.invalidateQueries({
+      queryKey: partiesApi.getPartyQueryOptions(
+        String(uploadPartyFileMutation.variables?.partyId)
+      ).queryKey,
+    }),
   };
 }

@@ -17,15 +17,15 @@ export function useUploadOrderFile() {
     onError: (error) => {
       console.error(error);
     },
+    onSettled: (data) => console.log(data),
   });
 
   return {
     handleUploadOrderFile: uploadOrderFileMutation.mutateAsync,
-    updateOrderPage: () =>
-      queryClient.invalidateQueries({
-        queryKey: ordersApi.getOrderQueryOptions(
-          String(uploadOrderFileMutation.variables?.orderId)
-        ).queryKey,
-      }),
+    updateOrderPage: queryClient.invalidateQueries({
+      queryKey: ordersApi.getOrderQueryOptions(
+        String(uploadOrderFileMutation.variables?.orderId)
+      ).queryKey,
+    }),
   };
 }

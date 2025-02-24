@@ -11,7 +11,7 @@ type UploadButtonProps = {
 }
 // TODO:уведомление
 export function UploadButton({savePlace, id}: UploadButtonProps) {
-  const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace)
+  const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace, id)
   const queryClient = useQueryClient()
 
   if (!uploadFunc) {
@@ -42,7 +42,8 @@ export function UploadButton({savePlace, id}: UploadButtonProps) {
   
     try {
       await Promise.all(uploadPromises);
-      await refreshPageFunc();
+      console.log('обновляю страницу')
+      await refreshPageFunc
     } catch (error) {
       console.error("Произошла ошибка при загрузке некоторых файлов:", error);
     }

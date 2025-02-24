@@ -16,7 +16,7 @@ export function Party({ partyData }: PartyProps) {
   return (
     <>
       <CardSettingsBar pageType={"party"} />
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 grid-rows-1 items-stretch">
         <div className="px-[30px] pb-[25px] flex flex-col border-b border-r border-black border-solid group/title">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
             <Typography isGray={true}>дополнительная информация</Typography>

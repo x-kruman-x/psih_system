@@ -1,8 +1,11 @@
 import { useUploadPartyFile } from "@/modules/warehouse/parties/hooks/use-upload-party-file";
 import { useUploadOrderFile } from "../../modules/warehouse/orders/hooks/use-upload-order-file";
 import { savePlaceType } from "../types/savePlaceTypes";
+import { useQueryClient } from "@tanstack/react-query";
+import { ordersApi } from "@/modules/warehouse/orders/api/api";
 
-export const useConfigUploadBtn = (savePlace: savePlaceType) => {
+export const useConfigUploadBtn = (savePlace: savePlaceType, id: number) => {
+  const queryClient = useQueryClient()
   const { handleUploadOrderFile, updateOrderPage } = useUploadOrderFile();
   const { handleUploadPartyFile, updatePartyPage } = useUploadPartyFile();
 
