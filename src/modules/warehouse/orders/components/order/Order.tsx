@@ -16,19 +16,34 @@ type OrderProps = {
 export function Order({ orderData }: OrderProps) {
   return (
     <>
-      <CardSettingsBar pageType={'order'} />
+      <CardSettingsBar pageType={"order"} />
       <div className="grid grid-cols-3 grid-rows-2 border-b border-black border-solid">
         <div className="row-span-2 px-20 pb-[23px] border-r border-black border-solid group/title">
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
             <Typography isGray={true}>информация доставки</Typography>
           </h2>
           <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-            <DataContainerWithHidddenText hiddenText="страна" infoText="Россия" />
-            <DataContainerWithHidddenText hiddenText="город" infoText="Москва" />
-            <DataContainerWithHidddenText hiddenText="страна" infoText="Россия" />
-            <DataContainerWithHidddenText hiddenText="улица" infoText="Кащенко" />
+            <DataContainerWithHidddenText
+              hiddenText="страна"
+              infoText="Россия"
+            />
+            <DataContainerWithHidddenText
+              hiddenText="город"
+              infoText="Москва"
+            />
+            <DataContainerWithHidddenText
+              hiddenText="страна"
+              infoText="Россия"
+            />
+            <DataContainerWithHidddenText
+              hiddenText="улица"
+              infoText="Кащенко"
+            />
             <DataContainerWithHidddenText hiddenText="дом" infoText="6" />
-            <DataContainerWithHidddenText hiddenText="квартира | офис" infoText="666" />
+            <DataContainerWithHidddenText
+              hiddenText="квартира | офис"
+              infoText="666"
+            />
           </div>
           <Typography className="text-center mt-[30px] text-[#494949]">
             Кащенко 666
@@ -54,7 +69,10 @@ export function Order({ orderData }: OrderProps) {
                 hiddenText="email"
                 infoText="dotdarkk@gmail.com"
               />
-              <DataContainerWithHidddenText hiddenText="телефон" infoText="89639366661" />
+              <DataContainerWithHidddenText
+                hiddenText="телефон"
+                infoText="89639366661"
+              />
             </div>
             <div className="flex justify-end items-end">
               <HoverBorderedEl>
@@ -70,16 +88,36 @@ export function Order({ orderData }: OrderProps) {
             <Typography isGray={true}>дополнительная информация</Typography>
           </h2>
           <div className="flex items-center justify-between">
-            <SelectCell currentValue={orderData.status} orderId={orderData.id} btnType={"status"} wFull={true} />
-            <SelectCell currentValue={orderData.tag} orderId={orderData.id} btnType={"tag"} wFull={true} />
+            <SelectCell
+              currentValue={orderData.status}
+              orderId={orderData.id}
+              btnType={"status"}
+              wFull={true}
+              refreshPlace="card"
+              page="orders"
+            />
+            <SelectCell
+              currentValue={orderData.tag}
+              orderId={orderData.id}
+              btnType={"tag"}
+              wFull={true}
+              refreshPlace="card"
+              page="orders"
+            />
           </div>
-          <Typography isGray={true} className="text-center">{formatDateTime(orderData.order_date)}</Typography>
+          <Typography isGray={true} className="text-center">
+            {formatDateTime(orderData.order_date)}
+          </Typography>
         </div>
         <div className="col-start-3 row-start-1 row-span-2 group/title px-[50px] pb-[20px]">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">
             <Typography isGray={true}>файлы</Typography>
           </h2>
-          <FileContainer files={orderData.files} id={orderData.id} savePlace='order'/>
+          <FileContainer
+            files={orderData.files}
+            id={orderData.id}
+            savePlace="order"
+          />
         </div>
       </div>
       {/* TODO: доделать таблицу с товарами в заказе */}

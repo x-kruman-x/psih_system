@@ -17,7 +17,7 @@ export function useUploadOrderFile() {
     onError: (error) => {
       console.error(error);
     },
-    onSettled: (data) => console.log(data),
+    // onSettled: (data) => console.log(data),
   });
 
   return {

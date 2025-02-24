@@ -11,8 +11,7 @@ type UploadButtonProps = {
 }
 // TODO:уведомление
 export function UploadButton({savePlace, id}: UploadButtonProps) {
-  const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace, id)
-  const queryClient = useQueryClient()
+  const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace)
 
   if (!uploadFunc) {
     console.error(`Неизвестный тип сохранения: ${savePlace}`);

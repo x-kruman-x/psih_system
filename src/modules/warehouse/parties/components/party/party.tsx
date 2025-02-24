@@ -28,12 +28,16 @@ export function Party({ partyData }: PartyProps) {
                 orderId={partyData.id}
                 btnType={"status"}
                 wFull={true}
+                page='parties'
+                refreshPlace="card"
               />
               <SelectCell
                 currentValue={partyData.tag}
                 orderId={partyData.id}
                 btnType={"tag"}
                 wFull={true}
+                page='parties'
+                refreshPlace="card"
               />
             </div>
             <Typography isGray={true} className="text-center">

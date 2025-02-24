@@ -86,6 +86,8 @@ export function useColumns<T extends Record<string, any>>(
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
           btnType="status"
+          refreshPlace="list"
+          page="orders"
         />
       ),
       filterFn: filterIncludesSome,
@@ -100,6 +102,8 @@ export function useColumns<T extends Record<string, any>>(
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
           btnType="tag"
+          refreshPlace="list"
+          page="orders"
         />
       ),
       filterFn: filterIncludesSome,
@@ -188,6 +192,8 @@ export function useColumns<T extends Record<string, any>>(
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
           btnType="status"
+          refreshPlace="list"
+          page='parties'        
         />
       ),
       filterFn: filterIncludesSome,
@@ -202,6 +208,8 @@ export function useColumns<T extends Record<string, any>>(
           buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
           orderId={props.row.original.id}
           btnType="tag"
+          refreshPlace="list"
+          page='parties'
         />
       ),
       filterFn: filterIncludesSome,

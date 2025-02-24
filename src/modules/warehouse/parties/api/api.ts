@@ -13,6 +13,12 @@ async function deleteParties(idsArr: number[]) {
   return instance.delete("/api/parties/multiple/", { data: idsArr });
 }
 
+async function patchParty(partyId: number, key: string, newValue: any) {
+  return instance.patch(`/api/parties/?party_id=${partyId}`, {
+    [key]: newValue,
+  });
+}
+
 async function uploadPartyFile(partyId: number, formData: FormData) {
   return instance.post(`/api/parties/${partyId}/upload-file/`, formData);
 }
@@ -40,6 +46,12 @@ export const partiesApi = {
 
   deleteParties: (idsArr: number[]) => {
     return deleteParties(idsArr);
+  },
+  updatePartyStatus: (partyId: number, newValue: any) => {
+    return patchParty(partyId, "status", newValue);
+  },
+  updatePartyTag: (partyId: number, newValue: any) => {
+    return patchParty(partyId, "tag", newValue);
   },
   uploadPartyFile: (partyId: number, formData: FormData) => {
     return uploadPartyFile(partyId, formData)

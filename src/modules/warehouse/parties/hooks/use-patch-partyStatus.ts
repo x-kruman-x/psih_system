@@ -1,18 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ordersApi } from "../api/api";
+import { partiesApi } from "../api/api";
 
-export function usePatchOrderTag(refreshPlace: "list" | "card") {
+export function usePatchPartyStatus(refreshPlace: "list" | "card") {
   const queryClient = useQueryClient();
 
-  const updateOrderTagMutation = useMutation({
+  const updatePartyStatusMutation = useMutation({
     mutationFn: async ({
-      orderId,
+      partyId,
       newValue,
     }: {
-      orderId: number;
+      partyId: number;
       newValue: any;
     }) => {
-      return await ordersApi.updateOrderTag(orderId, newValue);
+      return await partiesApi.updatePartyStatus(partyId, newValue);
     },
     onError: (error) => {
       console.error(error);
@@ -21,12 +21,12 @@ export function usePatchOrderTag(refreshPlace: "list" | "card") {
       switch (refreshPlace) {
         case "list":
           await queryClient.invalidateQueries({
-            queryKey: ordersApi.getOrdersQueryOptions().queryKey,
+            queryKey: partiesApi.getPartiesQueryOptions().queryKey,
           });
           break;
         case "card":
           await queryClient.invalidateQueries({
-            queryKey: ordersApi.getOrderQueryOptions(String(variables.orderId)).queryKey,
+            queryKey: partiesApi.getPartyQueryOptions(String(variables.partyId)).queryKey
           });
           break;
       }
@@ -34,6 +34,6 @@ export function usePatchOrderTag(refreshPlace: "list" | "card") {
   });
 
   return {
-    handleUpdateOrderTag: updateOrderTagMutation.mutateAsync,
+    handleUpdateOrderStatus: updatePartyStatusMutation.mutateAsync,
   };
 }
