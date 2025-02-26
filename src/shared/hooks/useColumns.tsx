@@ -6,10 +6,14 @@ import { Link } from "@tanstack/react-router";
 import { SelectCell } from "../component/selectCell";
 import { filterIncludesSome } from "../utils/filterIncludesSome";
 import { configTableType } from "../types/columnTableTypes";
+import { CategoriesTypes } from "../types/categoriesTypes";
+import { CategoriesButton } from "../component/table/categories-button";
 
-export function useColumns<T extends Record<string, any>>(
-  configTable: configTableType
-): ColumnDef<T>[] {
+export function useColumns<T extends Record<string, any>>(params: {
+  configTable: configTableType;
+  categoriesData?: CategoriesTypes;
+}): ColumnDef<T>[] {
+  const { configTable, categoriesData } = params;
   const contentThStyle = `!text-[#8D8D8D]`;
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
 
@@ -66,7 +70,9 @@ export function useColumns<T extends Record<string, any>>(
     {
       id: "Покупатель",
       accessorKey: "full_name",
-      header: () => <Typography className={contentThStyle}>покупатель</Typography>,
+      header: () => (
+        <Typography className={contentThStyle}>покупатель</Typography>
+      ),
       cell: (props) => (
         <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
@@ -120,7 +126,7 @@ export function useColumns<T extends Record<string, any>>(
         </Typography>
       ),
       filterFn: filterIncludesSome,
-    }
+    },
   ];
 
   const partiesColumns: ColumnDef<T>[] = [
@@ -172,7 +178,9 @@ export function useColumns<T extends Record<string, any>>(
     {
       id: "Поставщик",
       accessorKey: "agent_name",
-      header: () => <Typography className={contentThStyle}>покупатель</Typography>,
+      header: () => (
+        <Typography className={contentThStyle}>покупатель</Typography>
+      ),
       cell: (props) => (
         <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
@@ -193,7 +201,7 @@ export function useColumns<T extends Record<string, any>>(
           orderId={props.row.original.id}
           btnType="status"
           refreshPlace="list"
-          page='parties'        
+          page="parties"
         />
       ),
       filterFn: filterIncludesSome,
@@ -209,7 +217,7 @@ export function useColumns<T extends Record<string, any>>(
           orderId={props.row.original.id}
           btnType="tag"
           refreshPlace="list"
-          page='parties'
+          page="parties"
         />
       ),
       filterFn: filterIncludesSome,
@@ -226,14 +234,34 @@ export function useColumns<T extends Record<string, any>>(
         </Typography>
       ),
       filterFn: filterIncludesSome,
-    }
-  ]
+    },
+  ];
+
+  const productsColumns: ColumnDef<T>[] = [
+    {
+      id: 'Категории',
+      header: () => (
+        <Typography className={`pl-[23px] ${contentThStyle}`}>категории</Typography>
+      ),
+      cell: () => {
+        return (
+          <div>
+            {categoriesData ? (
+              <CategoriesButton categoriesData={categoriesData} />
+            ) : (
+              <Typography>Нет категорий</Typography>
+            )}
+          </div>
+        );
+      },
+    },
+  ];
 
   switch (configTable) {
     case "orderTable":
       return ordersColumns;
     case "partiesTable":
-      return partiesColumns
+      return partiesColumns;
     default:
       return [];
   }
