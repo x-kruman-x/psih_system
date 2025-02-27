@@ -3,6 +3,7 @@ import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import { useState } from "react";
 
+// TODO: доделать
 export const Table = <T extends Record<string, any>>({
   data,
   configTable,
@@ -71,3 +72,7 @@ export const Table = <T extends Record<string, any>>({
         </div>
   );
 };
+function useCardColumns(configTable: string) {
+  throw new Error("Function not implemented.");
+}
+
