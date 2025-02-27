@@ -10,18 +10,15 @@ import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
 import { configTableType } from "../../types/columnTableTypes";
 import { TableHeaderBar } from "./table-header-bar";
-import { CategoriesTypes } from "@/shared/types/categoriesTypes";
 
 export const Table = <T extends Record<string, any>>({
   data,
   configTable,
-  categoriesData
 }: {
   data: T[];
   configTable: configTableType;
-  categoriesData?: CategoriesTypes;
 }) => {
-  const columns = useColumns({ configTable, categoriesData });
+  const columns = useColumns(configTable);
 
   const [columnVisibility, setColumnVisibility] = useState({});
 
@@ -43,7 +40,11 @@ export const Table = <T extends Record<string, any>>({
   });
   return (
     <div className="relative">
-      <TableHeaderBar table={table} selectedIds={selectedIds} configTable={configTable} />
+      <TableHeaderBar
+        table={table}
+        selectedIds={selectedIds}
+        configTable={configTable}
+      />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
