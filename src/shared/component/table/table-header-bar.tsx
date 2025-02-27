@@ -6,17 +6,15 @@ import { configTableType } from "@/shared/types/table/columnTableTypes";
 
 export function TableHeaderBar<T extends Record<string, any>>({
   table,
-  selectedIds,
   configTable
 }: {
   table: Table<T>;
-  selectedIds: string[];
   configTable: configTableType;
 }) {
   const { isFilterOpen } = useFilterToggle();
 
   return !isFilterOpen ? (
-    <TableSettings table={table} selectedIds={selectedIds} configTable={configTable}/>
+    <TableSettings table={table}  configTable={configTable}/>
   ) : (
     <TableFilter table={table} />
   );

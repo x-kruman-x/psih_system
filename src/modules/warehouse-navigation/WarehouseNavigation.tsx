@@ -10,6 +10,7 @@ export function WarehouseNavigation() {
     <div className="sticky top-[47px] backdrop-blur-[6px] z-20">
       {isFilterOpen && (
         <div className="absolute left-[30px] top-[5px] flex gap-[20px]">
+          {/* TODO: добавить функцию очистки фильтра*/}
           <HoverBorderedEl as="button">
             <Typography>Очистить</Typography>
           </HoverBorderedEl>

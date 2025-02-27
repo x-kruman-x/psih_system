@@ -8,7 +8,6 @@ export interface RemainsDropDownComponentProps {
 }
 
 export function RemainsDropDown({ modifications }: RemainsDropDownComponentProps) {
-  console.log(modifications)
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const handleMenu = () => {

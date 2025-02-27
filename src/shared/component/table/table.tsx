@@ -4,7 +4,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useColumns } from "../../hooks/table/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
@@ -23,7 +23,7 @@ export const Table = <T extends Record<string, any>>({
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const [rowSelection, setRowSelection] = useState({});
-  const selectedIds = rowSelection ? Object.keys(rowSelection) : [];
+
 
   const table = useReactTable({
     data,
@@ -42,7 +42,6 @@ export const Table = <T extends Record<string, any>>({
     <div className="relative">
       <TableHeaderBar
         table={table}
-        selectedIds={selectedIds}
         configTable={configTable}
       />
       <table className="w-full">

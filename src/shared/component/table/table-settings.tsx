@@ -10,15 +10,15 @@ import { useDeleteRows } from "@/shared/hooks/table/useDeleteRows";
 
 export function TableSettings<T extends Record<string, any>>({
   table,
-  selectedIds,
   configTable
 }: {
   table: Table<T>;
-  selectedIds: string[]
   configTable: configTableType;
 }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const { toggleFilter } = useFilterToggle();
+
+  const selectedIds = Object.keys(table.getState().rowSelection)
 
   const deleteRows = useDeleteRows(configTable)
 
@@ -63,10 +63,10 @@ export function TableSettings<T extends Record<string, any>>({
           {selectedIds.length}
           <HoverBorderedEl
             as="button"
-            //TODO: удалять массив id
             onClick={() =>{
-              //TODO: функция удаления для товааров и остатков
+              //TODO: функция удаления для товаров и остатков
               deleteRows(stringToNumber(selectedIds))
+              table.setRowSelection({})
             }}
           >
             <Typography>Удалить</Typography>
