@@ -1,5 +1,5 @@
 import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { isFilterType } from "../types/isFilterTypes";
+import { isFilterType } from "../../types/table/isFilterTypes";
 
 export function useFilterToggle() {
   const queryClient = useQueryClient();

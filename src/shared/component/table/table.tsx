@@ -5,10 +5,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useColumns } from "../../hooks/useColumns";
+import { useColumns } from "../../hooks/table/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
-import { configTableType } from "../../types/columnTableTypes";
+import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "./table-header-bar";
 
 export const Table = <T extends Record<string, any>>({

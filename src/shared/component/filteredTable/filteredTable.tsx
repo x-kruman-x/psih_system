@@ -5,11 +5,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useColumns } from "../../hooks/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
-import { configTableType } from "../../types/columnTableTypes";
+import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "../table/table-header-bar";
+import { useColumns } from "@/shared/hooks/table/useColumns";
 
 export const FilteredTable = <T extends Record<string, any>>({
   combinedData,

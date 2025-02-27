@@ -1,12 +1,14 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDateTime } from "../utils/formateDateTime";
-import { CustomCheckbox } from "../UI/CustomCheckBox";
-import { Typography } from "../UI/Text";
 import { Link } from "@tanstack/react-router";
-import { SelectCell } from "../component/selectCell";
-import { filterIncludesSome } from "../utils/filterIncludesSome";
-import { configTableType } from "../types/columnTableTypes";
-import HoverBorderedEl from "../UI/HoverBorderedEl";
+import { RemainsDropDown } from "@/shared/component/remainsDropDown";
+import { SelectCell } from "@/shared/component/selectCell";
+import { configTableType } from "@/shared/types/table/columnTableTypes";
+import { RemainsDropDownProps } from "@/shared/types/remainsDropDownProps";
+import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
+import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
+import { Typography } from "@/shared/UI/Text";
+import { filterIncludesSome } from "@/shared/utils/filterIncludesSome";
+import { formatDateTime } from "@/shared/utils/formateDateTime";
 
 export function useColumns<T extends Record<string, any>>(
   configTable: configTableType | "categories"
@@ -364,13 +366,9 @@ export function useColumns<T extends Record<string, any>>(
       accessorKey: "modifications",
       header: () => <Typography className={contentThStyle}>остаток</Typography>,
       cell: (props) => {
-        console.log(props);
+        const remainsData = props.getValue<RemainsDropDownProps[]>();
         return (
-          <Typography
-            className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
-          >
-            о
-          </Typography>
+          <RemainsDropDown modifications={remainsData} />
         );
       },
       filterFn: filterIncludesSome,

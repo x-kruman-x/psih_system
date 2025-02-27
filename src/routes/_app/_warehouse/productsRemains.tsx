@@ -44,8 +44,8 @@ function RouteComponent() {
   //   console.log(products)
   //   console.log(eachProduct)
   // }
-  if (isSuccessProducts) {
-    console.log(products)
-  }
+  // if (isSuccessProducts) {
+  //   console.log(products)
+  // }
   return <Table<ProductRemainsType> data={products || []} configTable={"remainsTable"} />;
 }

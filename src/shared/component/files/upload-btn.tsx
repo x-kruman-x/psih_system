@@ -3,7 +3,7 @@ import { useConfigUploadBtn } from "../../hooks/useConfigUploadBtn";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
 import { ordersApi } from "../../../modules/warehouse/orders/api/api";
-import { savePlaceType } from "@/shared/types/savePlaceTypes";
+import { savePlaceType } from "@/shared/types/uploadSavePlaceTypes";
 
 type UploadButtonProps = {
   id: number;

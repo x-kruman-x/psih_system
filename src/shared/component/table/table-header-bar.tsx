@@ -1,8 +1,8 @@
 import { Table } from "@tanstack/react-table";
 import { TableSettings } from "./table-settings";
-import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
+import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
 import { TableFilter } from "./table-filter";
-import { configTableType } from "@/shared/types/columnTableTypes";
+import { configTableType } from "@/shared/types/table/columnTableTypes";
 
 export function TableHeaderBar<T extends Record<string, any>>({
   table,

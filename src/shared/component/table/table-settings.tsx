@@ -4,9 +4,9 @@ import { Typography } from "../../UI/Text";
 import { Table } from "@tanstack/react-table";
 import { stringToNumber } from "../../utils/stringToNumber";
 import { CustomCheckbox } from "../../UI/CustomCheckBox";
-import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
-import { configTableType } from "@/shared/types/columnTableTypes";
-import { useDeleteRows } from "@/shared/hooks/useDeleteRows";
+import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
+import { configTableType } from "@/shared/types/table/columnTableTypes";
+import { useDeleteRows } from "@/shared/hooks/table/useDeleteRows";
 
 export function TableSettings<T extends Record<string, any>>({
   table,
@@ -65,6 +65,7 @@ export function TableSettings<T extends Record<string, any>>({
             as="button"
             //TODO: удалять массив id
             onClick={() =>{
+              //TODO: функция удаления для товааров и остатков
               deleteRows(stringToNumber(selectedIds))
             }}
           >

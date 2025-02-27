@@ -1,7 +1,7 @@
 import { Typography } from "../../shared/UI/Text";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
+import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
 
 export function WarehouseNavigation() {
   const { isFilterOpen, toggleFilter } = useFilterToggle();

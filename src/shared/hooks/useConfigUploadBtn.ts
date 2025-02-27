@@ -1,6 +1,6 @@
 import { useUploadPartyFile } from "@/modules/warehouse/parties/hooks/use-upload-party-file";
 import { useUploadOrderFile } from "../../modules/warehouse/orders/hooks/use-upload-order-file";
-import { savePlaceType } from "../types/savePlaceTypes";
+import { savePlaceType } from "../types/uploadSavePlaceTypes";
 
 export const useConfigUploadBtn = (savePlace: savePlaceType) => {
   const { handleUploadOrderFile, updateOrderPage } = useUploadOrderFile();
