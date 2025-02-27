@@ -234,6 +234,12 @@ export function useColumns<T extends Record<string, any>>(
     },
   ];
 
+  const notCategory = (original: object) => {
+    if (Object.keys(original).length != 2) {
+      return true;
+    }
+  };
+
   const productsColumns: ColumnDef<T>[] = [
     {
       id: "Товар",
@@ -325,12 +331,108 @@ export function useColumns<T extends Record<string, any>>(
       cell: ({ row }) => {
         if (Object.keys(row.original).length == 2) {
           return (
-            <HoverBorderedEl key={row.original.id} className={`${contentTdStyle} cursor-pointer`}>
+            <HoverBorderedEl
+              key={row.original.id}
+              className={`${contentTdStyle} cursor-pointer`}
+            >
               <Typography>{row.original.name}</Typography>
             </HoverBorderedEl>
           );
         }
       },
+    },
+  ];
+
+  const productRemainsColumns: ColumnDef<T>[] = [
+    {
+      id: "Наименование",
+      accessorKey: "name",
+      header: () => (
+        <Typography className={contentThStyle}>наименование</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Остаток",
+      accessorKey: "modifications",
+      header: () => <Typography className={contentThStyle}>остаток</Typography>,
+      cell: (props) => {
+        console.log(props);
+        return (
+          <Typography
+            className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+          >
+            о
+          </Typography>
+        );
+      },
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Предзаказ",
+      // accessorKey: "modifications",
+      header: () => (
+        <Typography className={contentThStyle}>предзаказ</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          нет данных
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Себестоимость",
+      accessorKey: "cost_price",
+      header: () => (
+        <Typography className={contentThStyle}>себестоимость</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          {props.getValue<number>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Тег",
+      accessorKey: "tag",
+      header: () => <Typography className={contentThStyle}>тег</Typography>,
+      cell: (props) => (
+        <SelectCell
+          currentValue={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType="tag"
+          refreshPlace="list"
+          page="remains"
+        />
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Сумма",
+      // accessorKey: "amount",
+      header: () => <Typography className={contentThStyle}>сумма</Typography>,
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<number>() || 0}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
     },
   ];
 
@@ -343,6 +445,8 @@ export function useColumns<T extends Record<string, any>>(
       return productsColumns;
     case "categories":
       return categoriesColumn;
+    case "remainsTable":
+      return productRemainsColumns;
     default:
       return [];
   }

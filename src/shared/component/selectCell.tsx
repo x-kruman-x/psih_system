@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { useConfigSelectCell } from "../hooks/select/useConfigSelectCell";
 import { SelectButton } from "../UI/status-button/SelectButton";
 import { SelectButtonListElement } from "../UI/status-button/SelectButton-listElement";
-
-type SelectCellProps = {
-  currentValue: string | null;
-  buttonStyle?: string;
-  orderId: number;
-  btnType: "status" | "tag";
-  refreshPlace: 'list' | 'card';
-  page: 'orders' | 'parties';
-  wFull?: boolean;
-};
+import { SelectCellProps } from "../types/SelectCellPropsTypes";
 
 export function SelectCell({
   currentValue,

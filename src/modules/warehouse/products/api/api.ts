@@ -16,6 +16,8 @@ async function getCategories() {
   return instance.get(`/api/products/categories/`);
 }
 
+
+
 export const productsApi = {
   basekey: "products",
   getProductsQueryOptions: (isArchived?: boolean) => {

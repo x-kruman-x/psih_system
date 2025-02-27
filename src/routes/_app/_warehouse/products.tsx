@@ -36,6 +36,22 @@ function RouteComponent() {
     console.error(categoriesError);
   }
 
+  if(isSuccessProducts && isSuccess) {
+    const groupedProducts = {};
+    products.forEach((product) => {
+      if (!groupedProducts[product.category_id]) {
+        groupedProducts[product.category_id] = [];
+      }
+      groupedProducts[product.category_id].push(product.name);
+    });
+
+    const tableData = categories.map((category) => ({
+      category: category.name,
+      products: groupedProducts[category.id]?.join(", ") || "", // Объединяем продукты в строку
+    }));
+    console.log(tableData)
+  }
+
   const combinedData =
     isSuccessProducts && isSuccess
       ? { products: products || [], categories: categories || [] }

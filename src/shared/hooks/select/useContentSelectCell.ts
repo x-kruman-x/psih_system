@@ -1,4 +1,6 @@
-export function useContentSelectCell(page: "orders" | "parties") {
+import { SelectCellPageType } from "@/shared/types/SelectCellPropsTypes";
+
+export function useContentSelectCell(page: SelectCellPageType) {
   switch (page) {
     case "orders":
       return {
@@ -13,6 +15,18 @@ export function useContentSelectCell(page: "orders" | "parties") {
         ],
       };
     case "parties":
+      return {
+        statusContent: [
+          { text: "на складе", backgroundColor: "bg-[#5685DE]", id: 1 },
+          { text: "оплачено", backgroundColor: "bg-[#56DE85]", id: 2 },
+          { text: "не заказано", backgroundColor: "bg-[#D6A0A0]", id: 3 },
+        ],
+        tagContent: [
+          { text: "бартер", backgroundColor: "bg-[#5685DE]", id: 1 },
+          { text: "нет", backgroundColor: "bg-[#D6A0A0]", id: 2 },
+        ],
+      };
+    case "remains":
       return {
         statusContent: [
           { text: "на складе", backgroundColor: "bg-[#5685DE]", id: 1 },

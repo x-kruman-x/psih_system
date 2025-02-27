@@ -1,1 +1,1 @@
-export type configTableType = "orderTable" | 'partiesTable' | 'productsTable'
+export type configTableType = "orderTable" | 'partiesTable' | 'productsTable' | 'remainsTable'

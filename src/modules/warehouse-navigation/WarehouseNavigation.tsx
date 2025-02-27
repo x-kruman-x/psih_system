@@ -25,7 +25,7 @@ export function WarehouseNavigation() {
         <BorderedLink to="/products">
           <Typography>ТОВАРЫ</Typography>
         </BorderedLink>
-        <BorderedLink to="/remains">
+        <BorderedLink to="/productsRemains">
           <Typography>ОСТАТКИ</Typography>
         </BorderedLink>
         <BorderedLink to="/parties">

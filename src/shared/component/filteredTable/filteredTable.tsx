@@ -20,7 +20,7 @@ export const FilteredTable = <T extends Record<string, any>>({
 }) => {
   const { products, categories } = combinedData;
   const unifiedData = [...(categories || []),  ...(products || [])];
-
+  console.log(unifiedData)
   const productColumns = useColumns<T>(configTable);
   const categoryColumns = useColumns<T>('categories');
 

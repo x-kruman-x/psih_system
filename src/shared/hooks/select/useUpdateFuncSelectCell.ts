@@ -2,10 +2,11 @@ import { usePatchOrderStatus } from "@/modules/warehouse/orders/hooks/use-patch-
 import { usePatchOrderTag } from "@/modules/warehouse/orders/hooks/use-patch-orderTag";
 import { usePatchPartyStatus } from "@/modules/warehouse/parties/hooks/use-patch-partyStatus";
 import { usePatchPartyTag } from "@/modules/warehouse/parties/hooks/use-patch-partyTag";
+import { SelectCellRefreshPlaceType, SelectCellPageType } from "@/shared/types/SelectCellPropsTypes";
 
 export function useUpdateFuncSelectCell(
-  refreshPlace: "list" | "card",
-  page: "orders" | "parties"
+  refreshPlace: SelectCellRefreshPlaceType,
+  page: SelectCellPageType
 ) {
   const updateOrderStatus = usePatchOrderStatus(refreshPlace);
   const updateOrderTag = usePatchOrderTag(refreshPlace);
@@ -37,6 +38,11 @@ export function useUpdateFuncSelectCell(
         updateTag: async (partyId: number, newValue: any) => {
           await updatePartyTag.handleUpdateOrderStatus({ partyId, newValue });
         },
+      };
+    case "remains":
+      return {
+        updateStatus: () => console.log('создай api для обновления статуса'),
+        updateTag: () => console.log('создай api для обновления тега'),
       };
   }
 }
