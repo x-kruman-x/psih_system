@@ -4,29 +4,26 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
-import { useColumns } from "../../hooks/useColumns";
+import { useEffect, useState } from "react";
+import { useColumns } from "../../hooks/table/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
-import { configTableType } from "../../types/columnTableTypes";
+import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "./table-header-bar";
-import { CategoriesTypes } from "@/shared/types/categoriesTypes";
 
 export const Table = <T extends Record<string, any>>({
   data,
   configTable,
-  categoriesData
 }: {
   data: T[];
   configTable: configTableType;
-  categoriesData?: CategoriesTypes;
 }) => {
-  const columns = useColumns({ configTable, categoriesData });
+  const columns = useColumns(configTable);
 
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const [rowSelection, setRowSelection] = useState({});
-  const selectedIds = rowSelection ? Object.keys(rowSelection) : [];
+
 
   const table = useReactTable({
     data,
@@ -43,7 +40,10 @@ export const Table = <T extends Record<string, any>>({
   });
   return (
     <div className="relative">
-      <TableHeaderBar table={table} selectedIds={selectedIds} configTable={configTable} />
+      <TableHeaderBar
+        table={table}
+        configTable={configTable}
+      />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

@@ -1,0 +1,1 @@
+export type EditPageSettingsBar = "order" | "product" | "party";

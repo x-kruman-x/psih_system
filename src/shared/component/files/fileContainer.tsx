@@ -1,4 +1,4 @@
-import { savePlaceType } from "@/shared/types/savePlaceTypes";
+import { savePlaceType } from "@/shared/types/uploadSavePlaceTypes";
 import { FileCard } from "./fileCard";
 import { UploadButton } from "./upload-btn";
 

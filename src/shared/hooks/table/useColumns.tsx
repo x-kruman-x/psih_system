@@ -1,19 +1,18 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDateTime } from "../utils/formateDateTime";
-import { CustomCheckbox } from "../UI/CustomCheckBox";
-import { Typography } from "../UI/Text";
 import { Link } from "@tanstack/react-router";
-import { SelectCell } from "../component/selectCell";
-import { filterIncludesSome } from "../utils/filterIncludesSome";
-import { configTableType } from "../types/columnTableTypes";
-import { CategoriesTypes } from "../types/categoriesTypes";
-import { CategoriesButton } from "../component/table/categories-button";
+import { RemainsDropDown } from "@/shared/component/remainsDropDown";
+import { SelectCell } from "@/shared/component/selectCell";
+import { configTableType } from "@/shared/types/table/columnTableTypes";
+import { RemainsDropDownProps } from "@/shared/types/remainsDropDownProps";
+import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
+import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
+import { Typography } from "@/shared/UI/Text";
+import { filterIncludesSome } from "@/shared/utils/filterIncludesSome";
+import { formatDateTime } from "@/shared/utils/formateDateTime";
 
-export function useColumns<T extends Record<string, any>>(params: {
-  configTable: configTableType;
-  categoriesData?: CategoriesTypes;
-}): ColumnDef<T>[] {
-  const { configTable, categoriesData } = params;
+export function useColumns<T extends Record<string, any>>(
+  configTable: configTableType | "categories"
+): ColumnDef<T>[] {
   const contentThStyle = `!text-[#8D8D8D]`;
   const contentTdStyle = `py-[7px] mx-4 mb-[11px] border border-solid rounded-md group-hover:border-black`;
 
@@ -237,23 +236,201 @@ export function useColumns<T extends Record<string, any>>(params: {
     },
   ];
 
+  const notCategory = (original: object) => {
+    if (Object.keys(original).length != 2) {
+      return true;
+    }
+  };
+
   const productsColumns: ColumnDef<T>[] = [
     {
-      id: 'Категории',
+      id: "Товар",
+      accessorKey: "name",
       header: () => (
-        <Typography className={`pl-[23px] ${contentThStyle}`}>категории</Typography>
+        <Typography className={`${contentThStyle}`}>товар</Typography>
       ),
-      cell: () => {
+      cell: (props) => {
+        // console.log(props);
         return (
-          <div>
-            {categoriesData ? (
-              <CategoriesButton categoriesData={categoriesData} />
-            ) : (
-              <Typography>Нет категорий</Typography>
-            )}
-          </div>
+          <Typography
+            className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+          >
+            {props.getValue<string>()}
+          </Typography>
         );
       },
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Коллекция",
+      // accessorKey: "name",
+      header: () => (
+        <Typography className={`${contentThStyle}`}>коллекция</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Пол",
+      // accessorKey: "name",
+      header: () => (
+        <Typography className={`${contentThStyle}`}>пол</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Остаток",
+      // accessorKey: "name",
+      header: () => (
+        <Typography className={`${contentThStyle}`}>остаток</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Цена",
+      accessorKey: "price",
+      header: () => (
+        <Typography className={`${contentThStyle}`}>цена</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<number>() || 0}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+  ];
+
+  const categoriesColumn: ColumnDef<T>[] = [
+    {
+      id: "Категории",
+      accessorKey: "category.name",
+      header: () => (
+        <Typography className={`${contentThStyle}`}>категории</Typography>
+      ),
+      cell: ({ row }) => {
+        if (Object.keys(row.original).length == 2) {
+          return (
+            <HoverBorderedEl
+              key={row.original.id}
+              className={`${contentTdStyle} cursor-pointer`}
+            >
+              <Typography>{row.original.name}</Typography>
+            </HoverBorderedEl>
+          );
+        }
+      },
+    },
+  ];
+
+  const productRemainsColumns: ColumnDef<T>[] = [
+    {
+      id: "Наименование",
+      accessorKey: "name",
+      header: () => (
+        <Typography className={contentThStyle}>наименование</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          {props.getValue<string>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Остаток",
+      accessorKey: "modifications",
+      header: () => <Typography className={contentThStyle}>остаток</Typography>,
+      cell: (props) => {
+        const remainsData = props.getValue<RemainsDropDownProps[]>();
+        return (
+          <RemainsDropDown modifications={remainsData} />
+        );
+      },
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Предзаказ",
+      // accessorKey: "modifications",
+      header: () => (
+        <Typography className={contentThStyle}>предзаказ</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          нет данных
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Себестоимость",
+      accessorKey: "cost_price",
+      header: () => (
+        <Typography className={contentThStyle}>себестоимость</Typography>
+      ),
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
+        >
+          {props.getValue<number>()}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Тег",
+      accessorKey: "tag",
+      header: () => <Typography className={contentThStyle}>тег</Typography>,
+      cell: (props) => (
+        <SelectCell
+          currentValue={props.getValue<string>()}
+          buttonStyle={`${returnBorderStyle(props.row.getIsSelected())}`}
+          orderId={props.row.original.id}
+          btnType="tag"
+          refreshPlace="list"
+          page="remains"
+        />
+      ),
+      filterFn: filterIncludesSome,
+    },
+    {
+      id: "Сумма",
+      // accessorKey: "amount",
+      header: () => <Typography className={contentThStyle}>сумма</Typography>,
+      cell: (props) => (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.getValue<number>() || 0}
+        </Typography>
+      ),
+      filterFn: filterIncludesSome,
     },
   ];
 
@@ -262,6 +439,12 @@ export function useColumns<T extends Record<string, any>>(params: {
       return ordersColumns;
     case "partiesTable":
       return partiesColumns;
+    case "productsTable":
+      return productsColumns;
+    case "categories":
+      return categoriesColumn;
+    case "remainsTable":
+      return productRemainsColumns;
     default:
       return [];
   }

@@ -9,67 +9,15 @@ import {
   SheetTitle,
   SheetDescription,
 } from "../UI/sheet";
+import { EditPageSettingsBar } from "../types/table/editPageSettingsBar";
+import { useConfigCardSettingsBar } from "../hooks/table/useConfigCardSettingsBar";
 
-type EditPageSettingsBar = {
-  pageType: "order" | "product" | "party";
-};
+type CardSettingsBarProps = {
+  pageType: EditPageSettingsBar
+}
 
-export function CardSettingsBar({ pageType }: EditPageSettingsBar) {
-  // TODO: сделать хук конфига
-  let configObj;
-  switch (pageType) {
-    case "order":
-      configObj = {
-        gap: "gap-[170px]",
-        linkPath: "/orders",
-        leftEl: (
-          <HoverBorderedEl>
-            <Link to="">
-              <Typography>CDEK</Typography>
-            </Link>
-          </HoverBorderedEl>
-        ),
-        rightEl: (
-          <HoverBorderedEl>
-            <Link to="">
-              <Typography>Почта России</Typography>
-            </Link>
-          </HoverBorderedEl>
-        ),
-        navStyle: "absolute left-1/2 -translate-x-1/2",
-      };
-      break;
-    case "product":
-      // configObj = {
-      //   gap: "",
-      //   linkPath: "/products",
-      //   leftEl: (
-      //     <HoverBorderedEl>
-      //       <Link to="">
-      //         <Text>CDEK</Text>
-      //       </Link>
-      //     </HoverBorderedEl>
-      //   ),
-      //   rightEl: (
-      //     <HoverBorderedEl>
-      //       <Link to="">
-      //         <Text>Почта России</Text>
-      //       </Link>
-      //     </HoverBorderedEl>
-      //   ),
-      //   navStyle: "absolute left-1/2 -translate-x-1/2",
-      // };
-      break;
-    case "party":
-      configObj = {
-        gap: '',
-        linkPath: "/parties",
-        leftEl: null,
-        rightEl: null,
-        navStyle: '',
-      };
-      break
-  }
+export function CardSettingsBar({ pageType }: CardSettingsBarProps) {
+  const configObj = useConfigCardSettingsBar(pageType)
 
   const containerStyle = `flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid`;
 

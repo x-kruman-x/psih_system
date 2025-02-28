@@ -1,7 +1,7 @@
 import { Typography } from "../../shared/UI/Text";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
+import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
 
 export function WarehouseNavigation() {
   const { isFilterOpen, toggleFilter } = useFilterToggle();
@@ -10,6 +10,7 @@ export function WarehouseNavigation() {
     <div className="sticky top-[47px] backdrop-blur-[6px] z-20">
       {isFilterOpen && (
         <div className="absolute left-[30px] top-[5px] flex gap-[20px]">
+          {/* TODO: добавить функцию очистки фильтра*/}
           <HoverBorderedEl as="button">
             <Typography>Очистить</Typography>
           </HoverBorderedEl>
@@ -25,7 +26,7 @@ export function WarehouseNavigation() {
         <BorderedLink to="/products">
           <Typography>ТОВАРЫ</Typography>
         </BorderedLink>
-        <BorderedLink to="/remains">
+        <BorderedLink to="/productsRemains">
           <Typography>ОСТАТКИ</Typography>
         </BorderedLink>
         <BorderedLink to="/parties">

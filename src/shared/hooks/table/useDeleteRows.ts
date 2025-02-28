@@ -1,5 +1,5 @@
 import { useDeleteOrders } from "@/modules/warehouse/orders/hooks/use-delete-orders";
-import { configTableType } from "../types/columnTableTypes";
+import { configTableType } from "../../types/table/columnTableTypes";
 import { useDeleteParties } from "@/modules/warehouse/parties/hooks/use-delete-parties";
 
 export function useDeleteRows(configTable: configTableType) {

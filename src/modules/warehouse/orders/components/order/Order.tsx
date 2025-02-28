@@ -14,6 +14,8 @@ type OrderProps = {
 };
 
 export function Order({ orderData }: OrderProps) {
+  console.log(orderData)
+  //TODO: сделать запрос через квери и проходиться по модифиикациям в заказе, запршивая все продукты по id. IsLoading сделать пока таблица не загрузится 
   return (
     <>
       <CardSettingsBar pageType={"order"} />
