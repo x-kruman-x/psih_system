@@ -10,6 +10,7 @@ import { Typography } from "../../UI/Text";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "../table/table-header-bar";
 import { useColumns } from "@/shared/hooks/table/useColumns";
+import { CategoriesType } from "@/shared/types/categoriesTypes";
 
 export const FilteredTable = <T extends Record<string, any>>({
   combinedData,
@@ -19,10 +20,10 @@ export const FilteredTable = <T extends Record<string, any>>({
   configTable: configTableType;
 }) => {
   const { products, categories } = combinedData;
-  const unifiedData = [...(categories || []),  ...(products || [])];
-  console.log(unifiedData)
+  // const unifiedData = [...(categories || []),  ...(products || [])];
+  // console.log(unifiedData)
   const productColumns = useColumns<T>(configTable);
-  const categoryColumns = useColumns<T>('categories');
+  const categoryColumns = useColumns<CategoriesType>('categories');
 
   const columns = [...categoryColumns, ...productColumns];
 
@@ -32,7 +33,7 @@ export const FilteredTable = <T extends Record<string, any>>({
   const selectedIds = rowSelection ? Object.keys(rowSelection) : [];
 
   const table = useReactTable({
-    data: unifiedData,
+    data: combinedData,
     columns,
     state: {
       columnVisibility,
@@ -46,7 +47,7 @@ export const FilteredTable = <T extends Record<string, any>>({
   });
   return (
     <div className="relative">
-      <TableHeaderBar table={table} selectedIds={selectedIds} configTable={configTable} />
+      <TableHeaderBar table={table} configTable={configTable} />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

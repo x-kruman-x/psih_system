@@ -25,15 +25,20 @@ declare module "@tanstack/react-router" {
 }
 
 if (localStorage.getItem("access_token")) {
-  await refreshToken();
-  const keysWithInfiniteGcTime = ["auth", "isFilter"];
-
-  keysWithInfiniteGcTime.forEach((key) => {
-    queryClient.setQueryDefaults([key], { gcTime: Infinity });
-  });
-
-  queryClient.setQueryData(["auth"], { isAuth: true });
-  queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
+  try {
+    await refreshToken();
+    const keysWithInfiniteGcTime = ["auth", "isFilter"];
+  
+    keysWithInfiniteGcTime.forEach((key) => {
+      queryClient.setQueryDefaults([key], { gcTime: Infinity });
+    });
+  
+    queryClient.setQueryData(["auth"], { isAuth: true });
+    queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
+  } catch(e) {
+    
+  }
+  
 }
 
 const rootElement = document.getElementById("root")!;

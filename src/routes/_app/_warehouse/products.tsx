@@ -49,7 +49,7 @@ function RouteComponent() {
       category: category.name,
       products: groupedProducts[category.id]?.join(", ") || "", // Объединяем продукты в строку
     }));
-    console.log(tableData)
+    // console.log(tableData) 
   }
 
   const combinedData =

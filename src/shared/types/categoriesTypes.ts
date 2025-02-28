@@ -1,4 +1,6 @@
-export type CategoriesTypes = {
-  name: string;
-  id: number;
-}[];
+export type CategoriesType = [
+  {
+    name: string;
+    id: number;
+  }
+];

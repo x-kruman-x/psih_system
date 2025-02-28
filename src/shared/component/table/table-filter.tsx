@@ -1,9 +1,19 @@
+import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
+import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
+import { Typography } from "@/shared/UI/Text";
+import { clearAllFilters } from "@/shared/utils/clearAllFilters";
 import { Column, Table } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 
-export function TableFilter<T extends Record<string, any>>({ table }: { table: Table<T> }) {
+export function TableFilter<T extends Record<string, any>>({
+  table,
+}: {
+  table: Table<T>;
+}) {
+  const { isFilterOpen, toggleFilter } = useFilterToggle();
+
   return (
-    <div className="w-full flex">
+    <div className="w-full flex relative">
       {table.getHeaderGroups().flatMap((headerGroup) =>
         headerGroup.headers.map((header) => {
           if (header.column.getCanFilter()) {
@@ -19,6 +29,14 @@ export function TableFilter<T extends Record<string, any>>({ table }: { table: T
           return null;
         })
       )}
+      <div className="absolute left-[30px] top-[-36px] flex gap-[20px] z-20">
+        <HoverBorderedEl as="button" onClick={() => clearAllFilters(table)}>
+          <Typography>Очистить</Typography>
+        </HoverBorderedEl>
+        <HoverBorderedEl as="button" onClick={toggleFilter}>
+          <Typography>Закрыть</Typography>
+        </HoverBorderedEl>
+      </div>
     </div>
   );
 }
@@ -74,7 +92,7 @@ function DebouncedInput({
       if (trimmedValue.includes(",")) {
         onChange(trimmedValue.split(",").map((item) => item.trim())); // Разделяем по запятой и удаляем пробелы
       } else {
-        onChange(trimmedValue); 
+        onChange(trimmedValue);
       }
     }, debounce);
 

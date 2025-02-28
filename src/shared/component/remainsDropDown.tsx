@@ -52,7 +52,7 @@ export function RemainsDropDown({ modifications }: RemainsDropDownComponentProps
       {isOpenMenu && (
         <div className="buttonList absolute w-full bg-white rounded-md py-[7px] px-4 z-10 border border-solid border-black flex flex-col">
           {modifications?.map((modification) => (
-            <div className="flex justify-center">{`${modification.size} - ${modification.remaining}`}</div>
+            <div key={modification.id} className="flex justify-center">{`${modification.size} - ${modification.remaining}`}</div>
           ))}
         </div>
       )}
