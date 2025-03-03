@@ -12,7 +12,7 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
-    port: 5173,
+    port: 4173,
     // proxy: {
     //   '/api': {
     //     target: 'http://87.242.85.68:8000',
