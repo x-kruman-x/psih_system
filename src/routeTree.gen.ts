@@ -44,19 +44,27 @@ const AppWarehouseProductsRemainsRoute =
     id: '/productsRemains',
     path: '/productsRemains',
     getParentRoute: () => AppWarehouseRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routes/_app/_warehouse/productsRemains.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 const AppWarehouseProductsRoute = AppWarehouseProductsImport.update({
   id: '/products',
   path: '/products',
   getParentRoute: () => AppWarehouseRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/_app/_warehouse/products.lazy').then((d) => d.Route),
+)
 
 const AppWarehousePartiesRoute = AppWarehousePartiesImport.update({
   id: '/parties',
   path: '/parties',
   getParentRoute: () => AppWarehouseRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/_app/_warehouse/parties.lazy').then((d) => d.Route),
+)
 
 const AppWarehouseOrdersRoute = AppWarehouseOrdersImport.update({
   id: '/orders',

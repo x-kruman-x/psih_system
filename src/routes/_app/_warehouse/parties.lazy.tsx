@@ -2,11 +2,9 @@ import { partiesApi } from '@/modules/warehouse/parties/api/api'
 import { PartiesType } from '@/modules/warehouse/parties/types/partiesTableTypes';
 import { Table } from '@/shared/component/table/table';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_app/_warehouse/parties')({
-  loader: ({ context: { queryClient } }) =>
-      queryClient.ensureQueryData(partiesApi.getPartiesQueryOptions()),
+export const Route = createLazyFileRoute('/_app/_warehouse/parties')({
   component: RouteComponent,
 })
 

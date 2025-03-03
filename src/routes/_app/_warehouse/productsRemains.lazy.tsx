@@ -1,14 +1,12 @@
-import { productsApi } from "@/modules/warehouse/products/api/api";
-import { ProductRemainsType } from "@/modules/warehouse/productsRemains/types/productRemainsTypes";
-import { Table } from "@/shared/component/table/table";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { productsApi } from '@/modules/warehouse/products/api/api'
+import { ProductRemainsType } from '@/modules/warehouse/productsRemains/types/productRemainsTypes'
+import { Table } from '@/shared/component/table/table'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { createLazyFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/_app/_warehouse/productsRemains")({
-  loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(productsApi.getProductsQueryOptions(false)),
+export const Route = createLazyFileRoute('/_app/_warehouse/productsRemains')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const {
@@ -16,10 +14,10 @@ function RouteComponent() {
     error: productsError,
     isError: isProductsError,
     // isSuccess: isSuccessProducts,
-  } = useSuspenseQuery(productsApi.getProductsQueryOptions(false));
+  } = useSuspenseQuery(productsApi.getProductsQueryOptions(false))
 
   if (isProductsError) {
-    console.error(productsError);
+    console.error(productsError)
   }
 
   // if (isSuccessProducts) {
@@ -47,5 +45,10 @@ function RouteComponent() {
   // if (isSuccessProducts) {
   //   console.log(products)
   // }
-  return <Table<ProductRemainsType> data={products || []} configTable={"remainsTable"} />;
+  return (
+    <Table<ProductRemainsType>
+      data={products || []}
+      configTable={'remainsTable'}
+    />
+  )
 }

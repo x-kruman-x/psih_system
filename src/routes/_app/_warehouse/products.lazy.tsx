@@ -1,38 +1,34 @@
-import { productsApi } from "@/modules/warehouse/products/api/api";
-import { ProductsAndCategoriesType } from "@/modules/warehouse/products/types/productsTableTypes";
-import { FilteredTable } from "@/shared/component/filteredTable/filteredTable";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { productsApi } from '@/modules/warehouse/products/api/api'
+import { ProductsAndCategoriesType } from '@/modules/warehouse/products/types/productsTableTypes'
+import { FilteredTable } from '@/shared/component/filteredTable/filteredTable'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { createLazyFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute("/_app/_warehouse/products")({
-  loader: ({ context: { queryClient } }) => {
-    queryClient.ensureQueryData(productsApi.getProductsQueryOptions(false));
-    queryClient.ensureQueryData(productsApi.getCategoriesQueryOptions());
-  },
+export const Route = createLazyFileRoute('/_app/_warehouse/products')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const {
     data: products,
     error: productsError,
     isError: isProductsError,
-    isSuccess: isSuccessProducts
-  } = useSuspenseQuery(productsApi.getProductsQueryOptions(false));
+    isSuccess: isSuccessProducts,
+  } = useSuspenseQuery(productsApi.getProductsQueryOptions(false))
 
   const {
     data: categories,
     error: categoriesError,
     isError: isCategoriesError,
-    isSuccess
-  } = useSuspenseQuery(productsApi.getCategoriesQueryOptions());
+    isSuccess,
+  } = useSuspenseQuery(productsApi.getCategoriesQueryOptions())
 
   if (isProductsError) {
-    console.error(productsError);
+    console.error(productsError)
   }
 
   if (isCategoriesError) {
-    console.error(categoriesError);
+    console.error(categoriesError)
   }
 
   // if(isSuccessProducts && isSuccess) {
@@ -48,13 +44,13 @@ function RouteComponent() {
   //     category: category.name,
   //     products: groupedProducts[category.id]?.join(", ") || "", // Объединяем продукты в строку
   //   }));
-  //   // console.log(tableData) 
+  //   // console.log(tableData)
   // }
 
   const combinedData =
     isSuccessProducts && isSuccess
       ? { products: products || [], categories: categories || [] }
-      : { products: [], categories: [] };
+      : { products: [], categories: [] }
 
   return (
     <>
@@ -63,5 +59,5 @@ function RouteComponent() {
         configTable="productsTable"
       />
     </>
-  );
+  )
 }

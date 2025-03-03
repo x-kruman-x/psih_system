@@ -24,30 +24,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
-// if (localStorage.getItem("access_token")) {
-//   await refreshToken();
-//   const keysWithInfiniteGcTime = ["auth", "isFilter"];
-
-//   keysWithInfiniteGcTime.forEach((key) => {
-//     queryClient.setQueryDefaults([key], { gcTime: Infinity });
-//   });
-
-//   queryClient.setQueryData(["auth"], { isAuth: true });
-//   queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-// }
-
 if (localStorage.getItem("access_token")) {
-  (async () => {
-    await refreshToken();
-    const keysWithInfiniteGcTime = ["auth", "isFilter"];
+  await refreshToken();
+  const keysWithInfiniteGcTime = ["auth", "isFilter"];
 
-    keysWithInfiniteGcTime.forEach((key) => {
-      queryClient.setQueryDefaults([key], { gcTime: Infinity });
-    });
+  keysWithInfiniteGcTime.forEach((key) => {
+    queryClient.setQueryDefaults([key], { gcTime: Infinity });
+  });
 
-    queryClient.setQueryData(["auth"], { isAuth: true });
-    queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-  })();
+  queryClient.setQueryData(["auth"], { isAuth: true });
+  queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
 }
 
 const rootElement = document.getElementById("root")!;
