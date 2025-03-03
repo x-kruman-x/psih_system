@@ -25,7 +25,7 @@ declare module "@tanstack/react-router" {
 }
 
 if (localStorage.getItem("access_token")) {
-  await refreshToken();
+  refreshToken();
   const keysWithInfiniteGcTime = ["auth", "isFilter"];
 
   keysWithInfiniteGcTime.forEach((key) => {
