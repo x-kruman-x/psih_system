@@ -74,7 +74,9 @@ export function CardSettingsBar<
           )}
         </HoverBorderedEl>
       </div>
-      {/* TODO: доделать настройки */}
+      {/* TODO: добавить кнопку удаления itema  */}
+      {/* TODO: добавить список тегов  */}
+      {/* TODO: добавить кнопку создания тегов */}
       <Sheet>
         <SheetTrigger>
           <HoverBorderedEl>

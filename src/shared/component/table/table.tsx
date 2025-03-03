@@ -52,7 +52,7 @@ export const Table = <T extends Record<string, any>>({
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="w-1/6 py-[5px] border-r border-solid border-black last:border-none"
+                    className="w-1/6 py-[5px] px-0 border-l border-solid border-black first:border-none"
                   >
                     {header.isPlaceholder ? null : (
                       <>
@@ -71,11 +71,11 @@ export const Table = <T extends Record<string, any>>({
         <tbody>
           {/* TODO: добавить tooltip */}
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="group">
+            <tr key={row.id} className="group last:group/last-pb">
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="w-1/6 text-center border-r border-solid border-black last:border-none"
+                  className="w-1/6 px-0 text-center border-l border-solid border-black first:border-none group/last-pb:pb-[300px]"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>

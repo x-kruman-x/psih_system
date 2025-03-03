@@ -20,7 +20,7 @@ export function TableFilter<T extends Record<string, any>>({
             return (
               <div
                 key={header.id}
-                className="w-1/6 flex border-r border-b border-black border-solid p-[15px] text-center last:border-r-0 transition-all duration-300"
+                className="w-1/6 flex border-l border-b border-black border-solid p-[15px] text-center first:border-l-0 transition-all duration-300"
               >
                 <Filter column={header.column} />
               </div>
