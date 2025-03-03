@@ -1,13 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ordersApi } from "../api/api";
+import { toast } from "sonner";
 
 export function useDeleteOrders() {
   const queryClient = useQueryClient();
 
   const deleteOrdersMutation = useMutation({
     mutationFn: ordersApi.deleteOrders,
-    async onError(error) {
-      console.error("Failed to delete orders:", error);
+    onError: (error) => {
+      console.error(error);
+      toast.error('Произошла ошибка при удалении заказов'); 
+    },
+    onSuccess: () => {
+      toast.success('Заказы успешно удалены');
     },
     async onSettled() {
       await queryClient.invalidateQueries({ queryKey: [ordersApi.basekey, "getOrders"] });

@@ -5,12 +5,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Typography } from "../../UI/Text";
 import { configTableType } from "../../types/table/columnTableTypes";
-import { TableHeaderBar } from "../table/table-header-bar";
 import { useColumns } from "@/shared/hooks/table/useColumns";
-import { CategoriesType } from "@/shared/types/categoriesTypes";
 
 export const FilteredTable = <T extends Record<string, any>>({
   combinedData,
@@ -20,86 +16,89 @@ export const FilteredTable = <T extends Record<string, any>>({
   configTable: configTableType;
 }) => {
   const { products, categories } = combinedData;
-  // const unifiedData = [...(categories || []),  ...(products || [])];
-  // console.log(unifiedData)
+
   const productColumns = useColumns<T>(configTable);
-  const categoryColumns = useColumns<CategoriesType>('categories');
+  const categoryColumns = useColumns<T>("categories");
 
-  const columns = [...categoryColumns, ...productColumns];
+  const [productСolumnVisibility, setProductColumnVisibility] = useState({});
+  const [categoryСolumnVisibility, setCategoryColumnVisibility] = useState({});
 
-  const [columnVisibility, setColumnVisibility] = useState({});
+  const [productRowSelection, setProductRowSelection] = useState({});
+  const [categoryRowSelection, setCategoryRowSelection] = useState({});
 
-  const [rowSelection, setRowSelection] = useState({});
-  const selectedIds = rowSelection ? Object.keys(rowSelection) : [];
-
-  const table = useReactTable({
-    data: combinedData,
-    columns,
+  const productTable = useReactTable({
+    data: products,
+    columns: productColumns,
     state: {
-      columnVisibility,
-      rowSelection,
+      columnVisibility: productСolumnVisibility,
+      rowSelection: productRowSelection,
     },
-    getRowId: (originalRow) => originalRow.id.toString(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    onColumnVisibilityChange: setProductColumnVisibility,
+    onRowSelectionChange: setProductRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
+  const categoriesTable = useReactTable({
+    data: categories,
+    columns: categoryColumns,
+    state: {
+      columnVisibility: categoryСolumnVisibility,
+      rowSelection: categoryRowSelection,
+    },
+    onColumnVisibilityChange: setCategoryColumnVisibility,
+    onRowSelectionChange: setCategoryRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
   return (
     <div className="relative">
-      <TableHeaderBar table={table} configTable={configTable} />
       <table className="w-full">
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    className="w-1/6 py-[5px] border-r border-solid border-black last:border-none"
-                  >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
+          <tr>
+            {categoriesTable.getHeaderGroups().flatMap((headerGroup) =>
+              headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  className="w-1/6 py-[5px] border-r border-solid border-black"
+                >
+                  {header.isPlaceholder ? null : (
+                    <>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </>
+                  )}
+                </th>
+              ))
+            )}
+            {productTable.getHeaderGroups().flatMap((headerGroup) =>
+              headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  className="w-1/6 py-[5px] border-r border-solid border-black last:border-none"
+                >
+                  {header.isPlaceholder ? null : (
+                    <>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </>
+                  )}
+                </th>
+              ))
+            )}
+          </tr>
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="group">
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="w-1/6 text-center border-r border-solid border-black last:border-none"
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+     
         </tbody>
       </table>
-      <HoverBorderedEl
-        as="button"
-        className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-white z-20"
-        onClick={() => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }}
-      >
-        <Typography>НАВЕРХ</Typography>
-      </HoverBorderedEl>
     </div>
   );
 };

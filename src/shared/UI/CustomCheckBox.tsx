@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 //TODO: чекбоксы доделать
 type CustomCheckboxProps = {
   className?: string;

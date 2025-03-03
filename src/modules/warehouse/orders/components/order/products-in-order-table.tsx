@@ -1,15 +1,15 @@
-type modificationProps = {
-    amount: number;
-    modification: {
-        size: string;
-        article: (string | null);
-        remaining: number;
-        id: number;
-        product_id: number;
-    }
-    id: number;
-}
+// type modificationProps = {
+//     amount: number;
+//     modification: {
+//         size: string;
+//         article: (string | null);
+//         remaining: number;
+//         id: number;
+//         product_id: number;
+//     }
+//     id: number;
+// }
 
-export function ProductsInOrderTable({products}: modificationProps) {
-    
-}
+// export function ProductsInOrderTable({products}: modificationProps) {
+//     console.log(products)
+// }

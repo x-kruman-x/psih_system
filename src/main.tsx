@@ -14,7 +14,7 @@ const router = createRouter({
   context: {
     queryClient,
   },
-  defaultPreload: "intent",
+  // defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
 });
 
@@ -24,21 +24,30 @@ declare module "@tanstack/react-router" {
   }
 }
 
+// if (localStorage.getItem("access_token")) {
+//   await refreshToken();
+//   const keysWithInfiniteGcTime = ["auth", "isFilter"];
+
+//   keysWithInfiniteGcTime.forEach((key) => {
+//     queryClient.setQueryDefaults([key], { gcTime: Infinity });
+//   });
+
+//   queryClient.setQueryData(["auth"], { isAuth: true });
+//   queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
+// }
+
 if (localStorage.getItem("access_token")) {
-  try {
+  (async () => {
     await refreshToken();
     const keysWithInfiniteGcTime = ["auth", "isFilter"];
-  
+
     keysWithInfiniteGcTime.forEach((key) => {
       queryClient.setQueryDefaults([key], { gcTime: Infinity });
     });
-  
+
     queryClient.setQueryData(["auth"], { isAuth: true });
     queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-  } catch(e) {
-    
-  }
-  
+  })();
 }
 
 const rootElement = document.getElementById("root")!;

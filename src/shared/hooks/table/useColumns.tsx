@@ -236,12 +236,6 @@ export function useColumns<T extends Record<string, any>>(
     },
   ];
 
-  const notCategory = (original: object) => {
-    if (Object.keys(original).length != 2) {
-      return true;
-    }
-  };
-
   const productsColumns: ColumnDef<T>[] = [
     {
       id: "Товар",
@@ -352,13 +346,27 @@ export function useColumns<T extends Record<string, any>>(
       header: () => (
         <Typography className={contentThStyle}>наименование</Typography>
       ),
-      cell: (props) => (
-        <Typography
-          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())} `}
-        >
-          {props.getValue<string>()}
-        </Typography>
-      ),
+      cell: (props) => {
+        return (
+          <div
+            className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+          >
+            <CustomCheckbox
+              {...{
+                checked: props.row.getIsSelected(),
+                disabled: !props.row.getCanSelect(),
+                onChange: props.row.getToggleSelectedHandler(),
+              }}
+              className="ml-[6px]"
+            />
+            <div className="grow">
+            <Typography>
+              {props.getValue<string>()}
+            </Typography>
+            </div>
+          </div>
+        );
+      },
       filterFn: filterIncludesSome,
     },
     {
@@ -367,9 +375,7 @@ export function useColumns<T extends Record<string, any>>(
       header: () => <Typography className={contentThStyle}>остаток</Typography>,
       cell: (props) => {
         const remainsData = props.getValue<RemainsDropDownProps[]>();
-        return (
-          <RemainsDropDown modifications={remainsData} />
-        );
+        return <RemainsDropDown modifications={remainsData} />;
       },
       filterFn: filterIncludesSome,
     },

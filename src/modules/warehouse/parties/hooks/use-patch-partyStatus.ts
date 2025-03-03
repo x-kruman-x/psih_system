@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { partiesApi } from "../api/api";
+import { toast } from "sonner";
 
 export function usePatchPartyStatus(refreshPlace: "list" | "card") {
   const queryClient = useQueryClient();
@@ -16,6 +17,10 @@ export function usePatchPartyStatus(refreshPlace: "list" | "card") {
     },
     onError: (error) => {
       console.error(error);
+      toast.error('Произошла ошибка при обновлении статуса партии'); 
+    },
+    onSuccess: () => {
+      toast.success('Статус партии успешно обновлен');
     },
     onSettled: async (_, __, variables) => {
       switch (refreshPlace) {

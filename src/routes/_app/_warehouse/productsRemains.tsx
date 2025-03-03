@@ -15,7 +15,7 @@ function RouteComponent() {
     data: products,
     error: productsError,
     isError: isProductsError,
-    isSuccess: isSuccessProducts,
+    // isSuccess: isSuccessProducts,
   } = useSuspenseQuery(productsApi.getProductsQueryOptions(false));
 
   if (isProductsError) {

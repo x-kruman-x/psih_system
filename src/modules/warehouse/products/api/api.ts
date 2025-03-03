@@ -16,7 +16,9 @@ async function getCategories() {
   return instance.get(`/api/products/categories/`);
 }
 
-
+async function deleteProducts(idsArr: number[]) {
+  return instance.delete("/api/products/multiple/", { data: idsArr });
+}
 
 export const productsApi = {
   basekey: "products",
@@ -37,5 +39,9 @@ export const productsApi = {
         return resp.data;
       },
     });
+  },
+
+  deleteProducts: (idsArr: number[]) => {
+    return deleteProducts(idsArr);
   },
 };

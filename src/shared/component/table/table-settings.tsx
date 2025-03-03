@@ -7,6 +7,7 @@ import { CustomCheckbox } from "../../UI/CustomCheckBox";
 import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { useDeleteRows } from "@/shared/hooks/table/useDeleteRows";
+// import { toast } from "sonner";
 
 export function TableSettings<T extends Record<string, any>>({
   table,
@@ -71,6 +72,15 @@ export function TableSettings<T extends Record<string, any>>({
           >
             <Typography>Удалить</Typography>
           </HoverBorderedEl>
+          {/* <button
+            className="toast-button"
+            onClick={() => {
+              toast.success('This is a success toast');
+              console.log('toast')
+            }}
+          >
+            Render toast
+          </button> */}
         </div>
       ) : (
         ""

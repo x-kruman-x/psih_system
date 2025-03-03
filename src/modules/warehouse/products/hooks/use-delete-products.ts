@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { partiesApi } from "../api/api";
+import { productsApi } from "../api/api";
 import { toast } from "sonner";
 
-export function useDeleteParties() {
+export function useDeleteProducts() {
   const queryClient = useQueryClient();
 
-  const deletePartiesMutation = useMutation({
-    mutationFn: partiesApi.deleteParties,
+  const deleteProductsMutation = useMutation({
+    mutationFn: productsApi.deleteProducts,
     onError: (error) => {
       console.error(error);
       toast.error('Произошла ошибка при удалении партий'); 
@@ -14,14 +14,14 @@ export function useDeleteParties() {
     onSuccess: () => {
       toast.success('Партии успешно удалены');
     },
-    async onSettled() {
+    async onSettled(_, __, variables) {
       await queryClient.invalidateQueries({
-        queryKey: [partiesApi.basekey, "getParties"],
+        queryKey: [productsApi.basekey, "getParties", variables],
       });
     },
   });
 
   return {
-    handleDelete: deletePartiesMutation.mutate,
+    handleDelete: deleteProductsMutation.mutate,
   };
 }

@@ -3,22 +3,27 @@ import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Text";
 import { EditDataDialog } from "./edit-data-dialog";
 import { DataContainerWithHidddenText } from "./order-data-container";
-import { OrderType } from "../../types/ordersTableTypes";
+import { OrdersType, OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
 import { FileContainer } from "../../../../../shared/component/files/fileContainer";
 import { CardSettingsBar } from "@/shared/component/card-settings-bar";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { ordersApi } from "../../api/api";
 
 type OrderProps = {
   orderData: OrderType;
 };
 
 export function Order({ orderData }: OrderProps) {
-  console.log(orderData)
-  //TODO: сделать запрос через квери и проходиться по модифиикациям в заказе, запршивая все продукты по id. IsLoading сделать пока таблица не загрузится 
+  const queryClient = useQueryClient();
+
+  const cachedOrders = queryClient.getQueryData<OrdersType[]>([ordersApi.basekey, "getOrders"]);
+
+  const { data: orders } = cachedOrders ? { data: cachedOrders } : useSuspenseQuery(ordersApi.getOrdersQueryOptions());
   return (
     <>
-      <CardSettingsBar pageType={"order"} />
+      <CardSettingsBar<OrdersType, OrderType> pageType={"order"} items={orders} itemsData={orderData}/>
       <div className="grid grid-cols-3 grid-rows-2 border-b border-black border-solid">
         <div className="row-span-2 px-20 pb-[23px] border-r border-black border-solid group/title">
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
@@ -51,7 +56,7 @@ export function Order({ orderData }: OrderProps) {
             Кащенко 666
           </Typography>
           <Typography className="text-center mt-[66px]">63936</Typography>
-          {/* TODO: доделать изменение данных */}
+          {/* TODO: дождаться интеграции с сервисами */}
           <div className="flex justify-center mt-[66px]">
             <EditDataDialog />
           </div>
@@ -122,7 +127,7 @@ export function Order({ orderData }: OrderProps) {
           />
         </div>
       </div>
-      {/* TODO: доделать таблицу с товарами в заказе */}
+      {/* TODO: ждем новый бек для таблицы с товарами в заказе */}
     </>
   );
 }

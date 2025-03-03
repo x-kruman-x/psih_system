@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ordersApi } from "../api/api";
+import { toast } from "sonner";
 
 export function useUploadOrderFile() {
   const queryClient = useQueryClient();
@@ -16,8 +17,11 @@ export function useUploadOrderFile() {
     },
     onError: (error) => {
       console.error(error);
+      toast.error('Произошла ошибка при добавлении файла'); 
     },
-    // onSettled: (data) => console.log(data),
+    onSuccess: () => {
+      toast.success('Файл успешно добавлен');
+    },
   });
 
   return {

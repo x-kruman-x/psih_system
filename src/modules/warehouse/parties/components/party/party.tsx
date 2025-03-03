@@ -1,21 +1,29 @@
 import { CardSettingsBar } from "@/shared/component/card-settings-bar";
-import { PartyType } from "../../types/partiesTableTypes";
+import { PartiesType, PartyType } from "../../types/partiesTableTypes";
 import { SelectCell } from "@/shared/component/selectCell";
 import { Typography } from "@/shared/UI/Text";
 import { formatDateTime } from "@/shared/utils/formateDateTime";
 import { DataContainerWithHidddenText } from "@/modules/warehouse/orders/components/order/order-data-container";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Link } from "lucide-react";
 import { FileContainer } from "@/shared/component/files/fileContainer";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { partiesApi } from "../../api/api";
 
 type PartyProps = {
   partyData: PartyType;
 };
 
 export function Party({ partyData }: PartyProps) {
+  const queryClient = useQueryClient();
+
+  const cachedParties = queryClient.getQueryData<PartiesType[]>([partiesApi.basekey, 'getParties']);
+
+  const { data: orders } = cachedParties
+    ? { data: cachedParties }
+    : useSuspenseQuery(partiesApi.getPartiesQueryOptions());
   return (
     <>
-      <CardSettingsBar pageType={"party"} />
+      <CardSettingsBar<PartiesType, PartyType> pageType="party" items={orders} itemsData={partyData}/>
       <div className="grid grid-cols-3 grid-rows-1 items-stretch">
         <div className="px-[30px] pb-[25px] flex flex-col border-b border-r border-black border-solid group/title">
           <h2 className="text-center mb-5 transition opacity-0 group-hover/title:opacity-100">

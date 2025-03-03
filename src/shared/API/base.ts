@@ -18,6 +18,19 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (response) => response,
+    (error) => {
+      if (error.response) {
+        console.log("Ошибка обработана программно:", error.response.status);
+      } else {
+        console.error("Необработанная ошибка:", error);
+      }
+  
+      return Promise.reject(error);
+    }
+  );
+
+instance.interceptors.response.use(
+    (response) => response,
     async (error) => {
         const originalRequest = error.config;
 

@@ -7,7 +7,7 @@ export type PartiesType = {
   project: string | null;
   phone_number: string | null;
   overheads: number | null;
-  id: number | null;
+  id: number;
   party_date: string | null;
 };
 

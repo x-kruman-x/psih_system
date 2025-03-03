@@ -7,6 +7,7 @@ import { authDataType } from "../types/types";
 import { useState } from "react";
 import { TextLink } from "../../../shared/UI/TextLink";
 import { useTimer } from "../hooks/useTimer";
+import { toast } from "sonner";
 
 export function TelegramCodeForm() {
   const {messageFromBotQueryOptions, getTokensQueryOptions} = useAuthApi()
@@ -17,7 +18,6 @@ export function TelegramCodeForm() {
     queryKey: ["auth"],
   });
 
-  //TODO: сделать уведомление об отправке сообщения и ошибке
   const { refetch: refetchMessage } = useQuery({
     ...messageFromBotQueryOptions(
       authData?.enteredLogin ?? "",
@@ -37,13 +37,15 @@ export function TelegramCodeForm() {
   });
 
   if (error) {
-    console.error(error)
+    console.error(error);
+    toast.error('Произошла ошибка при авторизации'); 
   }
 
   const handleResendCode = () => {
     if (!isTimerActive) {
       refetchMessage();
       resetTimer(120);
+      toast.success('Сообщение отправлено'); 
     }
   };
 

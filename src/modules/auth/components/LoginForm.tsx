@@ -4,6 +4,7 @@ import { LoginContainer } from "../ui/LoginContainer";
 import { Typography } from "../../../shared/UI/Text";
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { useAuthApi } from "../api/api";
+import { toast } from "sonner";
 
 export function LoginForm() {
   const queryClient = useQueryClient()
@@ -18,9 +19,9 @@ export function LoginForm() {
     retry: false,
   });
 
-  //TODO: сделать уведомление
   if (error) {
-    console.log(error)
+    console.error(error);
+    toast.error('Произошла ошибка при авторизации'); 
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

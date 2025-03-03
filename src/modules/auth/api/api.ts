@@ -2,6 +2,7 @@
 import { queryOptions, useQueryClient} from "@tanstack/react-query";
 import { loginInstance, refreshInstance } from "../../../shared/API/base";
 import { useNavigate } from "@tanstack/react-router";
+import { AxiosResponse } from "axios";
 
 type serverMessage = {
   data: string;
@@ -49,11 +50,16 @@ async function getTokens(username: string, code: string) {
   });
 }
 
-export async function refreshToken() {
-    const response = await refreshInstance.post("/api/jwt/refresh/")
-    console.log('refresh')
+export async function refreshToken(): Promise<AxiosResponse> {
+  try {
+    const response = await refreshInstance.post("/api/jwt/refresh/");
+    console.log("Токен успешно обновлен");
     localStorage.setItem("access_token", response.data.access_token);
-    return response
+    return response; // Возвращаем успешный ответ
+  } catch (e) {
+    console.error("Ошибка обновления токена:", e);
+    throw new Error("Не удалось обновить токен");
+  }
 }
 
 export const useAuthApi = () => {
@@ -62,7 +68,6 @@ export const useAuthApi = () => {
   const basekey = "user";
 
   return {
-
     validateLoginQueryOptions: (username: string, password: string) => {
       return queryOptions({
         queryKey: [basekey, "validateLogin", username],
@@ -101,15 +106,20 @@ export const useAuthApi = () => {
 
     refreshTokenValidationOptions: () => {
       return queryOptions({
-        queryKey: [basekey, 'refresh'],
-        queryFn: async() => {
-          const response = await refreshToken()
-          queryClient.setQueryData(["auth"], {
-            isAuth: true,
-          });
-          return response.data
-        }
-      })
+        queryKey: [basekey, "refresh"],
+        queryFn: async () => {
+          try {
+            const response = await refreshToken();
+            queryClient.setQueryData(["auth"], {
+              isAuth: true,
+            });
+            return response.data;
+          } catch (error) {
+            console.error("Ошибка при обновлении токена в queryFn:", error);
+            throw error;
+          }
+        },
+      });
     },
   };
 };

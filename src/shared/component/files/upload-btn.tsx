@@ -1,15 +1,13 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useConfigUploadBtn } from "../../hooks/useConfigUploadBtn";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
-import { ordersApi } from "../../../modules/warehouse/orders/api/api";
 import { savePlaceType } from "@/shared/types/uploadSavePlaceTypes";
 
 type UploadButtonProps = {
   id: number;
   savePlace: savePlaceType;
 }
-// TODO:уведомление
+
 export function UploadButton({savePlace, id}: UploadButtonProps) {
   const {uploadFunc, refreshPageFunc} = useConfigUploadBtn(savePlace)
 
@@ -41,7 +39,6 @@ export function UploadButton({savePlace, id}: UploadButtonProps) {
   
     try {
       await Promise.all(uploadPromises);
-      console.log('обновляю страницу')
       await refreshPageFunc
     } catch (error) {
       console.error("Произошла ошибка при загрузке некоторых файлов:", error);

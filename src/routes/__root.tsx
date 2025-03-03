@@ -5,6 +5,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { Toaster } from "sonner";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -16,6 +17,7 @@ export const Route = createRootRouteWithContext<{
         <Navigate to="/orders" />
         <Outlet />
         <TanStackRouterDevtools />
+        <Toaster />
       </>
     );
   },
