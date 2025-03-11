@@ -20,3 +20,14 @@ div::-webkit-scrollbar-thumb {
 		--radius: 0.5rem
 	}
 }
+
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../../../assets/fonts/IBM_Plex_Mono/IBMPlexMono-Regular.ttf');
+  }
+
+  body {
+	font-family: 'IBM Plex Mono', sans-serif;
+  }

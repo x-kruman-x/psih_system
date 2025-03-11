@@ -10,6 +10,7 @@ interface ConfigSettingsBar {
   leftEl: React.ReactNode | null;
   rightEl: React.ReactNode | null;
   navStyle: string;
+  navText: string;
   Link: (item: { id: number }) => JSX.Element;
   cardSheetType: configTableType;
 }
@@ -31,6 +32,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
           </HoverBorderedEl>
         ),
         navStyle: "absolute left-1/2 -translate-x-1/2",
+        navText: 'Заказ',
         Link: (item: { id: number }) => (
           <Link
             to="/orders/$orderId/edit"
@@ -50,6 +52,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         leftEl: null,
         rightEl: null,
         navStyle: "",
+        navText: 'Партия',
         Link: (item: { id: number }) => (
           <Link
             to="/parties/$partyId/edit"
@@ -69,6 +72,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         leftEl: null,
         rightEl: null,
         navStyle: "",
+        navText: 'Товар',
         Link: (item: { id: number }) => (
           <Link
             to=""
