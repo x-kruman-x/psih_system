@@ -1,9 +1,20 @@
+import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { EditPageSettingsBar } from "@/shared/types/table/editPageSettingsBar";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Text";
 import { Link } from "@tanstack/react-router";
 
-export function useConfigCardSettingsBar(pageType: EditPageSettingsBar) {
+interface ConfigSettingsBar {
+  gap: string;
+  linkBackPath: string;
+  leftEl: React.ReactNode | null;
+  rightEl: React.ReactNode | null;
+  navStyle: string;
+  Link: (item: { id: number }) => JSX.Element;
+  cardSheetType: configTableType;
+}
+
+export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigSettingsBar {
   switch (pageType) {
     case "order":
       return {
@@ -30,6 +41,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar) {
             <Typography key={item.id}>Заказ - {item.id}</Typography>
           </Link>
         ),
+        cardSheetType: 'orderTable'
       };
     case "party":
       return {
@@ -48,6 +60,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar) {
             <Typography key={item.id}>Партия - {item.id}</Typography>
           </Link>
         ),
+        cardSheetType: 'partiesTable'
       };
     case "product":
       return {
@@ -63,6 +76,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar) {
             <Typography key={item.id}>{item.id}</Typography>
           </Link>
         ),
+        cardSheetType: 'productsTable'
       };
     default:
       throw new Error(`Некорректный pageType: ${pageType}`);

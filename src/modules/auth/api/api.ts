@@ -59,6 +59,7 @@ export async function refreshToken(): Promise<AxiosResponse> {
   } catch (e) {
     console.error("Ошибка обновления токена:", e);
     throw new Error("Не удалось обновить токен");
+    
   }
 }
 

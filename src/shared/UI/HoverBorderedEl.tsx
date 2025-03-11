@@ -13,7 +13,7 @@ const HoverBorderedEl = <C extends ElementType = "div">({
   as: Component = "div" as C,
   onClick,
 }: HoverBorderedElProps<C>) => {
-  const baseStyles = `p-[6px] ${className} border-solid border-[1px] border-transparent rounded-md hover:border-black`;
+  const baseStyles = `p-[6px] ${className} border-solid opacity-70 border-[1px] border-transparent backdrop-blur-[6px] rounded-md hover:border-black hover:opacity-100`;
 
   // const isClickableElement = ["button", "a"].includes(Component as unknown as string)
 

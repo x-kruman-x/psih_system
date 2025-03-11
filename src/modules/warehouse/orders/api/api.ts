@@ -13,6 +13,10 @@ async function deleteOrders(idsArr: number[]) {
   return instance.delete("/api/orders/multiple/", { data: idsArr });
 }
 
+async function deleteOrder(id: number) {
+  return instance.delete(`/api/orders/?order_id=${id}`);
+}
+
 async function patchOrder(orderId: number, key: string, newValue: any) {
   return instance.patch(`/api/orders/?order_id=${orderId}`, {
     [key]: newValue,
@@ -46,6 +50,9 @@ export const ordersApi = {
 
   deleteOrders: (idsArr: number[]) => {
     return deleteOrders(idsArr);
+  },
+  deleteOrder: (id: number) => {
+    return deleteOrder(id);
   },
   updateOrderStatus: (orderId: number, newValue: any) => {
     return patchOrder(orderId, "status", newValue);

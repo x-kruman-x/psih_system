@@ -4,7 +4,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useColumns } from "../../hooks/table/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
@@ -19,10 +19,17 @@ export const Table = <T extends Record<string, any>>({
   configTable: configTableType;
 }) => {
   const columns = useColumns(configTable);
-
   const [columnVisibility, setColumnVisibility] = useState({});
-
   const [rowSelection, setRowSelection] = useState({});
+
+  const tableEl = useRef<HTMLDivElement>(null)
+  // let tableHeight: number
+
+  // useEffect(() => {
+  //   if (tableEl.current) {
+  //     tableHeight = tableEl.current?.offsetHeight;
+  //   }
+  // }, []); 
 
   const table = useReactTable({
     data,
@@ -38,11 +45,8 @@ export const Table = <T extends Record<string, any>>({
     getFilteredRowModel: getFilteredRowModel(),
   });
   return (
-    <div className="relative">
-      <TableHeaderBar
-        table={table}
-        configTable={configTable}
-      />
+    <div className="relative" ref={tableEl}>
+      <TableHeaderBar table={table} configTable={configTable} />
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -68,20 +72,32 @@ export const Table = <T extends Record<string, any>>({
             </tr>
           ))}
         </thead>
+        {/* TODO: добавить tooltip */}
         <tbody>
-          {/* TODO: добавить tooltip */}
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="group last:group/last-pb">
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="w-1/6 px-0 text-center border-l border-solid border-black first:border-none group/last-pb:pb-[300px]"
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row, index) => {
+            const isLastCell = index === table.getRowModel().rows.length - 1;
+            return (
+              <tr key={row.id} className="group relative">
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td
+                      key={cell.id}
+                      className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${
+                        // isLastCell ? `pb-[calc(100vh-${tableHeight})]` : ""
+                        // TODO: мб надо переделать
+                        isLastCell ? `pb-[100vh]` : ""
+                      }`}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <HoverBorderedEl

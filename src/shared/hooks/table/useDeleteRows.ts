@@ -10,12 +10,12 @@ export function useDeleteRows(configTable: configTableType) {
 
   switch (configTable) {
     case "orderTable":
-      return (id: number[]) => deleteOrders.handleDelete(id);
+      return (ids: number[]) => deleteOrders.handleDelete(ids);
     case "partiesTable":
-      return (id: number[]) => deleteParties.handleDelete(id);
+      return (ids: number[]) => deleteParties.handleDelete(ids);
     case "productsTable":
-      return (id: number[]) => deleteProducts.handleDelete(id);
+      return (ids: number[]) => deleteProducts.handleDelete(ids);
     case "remainsTable":
-      return (id: number[]) => console.log(`удалил остатки с таким ${id}`);
+      return (ids: number[]) => console.log(`удалил остатки с таким ${ids}`);
   }
 }

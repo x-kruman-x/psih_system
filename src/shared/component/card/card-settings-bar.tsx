@@ -1,17 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import HoverBorderedEl from "../UI/HoverBorderedEl";
-import { Typography } from "../UI/Text";
-import {
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  Sheet,
-} from "../UI/sheet";
-import { EditPageSettingsBar } from "../types/table/editPageSettingsBar";
-import { useConfigCardSettingsBar } from "../hooks/table/useConfigCardSettingsBar";
+import HoverBorderedEl from "../../UI/HoverBorderedEl";
+import { Typography } from "../../UI/Text";
+import { EditPageSettingsBar } from "../../types/table/editPageSettingsBar";
+import { useConfigCardSettingsBar } from "../../hooks/table/useConfigCardSettingsBar";
 import { useState } from "react";
+import { CardSheet } from "./card-sheet";
 
 type CardSettingsBarProps<
   TItems extends { id: number },
@@ -74,25 +67,7 @@ export function CardSettingsBar<
           )}
         </HoverBorderedEl>
       </div>
-      {/* TODO: добавить кнопку удаления itema  */}
-      {/* TODO: добавить список тегов  */}
-      {/* TODO: добавить кнопку создания тегов */}
-      <Sheet>
-        <SheetTrigger>
-          <HoverBorderedEl>
-            <Typography>Настройки</Typography>
-          </HoverBorderedEl>
-        </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
+      <CardSheet configTable={configObj.cardSheetType} id={itemsData.id}/>
     </div>
   );
 }

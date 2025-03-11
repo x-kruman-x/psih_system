@@ -13,6 +13,10 @@ async function deleteParties(idsArr: number[]) {
   return instance.delete("/api/parties/multiple/", { data: idsArr });
 }
 
+async function deleteParty(id: number) {
+  return instance.delete(`/api/parties/?party_id=${id}`);
+}
+
 async function patchParty(partyId: number, key: string, newValue: any) {
   return instance.patch(`/api/parties/?party_id=${partyId}`, {
     [key]: newValue,
@@ -46,6 +50,9 @@ export const partiesApi = {
 
   deleteParties: (idsArr: number[]) => {
     return deleteParties(idsArr);
+  },
+  deleteParty: (id: number) => {
+    return deleteParty(id);
   },
   updatePartyStatus: (partyId: number, newValue: any) => {
     return patchParty(partyId, "status", newValue);

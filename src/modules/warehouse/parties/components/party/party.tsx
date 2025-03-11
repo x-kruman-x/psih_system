@@ -1,4 +1,4 @@
-import { CardSettingsBar } from "@/shared/component/card-settings-bar";
+import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { PartiesType, PartyType } from "../../types/partiesTableTypes";
 import { SelectCell } from "@/shared/component/selectCell";
 import { Typography } from "@/shared/UI/Text";

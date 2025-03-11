@@ -7,7 +7,7 @@ import { OrdersType, OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
 import { FileContainer } from "../../../../../shared/component/files/fileContainer";
-import { CardSettingsBar } from "@/shared/component/card-settings-bar";
+import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { ordersApi } from "../../api/api";
 
@@ -58,7 +58,7 @@ export function Order({ orderData }: OrderProps) {
           <Typography className="text-center mt-[66px]">63936</Typography>
           {/* TODO: дождаться интеграции с сервисами */}
           <div className="flex justify-center mt-[66px]">
-            <EditDataDialog />
+            {/* <EditDataDialog /> */}
           </div>
         </div>
         <div className="border-b border-r border-black border-solid px-20 pb-[30px] group/title">

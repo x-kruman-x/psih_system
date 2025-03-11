@@ -11,6 +11,7 @@ export const Route = createFileRoute("/_app/_warehouse/orders")({
 });
 
 function RouteComponent() {
+  // TODO: добавить пагинацию
   const { data, error, isError } = useSuspenseQuery(
     ordersApi.getOrdersQueryOptions()
   );
