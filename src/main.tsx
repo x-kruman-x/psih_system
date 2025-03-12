@@ -23,7 +23,7 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-
+// TODO: при неправильном токене все равно пропускает в таблицу, а при обновлении страницы уже на логин перебрасывает
 if (localStorage.getItem("access_token")) {
   refreshToken();
   const keysWithInfiniteGcTime = ["auth", "isFilter"];
@@ -43,7 +43,7 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </StrictMode>
   );

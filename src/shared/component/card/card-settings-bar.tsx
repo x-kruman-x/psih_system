@@ -6,6 +6,8 @@ import { useConfigCardSettingsBar } from "../../hooks/table/useConfigCardSetting
 import { useEffect, useRef, useState } from "react";
 import { CardSheet } from "./card-sheet";
 import debounce from "lodash.debounce";
+import arrowsUpDown from '../../../assets/img/arrows-up-down.svg'
+import { useScrollLinkContainer } from "@/shared/hooks/card/useScrollLinkContainer";
 
 type CardSettingsBarProps<
   TItems extends { id: number },
@@ -21,6 +23,9 @@ export function CardSettingsBar<
   TItemData extends Record<string, any>,
 >({ pageType, items, itemsData }: CardSettingsBarProps<TItems, TItemData>) {
   const configObj = useConfigCardSettingsBar(pageType);
+  
+  const listRef = useRef<HTMLDivElement>(null);
+  const {canScrollUp, canScrollDown, scrollContainerBy} = useScrollLinkContainer(listRef)
 
   if (!configObj) {
     throw new Error(`Некорректный pageType: ${pageType}`);
@@ -54,35 +59,7 @@ export function CardSettingsBar<
   //     document.removeEventListener("click", handleOutsideClick);
   //   };
   // }, [isOpenMenu]);
-  const [canScrollUp, setCanScrollUp] = useState<boolean>(false);
-  const [canScrollDown, setCanScrollDown] = useState<boolean>(false);
-
-  const listRef = useRef<HTMLDivElement>(null);
-
-  const checkForScrollPosition = () => {
-    const { current } = listRef;
-    if (current) {
-      const { scrollTop, scrollHeight, clientHeight } = current;
-      setCanScrollUp(scrollTop > 0);
-      setCanScrollDown(scrollTop < scrollHeight - clientHeight);
-    }
-  };
-
-  const debounceCheckForScrollPosition = debounce(checkForScrollPosition, 200);
-
-  const scrollContainerBy = (distance: number) =>
-    listRef.current?.scrollBy({ top: distance, behavior: "smooth" });
-
-  useEffect(() => {
-    const { current } = listRef;
-    checkForScrollPosition();
-    current?.addEventListener("scroll", debounceCheckForScrollPosition);
-
-    return () => {
-      current?.removeEventListener("scroll", debounceCheckForScrollPosition);
-      debounceCheckForScrollPosition.cancel();
-    };
-  }, []);
+  
 
   return (
     <div className="flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid">
@@ -102,7 +79,7 @@ export function CardSettingsBar<
         className={`navbutton absolute left-1/2 -translate-x-1/2 flex ${isOpenMenu ? "top-[10px] z-20" : ""}`}
       >
         <HoverBorderedEl
-          className={`cursor-pointer !opacity-100 ${isOpenMenu ? "px-16 !border-black bg-white" : ""}`}
+          className={`cursor-pointer !opacity-100 ${isOpenMenu ? "px-16 !border-black bg-white !rounded-none !rounded-l-md" : ""}`}
           onClick={handleMenu}
         >
             <Typography>
@@ -110,9 +87,11 @@ export function CardSettingsBar<
                 ? `${configObj.navText} - ${itemsData.id}`
                 : "Данные не загружены"}
             </Typography>
+            {/* TODO: добавить img */}
+            {/* <img className="" src={arrowsUpDown} alt="arrows" /> */}
 
             {isOpenMenu && (
-              <div className="max-h-[100px] overflow-y-auto" ref={listRef}>
+              <div className="linkCardList max-h-[100px] overflow-y-auto" ref={listRef}>
                 {items
                   .filter((item) => item.id !== itemsData.id)
                   .map((item) => (
@@ -122,26 +101,26 @@ export function CardSettingsBar<
             )}
         </HoverBorderedEl>
         {isOpenMenu && (
-            <div className="flex flex-col border border-black border-solid">
+            <div className="flex flex-col border border-l-transparent border-black border-solid rounded-r-md bg-white divide-y-[1px] divide-black">
               <button
+                className="h-1/2 p-1"
                 type="button"
                 // disabled={!canScrollUp}
                 onClick={() => {
-                  console.log('up')
                   scrollContainerBy(-50)
                 }}
               >
-                u
+                &#8593;
               </button>
               <button
+              className="h-1/2 p-1"
                 type="button"
                 // disabled={!canScrollDown}
                 onClick={() => {
-                  console.log('down')
                   scrollContainerBy(50)
                 }}
               >
-                p
+                &#8595;
               </button>
             </div>
           )}

@@ -10,11 +10,20 @@ body::-webkit-scrollbar-track,
 div::-webkit-scrollbar-track {
 	background: transparent;        /* цвет дорожки */
 }
+
+
 body::-webkit-scrollbar-thumb,
 div::-webkit-scrollbar-thumb {
 	background-color: rgba(0, 0, 0, 0.3);    /* цвет плашки */
 	border-radius: 7px;       /* закругления плашки */
 }
+
+.linkCardList::-webkit-scrollbar { width: 0; }
+
+.linkCardList { -ms-overflow-style: none; }
+
+.linkCardList { overflow: -moz-scrollbars-none; }
+
 @layer base {
   :root {
 		--radius: 0.5rem
