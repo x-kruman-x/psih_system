@@ -38,6 +38,7 @@ export function CardSheet({
             <div className="flex flex-col justify-between">
               <div className="flex flex-col pt-[46px] gap-[46px]">
                 <Typography className="text-center">Теги заказов</Typography>
+                
               </div>
             </div>
           </SheetDescription>

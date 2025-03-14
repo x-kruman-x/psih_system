@@ -65,7 +65,6 @@ export function TableSettings<T extends Record<string, any>>({
           <HoverBorderedEl
             as="button"
             onClick={() =>{
-              //TODO: функция удаления для товаров и остатков
               deleteRows(stringToNumber(selectedIds))
               table.setRowSelection({})
             }}

@@ -6,7 +6,7 @@ import { useConfigCardSettingsBar } from "../../hooks/table/useConfigCardSetting
 import { useEffect, useRef, useState } from "react";
 import { CardSheet } from "./card-sheet";
 import debounce from "lodash.debounce";
-import arrowsUpDown from '../../../assets/img/arrows-up-down.svg'
+import arrowsUpDown from "../../../assets/img/arrows-up-down.svg";
 import { useScrollLinkContainer } from "@/shared/hooks/card/useScrollLinkContainer";
 
 type CardSettingsBarProps<
@@ -23,9 +23,12 @@ export function CardSettingsBar<
   TItemData extends Record<string, any>,
 >({ pageType, items, itemsData }: CardSettingsBarProps<TItems, TItemData>) {
   const configObj = useConfigCardSettingsBar(pageType);
-  
+
   const listRef = useRef<HTMLDivElement>(null);
-  const {canScrollUp, canScrollDown, scrollContainerBy} = useScrollLinkContainer(listRef)
+  
+  const [searchText, setSearchText] = useState("");
+  const { canScrollUp, canScrollDown, scrollContainerBy } =
+    useScrollLinkContainer(listRef);
 
   if (!configObj) {
     throw new Error(`Некорректный pageType: ${pageType}`);
@@ -40,8 +43,9 @@ export function CardSettingsBar<
   // TODO: доделать клик вне области
   // const handleOutsideClick = (event: MouseEvent) => {
   //   const target = event.target as HTMLElement;
-
-  //   if (target.closest("navbutton")) {
+  //   console.log(target.closest('navbutton'))
+  //   if (!target.closest("navbutton")) {
+  //     console.log('клик возле навбатон', target.closest("navbutton"))
   //     return;
   //   }
 
@@ -59,7 +63,6 @@ export function CardSettingsBar<
   //     document.removeEventListener("click", handleOutsideClick);
   //   };
   // }, [isOpenMenu]);
-  
 
   return (
     <div className="flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid">
@@ -74,14 +77,15 @@ export function CardSettingsBar<
           {configObj.rightEl}
         </div>
       </div>
-      {/* TODO: доделать навигацию */}
+      {/* TODO: добавить поиск*/}
       <div
-        className={`navbutton absolute left-1/2 -translate-x-1/2 flex ${isOpenMenu ? "top-[10px] z-20" : ""}`}
+        className={`navbutton absolute left-1/2 -translate-x-1/2 flex flex-col ${isOpenMenu ? "top-[10px] z-20" : ""}`}
       >
-        <HoverBorderedEl
-          className={`cursor-pointer !opacity-100 ${isOpenMenu ? "px-16 !border-black bg-white !rounded-none !rounded-l-md" : ""}`}
-          onClick={handleMenu}
-        >
+        <div className="flex">
+          <HoverBorderedEl
+            className={`cursor-pointer !opacity-100 ${isOpenMenu ? "px-16 !border-black bg-white !rounded-none !rounded-tl-md" : ""}`}
+            onClick={handleMenu}
+          >
             <Typography>
               {itemsData.id
                 ? `${configObj.navText} - ${itemsData.id}`
@@ -91,7 +95,10 @@ export function CardSettingsBar<
             {/* <img className="" src={arrowsUpDown} alt="arrows" /> */}
 
             {isOpenMenu && (
-              <div className="linkCardList max-h-[100px] overflow-y-auto" ref={listRef}>
+              <div
+                className="linkCardList max-h-[100px] overflow-y-auto"
+                ref={listRef}
+              >
                 {items
                   .filter((item) => item.id !== itemsData.id)
                   .map((item) => (
@@ -99,31 +106,41 @@ export function CardSettingsBar<
                   ))}
               </div>
             )}
-        </HoverBorderedEl>
-        {isOpenMenu && (
-            <div className="flex flex-col border border-l-transparent border-black border-solid rounded-r-md bg-white divide-y-[1px] divide-black">
+          </HoverBorderedEl>
+          {isOpenMenu && (
+            <div className="flex flex-col border border-l-transparent border-black border-solid rounded-tr-md bg-white divide-y-[1px] divide-black">
               <button
                 className="h-1/2 p-1"
                 type="button"
                 // disabled={!canScrollUp}
                 onClick={() => {
-                  scrollContainerBy(-50)
+                  scrollContainerBy(-50);
                 }}
               >
                 &#8593;
               </button>
               <button
-              className="h-1/2 p-1"
+                className="h-1/2 p-1"
                 type="button"
                 // disabled={!canScrollDown}
                 onClick={() => {
-                  scrollContainerBy(50)
+                  scrollContainerBy(50);
                 }}
               >
                 &#8595;
               </button>
             </div>
           )}
+        </div>
+        {isOpenMenu && (
+          <input
+            type="text"
+            placeholder="поиск"
+            // value={searchText}
+            // onChange={handleSearchChange}
+            className="w-full py-[1px] text-center text-black text-[13px] leading-[17px] focus:outline-none bg-white border border-t-transparent border-black border-solid rounded-b-lg"
+          />
+        )}
       </div>
       <CardSheet configTable={configObj.cardSheetType} id={itemsData.id} />
     </div>

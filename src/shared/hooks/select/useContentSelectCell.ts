@@ -1,6 +1,7 @@
 import { SelectCellPageType } from "@/shared/types/SelectCellPropsTypes";
 
 export function useContentSelectCell(page: SelectCellPageType) {
+  // TODO: это все должно быть из бекенда
   switch (page) {
     case "orders":
       return {

@@ -72,7 +72,6 @@ export const Table = <T extends Record<string, any>>({
             </tr>
           ))}
         </thead>
-        {/* TODO: добавить tooltip */}
         <tbody>
           {table.getRowModel().rows.map((row, index) => {
             const isLastCell = index === table.getRowModel().rows.length - 1;
