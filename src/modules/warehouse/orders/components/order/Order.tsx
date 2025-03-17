@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Text";
-import { EditDataDialog } from "./edit-data-dialog";
 import { DataContainerWithHidddenText } from "./order-data-container";
 import { OrdersType, OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
@@ -10,6 +9,7 @@ import { FileContainer } from "../../../../../shared/component/files/fileContain
 import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { ordersApi } from "../../api/api";
+import { CardTableDataValidation } from "@/shared/component/cardTable/CardTableDataValidation";
 
 type OrderProps = {
   orderData: OrderType;
@@ -17,9 +17,8 @@ type OrderProps = {
 
 export function Order({ orderData }: OrderProps) {
   const queryClient = useQueryClient();
-
+  
   const cachedOrders = queryClient.getQueryData<OrdersType[]>([ordersApi.basekey, "getOrders"]);
-
   const { data: orders } = cachedOrders ? { data: cachedOrders } : useSuspenseQuery(ordersApi.getOrdersQueryOptions());
   return (
     <>
@@ -127,7 +126,8 @@ export function Order({ orderData }: OrderProps) {
           />
         </div>
       </div>
-      {/* TODO: ждем новый бек для таблицы с товарами в заказе */}
+      {/* TODO: доделать таблицу товаров */}
+      <CardTableDataValidation products={orderData.modifications_in_order} configTable='orderTable' />
     </>
   );
 }

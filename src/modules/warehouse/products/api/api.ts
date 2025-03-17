@@ -12,6 +12,10 @@ async function getProducts(isArchived: boolean | undefined = false) {
   return response;
 }
 
+async function getProductById(productId:string) {
+  return instance.get(`/api/products/${productId}/`);
+}
+
 async function getCategories() {
   return instance.get(`/api/products/categories/`);
 }
@@ -39,6 +43,15 @@ export const productsApi = {
         return resp.data;
       },
     });
+  },
+  getProductById: (productId: string) => {
+    return queryOptions({
+      queryKey: [productsApi.basekey, "getProduct", productId],
+      queryFn: async () => {
+        const resp = await getProductById(productId);
+        return resp.data;
+      },
+    })
   },
 
   deleteProducts: (idsArr: number[]) => {
