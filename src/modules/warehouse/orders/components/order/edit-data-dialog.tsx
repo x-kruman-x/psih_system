@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Text";
-import { DataContainerWithHidddenText } from "./order-data-container";
+import { DataContainerWithHiddenText } from "./order-data-container";
 
 export function EditDataDialog() {
   return (
@@ -27,31 +27,31 @@ export function EditDataDialog() {
           </Dialog.Description>
           <div className="flex flex-col justify-center items-center mt-[190px]">
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="страна"
                 infoText="Россия"
                 isHiddenText={false}
                 border={true}
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="город"
                 infoText="Москва"
                 isHiddenText={false}
                 border={true}
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="улица"
                 infoText="Кащенко"
                 isHiddenText={false}
                 border={true}
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="дом"
                 infoText="6"
                 isHiddenText={false}
                 border={true}
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="квартира | офис"
                 infoText="666"
                 isHiddenText={false}

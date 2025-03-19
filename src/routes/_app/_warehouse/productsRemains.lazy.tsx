@@ -3,6 +3,7 @@ import { ProductRemainsType } from '@/modules/warehouse/productsRemains/types/pr
 import { Table } from '@/shared/component/table/table'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createLazyFileRoute } from '@tanstack/react-router'
+import { toast } from 'sonner'
 
 export const Route = createLazyFileRoute('/_app/_warehouse/productsRemains')({
   component: RouteComponent,
@@ -18,6 +19,7 @@ function RouteComponent() {
 
   if (isProductsError) {
     console.error(productsError)
+    toast.error('Произошла ошибка загрузки'); 
   }
 
   // if (isSuccessProducts) {

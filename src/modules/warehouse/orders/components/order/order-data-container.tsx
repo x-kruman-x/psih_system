@@ -9,7 +9,7 @@ type OrderDataContainerProps = {
   border?: boolean;
 };
 
-export function DataContainerWithHidddenText({
+export function DataContainerWithHiddenText({
   hiddenText,
   infoText,
   button = false,

@@ -1,4 +1,4 @@
-//TODO: чекбоксы доделать
+//TODO!: чекбоксы доделать
 type CustomCheckboxProps = {
   className?: string;
   checked?: boolean;

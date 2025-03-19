@@ -70,7 +70,6 @@ export function useCardColumns<T extends Record<string, any>>(
       accessorKey: "modification.productInfo.price",
       header: () => <Typography className={contentThStyle}>цена</Typography>,
       cell: (props) => {
-        console.log(props);
         return (
           <Typography
             className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
@@ -86,22 +85,22 @@ export function useCardColumns<T extends Record<string, any>>(
       header: () => (
         <Typography className={contentThStyle}>количество</Typography>
       ),
-      // cell: (props) => {
-      //   console.log(props)
-      //   return (
-      //   <Typography
-      //     className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
-      //   >
-      //     {props.row.original?.modification?.productInfo?.price}
-      //   </Typography>
-      // )},
+      cell: (props) => {
+        return (
+        <Typography
+          className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+        >
+          {props.row.original?.amount}
+        </Typography>
+      )},
     },
     {
       id: "Остаток",
       accessorKey: "modification.remaining",
       header: () => <Typography className={contentThStyle}>остаток</Typography>,
       cell: (props) => {
-        console.log(props);
+        // console.log(props);
+        // TODO: сделать инпут для изменения остатка 
         return (
           <Typography
             className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
@@ -116,12 +115,12 @@ export function useCardColumns<T extends Record<string, any>>(
       // accessorKey: "modification.remaining",
       header: () => <Typography className={contentThStyle}>сумма</Typography>,
       cell: (props) => {
-        console.log(props);
+        // console.log(props);
         return (
           <Typography
             className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
           >
-            {props.row.original?.modification?.productInfo?.price * 1 + ' р'}
+            {props.row.original?.modification?.productInfo?.price * props.row.original?.amount + ' р'}
           </Typography>
         );
       },

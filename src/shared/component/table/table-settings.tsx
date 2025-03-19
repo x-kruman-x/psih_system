@@ -60,8 +60,8 @@ export function TableSettings<T extends Record<string, any>>({
         </button>
       </div>
       {selectedIds.length !== 0 ? (
-        <div className="flex items-center gap-[30px] absolute left-1/2 -translate-x-1/2">
-          {selectedIds.length}
+        <div className="flex items-center gap-[20px] absolute left-1/2 -translate-x-1/2">
+          <Typography>{selectedIds.length}</Typography>
           <HoverBorderedEl
             as="button"
             onClick={() =>{

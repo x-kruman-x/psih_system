@@ -27,8 +27,7 @@ export function CardSettingsBar<
   const listRef = useRef<HTMLDivElement>(null);
   
   const [searchText, setSearchText] = useState("");
-  const { canScrollUp, canScrollDown, scrollContainerBy } =
-    useScrollLinkContainer(listRef);
+  const { canScrollUp, canScrollDown, scrollContainerBy } = useScrollLinkContainer(listRef);
 
   if (!configObj) {
     throw new Error(`Некорректный pageType: ${pageType}`);
@@ -40,7 +39,7 @@ export function CardSettingsBar<
     setIsOpenMenu((prev) => !prev);
   };
 
-  // TODO: доделать клик вне области
+  // TODO!: доделать клик вне области
   // const handleOutsideClick = (event: MouseEvent) => {
   //   const target = event.target as HTMLElement;
   //   console.log(target.closest('navbutton'))
@@ -77,7 +76,7 @@ export function CardSettingsBar<
           {configObj.rightEl}
         </div>
       </div>
-      {/* TODO: добавить поиск*/}
+      {/* TODO!: добавить поиск*/}
       <div
         className={`navbutton absolute left-1/2 -translate-x-1/2 flex flex-col ${isOpenMenu ? "top-[10px] z-20" : ""}`}
       >
@@ -91,7 +90,7 @@ export function CardSettingsBar<
                 ? `${configObj.navText} - ${itemsData.id}`
                 : "Данные не загружены"}
             </Typography>
-            {/* TODO: добавить img */}
+            {/* TODO!: добавить img */}
             {/* <img className="" src={arrowsUpDown} alt="arrows" /> */}
 
             {isOpenMenu && (

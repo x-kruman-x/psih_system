@@ -12,10 +12,9 @@ export function CardTableDataValidation({
   products: OrderTypeModification[];
   configTable: configTableType;
 }) {
-  const [newProducts, setNewProducts] =
-    useState<OrderTypeModification[]>(products);
+  const [newProducts, setNewProducts] = useState<OrderTypeModification[]>(products);
   const [allDataLoaded, setAllDataLoaded] = useState<boolean>(false);
-
+  console.log('CardTableDataValidation: ', products)
   const results = useQueries({
     queries: products.map((product) =>
       productsApi.getProductById(product.modification.product_id.toString())
@@ -43,7 +42,7 @@ export function CardTableDataValidation({
             ...product.modification,
             productInfo: {
               ...productInfo,
-              modifications: filteredModification, // Заменяем массив модификаций на отфильтрованный
+              modifications: filteredModification,
             },
           },
         };

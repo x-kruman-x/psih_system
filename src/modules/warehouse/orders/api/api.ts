@@ -35,7 +35,7 @@ export const ordersApi = {
       queryFn: async () => {
         const resp = await getOrders();
         return resp.data;
-      },
+      }
     });
   },
   getOrderQueryOptions: (id: string) => {
@@ -44,7 +44,7 @@ export const ordersApi = {
       queryFn: async () => {
         const resp = await getOrderById(id);
         return resp.data;
-      },
+      }
     });
   },
 
@@ -61,6 +61,6 @@ export const ordersApi = {
     return patchOrder(orderId, "tag", newValue);
   },
   uploadOrderFile: (orderId: number, formData: FormData) => {
-    return uploadOrderFile(orderId, formData)
-  }
+    return uploadOrderFile(orderId, formData);
+  },
 };

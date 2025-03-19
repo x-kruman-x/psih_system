@@ -23,7 +23,7 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-// TODO: при неправильном токене все равно пропускает в таблицу, а при обновлении страницы уже на логин перебрасывает
+// TODO!: при неправильном токене все равно пропускает в таблицу, а при обновлении страницы уже на логин перебрасывает
 if (localStorage.getItem("access_token")) {
   await refreshToken();
   const keysWithInfiniteGcTime = ["auth", "isFilter"];

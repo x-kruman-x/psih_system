@@ -25,7 +25,7 @@ export const BorderedElement = ({
 
   switch (variant) {
     case 'button':
-      // TODO: добавить новые стили
+      // TODO!: добавить новые стили
       baseClasses = 'py-[6px] flex justify-center border border-[1px] border-black rounded-md';
       break;
     default:

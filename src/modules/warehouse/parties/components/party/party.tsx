@@ -3,7 +3,7 @@ import { PartiesType, PartyType } from "../../types/partiesTableTypes";
 import { SelectCell } from "@/shared/component/selectCell";
 import { Typography } from "@/shared/UI/Text";
 import { formatDateTime } from "@/shared/utils/formateDateTime";
-import { DataContainerWithHidddenText } from "@/modules/warehouse/orders/components/order/order-data-container";
+import { DataContainerWithHiddenText } from "@/modules/warehouse/orders/components/order/order-data-container";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { FileContainer } from "@/shared/component/files/fileContainer";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -64,11 +64,11 @@ export function Party({ partyData }: PartyProps) {
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
             <div className="flex flex-col gap-2 items-start row-span-2">
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="email"
                 infoText="dotdarkk@gmail.com"
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="телефон"
                 infoText="89639366661"
               />

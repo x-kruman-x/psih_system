@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Text";
-import { DataContainerWithHidddenText } from "./order-data-container";
+import { DataContainerWithHiddenText } from "./order-data-container";
 import { OrdersType, OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
@@ -29,24 +29,24 @@ export function Order({ orderData }: OrderProps) {
             <Typography isGray={true}>информация доставки</Typography>
           </h2>
           <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-            <DataContainerWithHidddenText
+            <DataContainerWithHiddenText
               hiddenText="страна"
               infoText="Россия"
             />
-            <DataContainerWithHidddenText
+            <DataContainerWithHiddenText
               hiddenText="город"
               infoText="Москва"
             />
-            <DataContainerWithHidddenText
+            <DataContainerWithHiddenText
               hiddenText="страна"
               infoText="Россия"
             />
-            <DataContainerWithHidddenText
+            <DataContainerWithHiddenText
               hiddenText="улица"
               infoText="Кащенко"
             />
-            <DataContainerWithHidddenText hiddenText="дом" infoText="6" />
-            <DataContainerWithHidddenText
+            <DataContainerWithHiddenText hiddenText="дом" infoText="6" />
+            <DataContainerWithHiddenText
               hiddenText="квартира | офис"
               infoText="666"
             />
@@ -71,11 +71,11 @@ export function Order({ orderData }: OrderProps) {
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
             <div className="flex flex-col gap-2 items-start row-span-2">
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="email"
                 infoText="dotdarkk@gmail.com"
               />
-              <DataContainerWithHidddenText
+              <DataContainerWithHiddenText
                 hiddenText="телефон"
                 infoText="89639366661"
               />
@@ -126,7 +126,6 @@ export function Order({ orderData }: OrderProps) {
           />
         </div>
       </div>
-      {/* TODO: доделать таблицу товаров */}
       <CardTableDataValidation products={orderData.modifications_in_order} configTable='orderTable' />
     </>
   );

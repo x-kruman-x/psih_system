@@ -10,7 +10,7 @@ import HoverBorderedEl from "../../UI/HoverBorderedEl";
 import { Typography } from "../../UI/Text";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "./table-header-bar";
-// TODO: сделать таблицу покупателей
+
 export const Table = <T extends Record<string, any>>({
   data,
   configTable,

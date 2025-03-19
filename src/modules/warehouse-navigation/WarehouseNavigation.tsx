@@ -18,6 +18,9 @@ export function WarehouseNavigation() {
         <BorderedLink to="/parties">
           <Typography>ПАРТИИ</Typography>
         </BorderedLink>
+        <BorderedLink to="/buyers">
+          <Typography>ПОКУПАТЕЛИ</Typography>
+        </BorderedLink>
       </nav>
     </div>
   );

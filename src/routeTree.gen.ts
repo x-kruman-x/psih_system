@@ -18,6 +18,7 @@ import { Route as AppWarehouseProductsRemainsImport } from './routes/_app/_wareh
 import { Route as AppWarehouseProductsImport } from './routes/_app/_warehouse/products'
 import { Route as AppWarehousePartiesImport } from './routes/_app/_warehouse/parties'
 import { Route as AppWarehouseOrdersImport } from './routes/_app/_warehouse/orders'
+import { Route as AppWarehouseBuyersImport } from './routes/_app/_warehouse/buyers'
 import { Route as AppWarehousePartiesPartyIdEditImport } from './routes/_app/_warehouse/parties_/$partyId/edit'
 import { Route as AppWarehouseOrdersOrderIdEditImport } from './routes/_app/_warehouse/orders_/$orderId/edit'
 
@@ -72,6 +73,14 @@ const AppWarehouseOrdersRoute = AppWarehouseOrdersImport.update({
   getParentRoute: () => AppWarehouseRoute,
 } as any)
 
+const AppWarehouseBuyersRoute = AppWarehouseBuyersImport.update({
+  id: '/buyers',
+  path: '/buyers',
+  getParentRoute: () => AppWarehouseRoute,
+} as any).lazy(() =>
+  import('./routes/_app/_warehouse/buyers.lazy').then((d) => d.Route),
+)
+
 const AppWarehousePartiesPartyIdEditRoute =
   AppWarehousePartiesPartyIdEditImport.update({
     id: '/parties_/$partyId/edit',
@@ -110,6 +119,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof AppWarehouseImport
       parentRoute: typeof AppImport
+    }
+    '/_app/_warehouse/buyers': {
+      id: '/_app/_warehouse/buyers'
+      path: '/buyers'
+      fullPath: '/buyers'
+      preLoaderRoute: typeof AppWarehouseBuyersImport
+      parentRoute: typeof AppWarehouseImport
     }
     '/_app/_warehouse/orders': {
       id: '/_app/_warehouse/orders'
@@ -159,6 +175,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AppWarehouseRouteChildren {
+  AppWarehouseBuyersRoute: typeof AppWarehouseBuyersRoute
   AppWarehouseOrdersRoute: typeof AppWarehouseOrdersRoute
   AppWarehousePartiesRoute: typeof AppWarehousePartiesRoute
   AppWarehouseProductsRoute: typeof AppWarehouseProductsRoute
@@ -168,6 +185,7 @@ interface AppWarehouseRouteChildren {
 }
 
 const AppWarehouseRouteChildren: AppWarehouseRouteChildren = {
+  AppWarehouseBuyersRoute: AppWarehouseBuyersRoute,
   AppWarehouseOrdersRoute: AppWarehouseOrdersRoute,
   AppWarehousePartiesRoute: AppWarehousePartiesRoute,
   AppWarehouseProductsRoute: AppWarehouseProductsRoute,
@@ -193,6 +211,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof AppWarehouseRouteWithChildren
   '/login': typeof LoginRoute
+  '/buyers': typeof AppWarehouseBuyersRoute
   '/orders': typeof AppWarehouseOrdersRoute
   '/parties': typeof AppWarehousePartiesRoute
   '/products': typeof AppWarehouseProductsRoute
@@ -204,6 +223,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '': typeof AppWarehouseRouteWithChildren
   '/login': typeof LoginRoute
+  '/buyers': typeof AppWarehouseBuyersRoute
   '/orders': typeof AppWarehouseOrdersRoute
   '/parties': typeof AppWarehousePartiesRoute
   '/products': typeof AppWarehouseProductsRoute
@@ -217,6 +237,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/_app/_warehouse': typeof AppWarehouseRouteWithChildren
+  '/_app/_warehouse/buyers': typeof AppWarehouseBuyersRoute
   '/_app/_warehouse/orders': typeof AppWarehouseOrdersRoute
   '/_app/_warehouse/parties': typeof AppWarehousePartiesRoute
   '/_app/_warehouse/products': typeof AppWarehouseProductsRoute
@@ -230,6 +251,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/login'
+    | '/buyers'
     | '/orders'
     | '/parties'
     | '/products'
@@ -240,6 +262,7 @@ export interface FileRouteTypes {
   to:
     | ''
     | '/login'
+    | '/buyers'
     | '/orders'
     | '/parties'
     | '/products'
@@ -251,6 +274,7 @@ export interface FileRouteTypes {
     | '/_app'
     | '/login'
     | '/_app/_warehouse'
+    | '/_app/_warehouse/buyers'
     | '/_app/_warehouse/orders'
     | '/_app/_warehouse/parties'
     | '/_app/_warehouse/products'
@@ -297,6 +321,7 @@ export const routeTree = rootRoute
       "filePath": "_app/_warehouse.tsx",
       "parent": "/_app",
       "children": [
+        "/_app/_warehouse/buyers",
         "/_app/_warehouse/orders",
         "/_app/_warehouse/parties",
         "/_app/_warehouse/products",
@@ -304,6 +329,10 @@ export const routeTree = rootRoute
         "/_app/_warehouse/orders_/$orderId/edit",
         "/_app/_warehouse/parties_/$partyId/edit"
       ]
+    },
+    "/_app/_warehouse/buyers": {
+      "filePath": "_app/_warehouse/buyers.tsx",
+      "parent": "/_app/_warehouse"
     },
     "/_app/_warehouse/orders": {
       "filePath": "_app/_warehouse/orders.tsx",
