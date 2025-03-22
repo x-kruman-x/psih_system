@@ -36,22 +36,19 @@ declare module "@tanstack/react-router" {
 //   queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
 // }
 
-try {
-  if (localStorage.getItem("access_token")) {
-    await refreshToken();
-    const keysWithInfiniteGcTime = ["auth", "isFilter"];
-  
-    keysWithInfiniteGcTime.forEach((key) => {
-      queryClient.setQueryDefaults([key], { gcTime: Infinity });
-    });
-  
-    queryClient.setQueryData(["auth"], { isAuth: true });
-    queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-  }
-} catch (error) {
-  window.location.href = "/login";
-  // return; // Остановить выполнение
+
+if (localStorage.getItem("access_token")) {
+  await refreshToken();
+  const keysWithInfiniteGcTime = ["auth", "isFilter"];
+
+  keysWithInfiniteGcTime.forEach((key) => {
+    queryClient.setQueryDefaults([key], { gcTime: Infinity });
+  });
+
+  queryClient.setQueryData(["auth"], { isAuth: true });
+  queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
 }
+
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {

@@ -59,7 +59,7 @@ export async function refreshToken() {
   } catch (e) {
     console.error("Ошибка обновления токена:", e);
     console.error("Неправильный access скорее всего");
-    // window.location.href = "/login";
+    window.location.href = "/login";
     // throw new Error("Не удалось обновить токен");
   }
 }
