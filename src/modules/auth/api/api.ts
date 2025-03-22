@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { queryOptions, useQueryClient} from "@tanstack/react-query";
+import { queryOptions, useQueryClient } from "@tanstack/react-query";
 import { loginInstance, refreshInstance } from "../../../shared/API/base";
 import { useNavigate } from "@tanstack/react-router";
 import { AxiosResponse } from "axios";
@@ -50,7 +50,7 @@ async function getTokens(username: string, code: string) {
   });
 }
 
-export async function refreshToken(): Promise<AxiosResponse> {
+export async function refreshToken() {
   try {
     const response = await refreshInstance.post("/api/jwt/refresh/");
     console.log("Токен успешно обновлен");
@@ -58,8 +58,9 @@ export async function refreshToken(): Promise<AxiosResponse> {
     return response; // Возвращаем успешный ответ
   } catch (e) {
     console.error("Ошибка обновления токена:", e);
-    throw new Error("Не удалось обновить токен");
-    
+    console.error("Неправильный access скорее всего");
+    // window.location.href = "/login";
+    // throw new Error("Не удалось обновить токен");
   }
 }
 
@@ -105,22 +106,22 @@ export const useAuthApi = () => {
       });
     },
 
-    refreshTokenValidationOptions: () => {
-      return queryOptions({
-        queryKey: [basekey, "refresh"],
-        queryFn: async () => {
-          try {
-            const response = await refreshToken();
-            queryClient.setQueryData(["auth"], {
-              isAuth: true,
-            });
-            return response.data;
-          } catch (error) {
-            console.error("Ошибка при обновлении токена в queryFn:", error);
-            throw error;
-          }
-        },
-      });
-    },
+    // refreshTokenValidationOptions: () => {
+    //   return queryOptions({
+    //     queryKey: [basekey, "refresh"],
+    //     queryFn: async () => {
+    //       try {
+    //         const response = await refreshToken();
+    //         queryClient.setQueryData(["auth"], {
+    //           isAuth: true,
+    //         });
+    //         return response.data;
+    //       } catch (error) {
+    //         console.error("Ошибка при обновлении токена в queryFn:", error);
+    //         throw error;
+    //       }
+    //     },
+    //   });
+    // },
   };
 };
