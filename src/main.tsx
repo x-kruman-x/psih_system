@@ -5,7 +5,8 @@ import "./shared/config/tailwind-css/index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { routeTree } from "./routeTree.gen";
-import { refreshToken } from "./modules/auth/api/api";
+import { refreshToken, useAuthApi } from "./modules/auth/api/api";
+import { AuthGuard } from "./modules/auth/components/AuthGuard";
 
 const queryClient = new QueryClient();
 
@@ -36,26 +37,13 @@ declare module "@tanstack/react-router" {
 //   queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
 // }
 
-
-if (localStorage.getItem("access_token")) {
-  await refreshToken();
-  const keysWithInfiniteGcTime = ["auth", "isFilter"];
-
-  keysWithInfiniteGcTime.forEach((key) => {
-    queryClient.setQueryDefaults([key], { gcTime: Infinity });
-  });
-
-  queryClient.setQueryData(["auth"], { isAuth: true });
-  queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-}
-
-
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
+        <AuthGuard />
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
