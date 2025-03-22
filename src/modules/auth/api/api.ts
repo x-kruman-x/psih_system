@@ -57,10 +57,10 @@ export async function refreshToken() {
     localStorage.setItem("access_token", response.data.access_token);
     return response; // Возвращаем успешный ответ
   } catch (e) {
-    console.error("Ошибка обновления токена:", e);
-    console.error("Неправильный access скорее всего");
+    // console.error("Ошибка обновления токена:", e);
+    // console.error("Неправильный access скорее всего");
     // window.location.href = "/login";
-    // throw new Error("Не удалось обновить токен");
+    throw new Error("Не удалось обновить токен");
   }
 }
 

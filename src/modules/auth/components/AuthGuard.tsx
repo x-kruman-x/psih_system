@@ -12,6 +12,7 @@ export const AuthGuard = () => {
       if (localStorage.getItem("access_token")) {
         try {
           if (localStorage.getItem("access_token")) {
+            await refreshToken()
             const keysWithInfiniteGcTime = ["auth", "isFilter"];
 
             keysWithInfiniteGcTime.forEach((key) => {
@@ -30,5 +31,5 @@ export const AuthGuard = () => {
     checkAuth();
   }, []);
 
-  return null; // Компонент ничего не рендерит, только логика
+  return <></>;
 };

@@ -9,7 +9,7 @@ import { configTableType } from "../../types/table/columnTableTypes";
 import { useColumns } from "@/shared/hooks/table/useColumns";
 import { Typography } from "@/shared/UI/Text";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-
+// TODO!: сделать таблицу категорий
 export const FilteredTable = <T extends Record<string, any>>({
   combinedData,
   configTable,

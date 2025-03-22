@@ -5,7 +5,7 @@ import "./shared/config/tailwind-css/index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { routeTree } from "./routeTree.gen";
-import { refreshToken, useAuthApi } from "./modules/auth/api/api";
+import { refreshToken } from "./modules/auth/api/api";
 import { AuthGuard } from "./modules/auth/components/AuthGuard";
 
 const queryClient = new QueryClient();
@@ -24,18 +24,23 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
+
 // TODO!: при неправильном токене все равно пропускает в таблицу, а при обновлении страницы уже на логин перебрасывает
-// if (localStorage.getItem("access_token")) {
-//   await refreshToken();
-//   const keysWithInfiniteGcTime = ["auth", "isFilter"];
-
-//   keysWithInfiniteGcTime.forEach((key) => {
-//     queryClient.setQueryDefaults([key], { gcTime: Infinity });
-//   });
-
-//   queryClient.setQueryData(["auth"], { isAuth: true });
-//   queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
-// }
+try {
+  if (localStorage.getItem("access_token")) {
+    await refreshToken();
+    const keysWithInfiniteGcTime = ["auth", "isFilter"];
+  
+    keysWithInfiniteGcTime.forEach((key) => {
+      queryClient.setQueryDefaults([key], { gcTime: Infinity });
+    });
+  
+    queryClient.setQueryData(["auth"], { isAuth: true });
+    queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
+  }
+} catch(e) {
+  console.log(e)
+}
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -43,7 +48,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <AuthGuard />
+        {/* <AuthGuard /> */}
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
