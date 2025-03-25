@@ -6,7 +6,7 @@ import {useConfigCardSettingsBar} from "../../hooks/table/useConfigCardSettingsB
 import {useEffect, useRef, useState} from "react";
 import {CardSheet} from "./card-sheet";
 import {useScrollLinkContainer} from "@/shared/hooks/card/useScrollLinkContainer";
-import useOrdersTableSearch from "@/shared/hooks/table/useOrdersTableSearch.ts";
+import useOrdersTableSearch from "@/shared/hooks/card/useOrdersTableSearch";
 
 type CardSettingsBarProps<
     TItems extends { id: number },
