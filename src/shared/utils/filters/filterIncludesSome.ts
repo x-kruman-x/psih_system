@@ -7,8 +7,7 @@ export const filterIncludesSome = <T extends Record<string, any>>(
 ) => {
   if (!value || value.length === 0) return true;
 
-  const rowValue =
-    row.getValue<string>(columnId)?.toString().toLowerCase() || "";
+  const rowValue = row.getValue<string>(columnId)?.toString().toLowerCase() || "";
 
   if (Array.isArray(value)) {
     return value.some((v) => rowValue.includes(v.toString().toLowerCase()));

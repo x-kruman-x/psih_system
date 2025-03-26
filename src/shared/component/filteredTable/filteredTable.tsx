@@ -7,8 +7,10 @@ import {
 import { useState } from "react";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { useColumns } from "@/shared/hooks/table/useColumns";
-import { Typography } from "@/shared/UI/Text";
+import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
+import { CategoryFilterButton } from "./category-filter-button";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
+
 // TODO!: сделать таблицу категорий
 export const FilteredTable = <T extends Record<string, any>>({
   combinedData,
@@ -18,15 +20,16 @@ export const FilteredTable = <T extends Record<string, any>>({
   configTable: configTableType;
 }) => {
   const { products, categories } = combinedData;
-
-  const productColumns = useColumns<T>(configTable);
-  const categoryColumns = useColumns<T>("categories");
+  // console.log(combinedData)
+  const productColumns = useColumns(configTable);
+  const categoryColumns = useColumns("categories");
 
   const [productСolumnVisibility, setProductColumnVisibility] = useState({});
   const [categoryСolumnVisibility, setCategoryColumnVisibility] = useState({});
 
   const [productRowSelection, setProductRowSelection] = useState({});
-  const [categoryRowSelection, setCategoryRowSelection] = useState({});
+
+  const [categoryFilter, setCategoryFilter] = useState<any>([]);
 
   const productTable = useReactTable({
     data: products,
@@ -34,59 +37,40 @@ export const FilteredTable = <T extends Record<string, any>>({
     state: {
       columnVisibility: productСolumnVisibility,
       rowSelection: productRowSelection,
+      globalFilter: categoryFilter,
     },
+    onGlobalFilterChange: setCategoryFilter,
+    globalFilterFn: filterByCategory,
     onColumnVisibilityChange: setProductColumnVisibility,
     onRowSelectionChange: setProductRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  // const categoriesTable = useReactTable({
-  //   data: categories,
-  //   columns: categoryColumns,
-  //   state: {
-  //     columnVisibility: categoryСolumnVisibility,
-  //     rowSelection: categoryRowSelection,
-  //   },
-  //   onColumnVisibilityChange: setCategoryColumnVisibility,
-  //   onRowSelectionChange: setCategoryRowSelection,
-  //   getCoreRowModel: getCoreRowModel(),
-  //   getFilteredRowModel: getFilteredRowModel(),
-  // });
-  // console.log(categoriesTable.getRowModel())
-  console.log(productTable.getRowModel());
+  const categoriesTable = useReactTable({
+    data: categories,
+    columns: categoryColumns,
+    state: {
+      columnVisibility: categoryСolumnVisibility,
+    },
+    onColumnVisibilityChange: setCategoryColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+  // console.log(productTable.getState().columnFilters);
+  // console.log("categoriesTable", categoriesTable.getRowModel());
+  // console.log("productTable", productTable.getRowModel());
   return (
-    <div className="relative">
-      <table className="w-full">
+    <div className="relative flex">
+      <table className="w-1/6">
         <thead>
           <tr>
-            {/* {categoriesTable.getHeaderGroups().flatMap((headerGroup) =>
+            {categoriesTable.getHeaderGroups().flatMap((headerGroup) =>
               headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
                   colSpan={header.colSpan}
-                  className="w-1/6 py-[5px] border-r border-solid border-black"
-                >
-                  {header.isPlaceholder ? null : (
-                    <>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </>
-                  )}
-                </th>
-              ))
-            )} */}
-            <th className="w-1/6 py-[5px] border-r border-solid border-black last:border-none">
-              <Typography className={`!text-[#8D8D8D] `}>категории</Typography>
-            </th>
-            {productTable.getHeaderGroups().flatMap((headerGroup) =>
-              headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  className="w-1/6 py-[5px] border-r border-solid border-black last:border-none"
+                  className="w-1/6 py-[5px]"
                 >
                   {header.isPlaceholder ? null : (
                     <>
@@ -102,32 +86,75 @@ export const FilteredTable = <T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody>
-          <div className="flex w-full">
-            <div className="flex flex-col">
-              {categories.map((category) => (
-                <HoverBorderedEl key={category.id}>
-                  {category.name}
-                </HoverBorderedEl>
-              ))}
-            </div>
-            <div className="">
-              {productTable.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="group last:group/last-pb">
-                  {row.getVisibleCells().map((cell) => (
+          {categoriesTable.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id} className="group relative">
+                {row.getVisibleCells().map((cell) => {
+                  return (
                     <td
                       key={cell.id}
-                      className="w-1/6 px-0 text-center border-l border-solid border-black first:border-none group/last-pb:pb-[300px]"
+                      className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none`}
                     >
+                      <button
+                        onClick={() => productTable.setGlobalFilter("кепки")}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </button>
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <table className="w-5/6">
+        <thead>
+          <tr>
+            {productTable.getHeaderGroups().flatMap((headerGroup) =>
+              headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  className="w-1/6 py-[5px] border-l border-solid border-black"
+                >
+                  {header.isPlaceholder ? null : (
+                    <>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </>
+                  )}
+                </th>
+              ))
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {productTable.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id} className="group relative">
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td
+                      key={cell.id}
+                      className={`w-1/6 px-0 text-center border-l border-solid border-black`}
+                    >
+                      {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
                     </td>
-                  ))}
-                </tr>
-              ))}
-            </div>
-          </div>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

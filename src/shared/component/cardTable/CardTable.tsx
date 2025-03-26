@@ -33,9 +33,9 @@ export const CardTable = <T extends Record<string, any>>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  useEffect(() => {
-      console.log('CardTable data: ', data)
-    }, [data])
+  // useEffect(() => {
+  //     console.log('CardTable data: ', data)
+  //   }, [data])
 
   // TODO!: при переходе между элементами таблица товаров не меняется 
   return (

@@ -15,9 +15,9 @@ export function CardTableDataValidation({
   const [newProducts, setNewProducts] = useState<OrderTypeModification[]>(products);
   const [allDataLoaded, setAllDataLoaded] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log('CardTableDataValidation products: ', products)
-  }, [products])
+  // useEffect(() => {
+  //   console.log('CardTableDataValidation products: ', products)
+  // }, [products])
 
   const results = useQueries({
     queries: products.map((product) =>

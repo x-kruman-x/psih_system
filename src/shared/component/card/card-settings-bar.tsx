@@ -32,7 +32,7 @@ export function CardSettingsBar<
     const {scrollContainerBy} = useScrollLinkContainer(listRef);
 
     useEffect(() => {
-        console.log(foundOrders)
+        // console.log(foundOrders)
         findOrders(searchText)
     }, [searchText])
 
