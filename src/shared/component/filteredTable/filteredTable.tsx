@@ -85,14 +85,15 @@ export const FilteredTable = <T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody>
-          {categoriesTable.getRowModel().rows.map((row) => {
+          {categoriesTable.getRowModel().rows.map((row, index) => {
+            const isLastCell = index === categoriesTable.getRowModel().rows.length - 1;
             return (
               <tr key={row.id} className="group relative">
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td
                       key={cell.id}
-                      className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none`}
+                      className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${isLastCell ? `pb-[100vh]` : ""}`}
                     >
                       {/* <button
                         onClick={() => productTable.setGlobalFilter("кепки")}
@@ -134,14 +135,15 @@ export const FilteredTable = <T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody>
-          {productTable.getRowModel().rows.map((row) => {
+          {productTable.getRowModel().rows.map((row, index) => {
+            const isLastCell = index === productTable.getRowModel().rows.length - 1;
             return (
               <tr key={row.id} className="group relative">
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td
                       key={cell.id}
-                      className={`w-1/6 px-0 text-center border-l border-solid border-black`}
+                      className={`w-1/6 px-0 text-center border-l border-solid border-black ${isLastCell ? `pb-[100vh]` : ""}`}
                     >
                       {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
                       {flexRender(

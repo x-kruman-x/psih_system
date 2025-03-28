@@ -67,10 +67,18 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
       };
     case "product":
       return {
-        gap: "",
+        gap: "gap-[170px]",
         linkBackPath: "/products",
-        leftEl: null,
-        rightEl: null,
+        leftEl: (
+          <HoverBorderedEl>
+            <Typography>Мужское</Typography>
+          </HoverBorderedEl>
+        ),
+        rightEl: (
+          <HoverBorderedEl>
+            <Typography>Женское</Typography>
+          </HoverBorderedEl>
+        ),
         navStyle: "",
         navText: '',
         Link: (item: { id: number, name?: string }) => (

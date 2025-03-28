@@ -70,6 +70,7 @@ export function CardSettingsBar<
   // }, [isOpenMenu]);
 
   return (
+    // TODO!: переделать верстку под новый дизайн
     <div className="flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid">
       <div className={`flex ${configObj.gap}`}>
         <HoverBorderedEl>
