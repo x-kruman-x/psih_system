@@ -21,7 +21,7 @@ export function CardTableDataValidation({
 
   const results = useQueries({
     queries: products.map((product) =>
-      productsApi.getProductById(product.modification.product_id.toString())
+      productsApi.getProductByIdQueryOptions(product.modification.product_id.toString())
     ),
   });
 

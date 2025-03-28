@@ -44,7 +44,7 @@ export const productsApi = {
       },
     });
   },
-  getProductById: (productId: string) => {
+  getProductByIdQueryOptions: (productId: string) => {
     return queryOptions({
       queryKey: [productsApi.basekey, "getProduct", productId],
       queryFn: async () => {

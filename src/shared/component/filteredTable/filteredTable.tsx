@@ -8,8 +8,6 @@ import { useState } from "react";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { useColumns } from "@/shared/hooks/table/useColumns";
 import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
-import { CategoryFilterButton } from "./category-filter-button";
-import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 
 // TODO!: сделать таблицу категорий
 export const FilteredTable = <T extends Record<string, any>>({
@@ -37,7 +35,7 @@ export const FilteredTable = <T extends Record<string, any>>({
     state: {
       columnVisibility: productСolumnVisibility,
       rowSelection: productRowSelection,
-      globalFilter: categoryFilter,
+      // globalFilter: categoryFilter,
     },
     onGlobalFilterChange: setCategoryFilter,
     globalFilterFn: filterByCategory,
@@ -62,6 +60,7 @@ export const FilteredTable = <T extends Record<string, any>>({
   // console.log("productTable", productTable.getRowModel());
   return (
     <div className="relative flex">
+      {/* TODO!: сделать table bar */}
       <table className="w-1/6">
         <thead>
           <tr>
@@ -95,14 +94,14 @@ export const FilteredTable = <T extends Record<string, any>>({
                       key={cell.id}
                       className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none`}
                     >
-                      <button
+                      {/* <button
                         onClick={() => productTable.setGlobalFilter("кепки")}
-                      >
+                      > */}
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
                         )}
-                      </button>
+                      {/* </button> */}
                     </td>
                   );
                 })}

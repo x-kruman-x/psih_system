@@ -245,7 +245,7 @@ export function useColumns<T extends Record<string, any>>(
         <Typography className={`${contentThStyle}`}>товар</Typography>
       ),
       cell: ({ row }) => {
-        // console.log(row.original);
+        console.log(row)
         return (
           <div
             className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row?.getIsSelected())}`}
@@ -260,9 +260,9 @@ export function useColumns<T extends Record<string, any>>(
             />
             <div className="grow">
               <Link
-                to="/products/$productsName/edit"
+                to="/products/$productsId/edit"
                 params={{
-                  productsName: row.original.name,
+                  productsId: row.original.id,
                 }}
               >
                 <Typography>{row.original.name}</Typography>
@@ -271,7 +271,7 @@ export function useColumns<T extends Record<string, any>>(
           </div>
         );
       },
-      filterFn: filterByCategory,
+      // filterFn: filterByCategory,
     },
     {
       id: "Коллекция",
@@ -301,7 +301,7 @@ export function useColumns<T extends Record<string, any>>(
           {props.getValue<string>()}
         </Typography>
       ),
-      filterFn: filterByCategory,
+      // filterFn: filterByCategory,
     },
     {
       id: "Остаток",
@@ -316,7 +316,7 @@ export function useColumns<T extends Record<string, any>>(
           {props.getValue<string>()}
         </Typography>
       ),
-      filterFn: filterByCategory,
+      // filterFn: filterByCategory,
     },
     {
       id: "Цена",
@@ -331,7 +331,7 @@ export function useColumns<T extends Record<string, any>>(
           {(props.getValue<number>() || 0) + "₽"}
         </Typography>
       ),
-      filterFn: filterByCategory,
+      // filterFn: filterByCategory,
     },
   ];
 

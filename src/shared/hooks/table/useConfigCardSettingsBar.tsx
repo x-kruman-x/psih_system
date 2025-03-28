@@ -32,7 +32,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
           </HoverBorderedEl>
         ),
         navStyle: "absolute left-1/2 -translate-x-1/2",
-        navText: 'Заказ',
+        navText: 'Заказ - ',
         Link: (item: { id: number }) => (
           <Link
             to="/orders/$orderId/edit"
@@ -52,7 +52,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         leftEl: null,
         rightEl: null,
         navStyle: "",
-        navText: 'Партия',
+        navText: 'Партия - ',
         Link: (item: { id: number }) => (
           <Link
             to="/parties/$partyId/edit"
@@ -72,12 +72,15 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         leftEl: null,
         rightEl: null,
         navStyle: "",
-        navText: 'Товар',
-        Link: (item: { id: number }) => (
+        navText: '',
+        Link: (item: { id: number, name?: string }) => (
           <Link
-            to=""
+            to="/products/$productsId/edit"
+            params={{
+              productsId: String(item.id)
+            }}
           >
-            <Typography key={item.id}>{item.id}</Typography>
+            <Typography key={item.id}>{item.name}</Typography>
           </Link>
         ),
         cardSheetType: 'productsTable'
