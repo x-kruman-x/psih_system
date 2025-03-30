@@ -176,7 +176,7 @@ export const FilteredTable = <T extends Record<string, any>>({
             <span className="text-[16px]">+</span> Товар
           </Typography>
         </HoverBorderedEl>
-        {isOpenNewProductDialog && <NewProductDialog />}
+        {isOpenNewProductDialog && <NewProductDialog  />}
       </div>
       <HoverBorderedEl
         as="button"
