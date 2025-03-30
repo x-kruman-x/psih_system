@@ -1,6 +1,6 @@
 import { useConfigUploadBtn } from "../../hooks/useConfigUploadBtn";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Typography } from "../../UI/Text";
+import { Typography } from "../../UI/Typography";
 import { savePlaceType } from "@/shared/types/uploadSavePlaceTypes";
 
 type UploadButtonProps = {

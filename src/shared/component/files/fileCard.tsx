@@ -1,5 +1,5 @@
 import getImgName from "../../utils/getImgName";
-import { Typography } from "../../UI/Text";
+import { Typography } from "../../UI/Typography";
 import logo from '../../../assets/img/logo.svg'
 
 type FileCardProps = {

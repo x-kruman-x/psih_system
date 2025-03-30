@@ -1,9 +1,9 @@
 import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { PartiesType, PartyType } from "../../types/partiesTableTypes";
 import { SelectCell } from "@/shared/component/selectCell";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { formatDateTime } from "@/shared/utils/formateDateTime";
-import { DataContainerWithHiddenText } from "@/modules/warehouse/orders/components/order/order-data-container";
+import { InputContainerWithHiddenText } from "@/shared/UI/InputContainerWithHiddenText";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { FileContainer } from "@/shared/component/files/fileContainer";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -63,14 +63,15 @@ export function Party({ partyData }: PartyProps) {
             </HoverBorderedEl>
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
+            {/* TODO!:починить баг */}
             <div className="flex flex-col gap-2 items-start row-span-2">
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="email"
-                infoText="dotdarkk@gmail.com"
+                inputText="dotdarkk@gmail.com"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="телефон"
-                infoText="89639366661"
+                inputText="89639366661"
               />
             </div>
             <div className="flex justify-end items-end">

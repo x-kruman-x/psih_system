@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Typography } from "../../../../../shared/UI/Text";
-import { DataContainerWithHiddenText } from "./order-data-container";
+import { Typography } from "../../../../../shared/UI/Typography";
+import { DataContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
 
 export function EditDataDialog() {
   return (

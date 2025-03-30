@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Typography } from "../../UI/Text";
+import { Typography } from "../../UI/Typography";
 import { Table } from "@tanstack/react-table";
 import { stringToNumber } from "../../utils/stringToNumber";
 import { CustomCheckbox } from "../../UI/CustomCheckBox";

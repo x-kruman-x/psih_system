@@ -7,7 +7,7 @@ import {
 import { useRef, useState } from "react";
 import { useColumns } from "../../hooks/table/useColumns";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Typography } from "../../UI/Text";
+import { Typography } from "../../UI/Typography";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { TableHeaderBar } from "./table-header-bar";
 

@@ -1,4 +1,4 @@
-import { Typography } from "../../shared/UI/Text";
+import { Typography } from "../../shared/UI/Typography";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function WarehouseNavigation() {

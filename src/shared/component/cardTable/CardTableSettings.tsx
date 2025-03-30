@@ -1,6 +1,6 @@
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { Table } from "@tanstack/react-table";
 
 export function CardTableSettings<T extends Record<string, any>>({

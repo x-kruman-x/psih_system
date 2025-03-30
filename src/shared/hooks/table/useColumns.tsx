@@ -6,7 +6,7 @@ import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { RemainsDropDownProps } from "@/shared/types/remainsDropDownProps";
 import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { filterIncludesSome } from "@/shared/utils/filters/filterIncludesSome";
 import { formatDateTime } from "@/shared/utils/formateDateTime";
 import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
@@ -242,10 +242,10 @@ export function useColumns<T extends Record<string, any>>(
       id: "Товар",
       accessorKey: "name",
       header: () => (
-        <Typography className={`${contentThStyle}`}>товар</Typography>
+        <Typography className={`${contentThStyle} pl-[27px]`}>товар</Typography>
       ),
       cell: ({ row }) => {
-        console.log(row)
+        // console.log(row)
         return (
           <div
             className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row?.getIsSelected())}`}
@@ -260,7 +260,7 @@ export function useColumns<T extends Record<string, any>>(
             />
             <div className="grow">
               <Link
-                to="/products/$productsId/edit"
+                to="/products/$productsId/edit/info"
                 params={{
                   productsId: row.original.id,
                 }}

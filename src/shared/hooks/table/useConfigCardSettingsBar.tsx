@@ -1,7 +1,7 @@
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { EditPageSettingsBar } from "@/shared/types/table/editPageSettingsBar";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { Link } from "@tanstack/react-router";
 
 interface ConfigSettingsBar {
@@ -83,7 +83,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         navText: '',
         Link: (item: { id: number, name?: string }) => (
           <Link
-            to="/products/$productsId/edit"
+            to="/products/$productsId/edit/info"
             params={{
               productsId: String(item.id)
             }}

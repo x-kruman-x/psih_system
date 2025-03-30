@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../UI/HoverBorderedEl";
-import { Typography } from "../../UI/Text";
+import { Typography } from "../../UI/Typography";
 import { EditPageSettingsBar } from "../../types/table/editPageSettingsBar";
 import { useConfigCardSettingsBar } from "../../hooks/table/useConfigCardSettingsBar";
 import { useEffect, useRef, useState } from "react";
@@ -83,7 +83,6 @@ export function CardSettingsBar<
           {configObj.rightEl}
         </div>
       </div>
-      {/* TODO!: добавить поиск*/}
       <div
         className={`navbutton absolute left-1/2 -translate-x-1/2 flex flex-col ${isOpenMenu ? "top-[10px] z-20" : ""}`}
       >
@@ -92,6 +91,7 @@ export function CardSettingsBar<
             className={`cursor-pointer !opacity-100 ${isOpenMenu ? "px-16 !border-black bg-white !rounded-none !rounded-tl-md" : ""}`}
             onClick={handleMenu}
           >
+            {/* TODO!: на странице товара отображается id, а не name*/}
             <Typography className="text-center">
               {itemsData.id
                 ? `${configObj.navText}${itemsData.id}`

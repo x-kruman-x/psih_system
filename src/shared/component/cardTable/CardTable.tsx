@@ -2,7 +2,7 @@
 import { useCardColumns } from "@/shared/hooks/cardTable/useCardColumns";
 import { useIntegrationData } from "@/shared/hooks/cardTable/useIntergrationData";
 import { configTableType } from "@/shared/types/table/columnTableTypes";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import {
   useReactTable,
   getCoreRowModel,

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "../../assets/img/logo.svg";
-import { Typography } from "../../shared/UI/Text";
+import { Typography } from "../../shared/UI/Typography";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function AppNavigation() {

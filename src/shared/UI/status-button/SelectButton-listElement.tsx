@@ -1,4 +1,4 @@
-import { Typography } from "../Text";
+import { Typography } from "../Typography";
 
 type SelectButtonListElementProps = {
   text: string;
