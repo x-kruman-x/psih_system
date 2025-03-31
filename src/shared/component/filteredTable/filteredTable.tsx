@@ -11,13 +11,14 @@ import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { NewProductDialog } from "./new-product-dialog";
+import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
 
 // TODO!: сделать таблицу категорий
-export const FilteredTable = <T extends Record<string, any>>({
+export const FilteredTable = ({
   combinedData,
   configTable,
 }: {
-  combinedData: { products: T[]; categories: T[] };
+  combinedData: ProductCombinedData;
   configTable: configTableType;
 }) => {
   const { products, categories } = combinedData;
@@ -29,8 +30,7 @@ export const FilteredTable = <T extends Record<string, any>>({
   const [productRowSelection, setProductRowSelection] = useState({});
   const [categoryFilter, setCategoryFilter] = useState<any>([]);
 
-  const [isOpenNewProductDialog, setIsOpenNewProductDialog] =
-    useState<boolean>(false);
+  const [isOpenNewProductDialog, setIsOpenNewProductDialog] = useState<boolean>(false);
 
   const productTable = useReactTable({
     data: products,
@@ -169,14 +169,13 @@ export const FilteredTable = <T extends Record<string, any>>({
           className="fixed bottom-4 left-[25%] -translate-x-1/2 bg-white z-20"
           onClick={() => {
             setIsOpenNewProductDialog((prev) => !prev)
-            console.log("click")
           }}
         >
           <Typography>
             <span className="text-[16px]">+</span> Товар
           </Typography>
         </HoverBorderedEl>
-        {isOpenNewProductDialog && <NewProductDialog  />}
+        {isOpenNewProductDialog && <NewProductDialog initialData={combinedData} onClose={() => setIsOpenNewProductDialog(false)} />}
       </div>
       <HoverBorderedEl
         as="button"

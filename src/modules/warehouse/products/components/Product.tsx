@@ -29,12 +29,12 @@ export function Product({ productData }: { productData: ProductType }) {
         itemsData={productData}
       />
       <div className="flex divide-x-[1px] divide-black divide-solid border-b-[1px] border-b-black border-solid">
-        <div className="w-1/2 h-[80vh]">
+        <div className="w-1/2">
           <Typography isGray={true} className="text-center">
             все фото
           </Typography>
         </div>
-        <div className="w-1/2 h-[80vh]">
+        <div className="w-1/2">
           <Typography isGray={true} className="text-center mb-4">
             товар
           </Typography>
@@ -81,7 +81,7 @@ export function Product({ productData }: { productData: ProductType }) {
           <Outlet />
         </div>
       </div>
-      <div className="py-[10px] flex justify-center  border-b-[1px] border-b-black">
+      <div className="py-[10px] flex justify-center border-b-[1px] border-b-black">
         <HoverBorderedEl as="button">
           <Typography>ПРЕДПРОСМОТР</Typography>
         </HoverBorderedEl>

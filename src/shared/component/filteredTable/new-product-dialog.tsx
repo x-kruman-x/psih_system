@@ -1,13 +1,23 @@
-import { BorderedElement } from "@/shared/UI/BorderedElement";
+import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
+import { useDeleteCategory } from "@/modules/warehouse/products/hooks/use-delete-category";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
+import { useDeleteProducts } from "@/modules/warehouse/products/hooks/use-delete-products";
 
-export function NewProductDialog() {
+export function NewProductDialog({
+  initialData,
+  onClose
+}: {
+  initialData: ProductCombinedData;
+  onClose: () => void
+}) {
+  const { deleteMutation } = useDeleteCategory();
+  const { deleteProducts } = useDeleteProducts();
   return (
     <div className="border border-black border-solid rounded-md w-[75vw] h-[700px] fixed top-[20vh] left-1/2 -translate-x-1/2 bg-white z-30 flex flex-col">
       <div className="border-b border-black border-solid py-[12px] relative px-3 flex-shrink-0">
         <div className="flex items-center gap-6">
-          <HoverBorderedEl>
+          <HoverBorderedEl className="cursor-pointer" onClick={onClose}>
             <Typography>Закрыть</Typography>
           </HoverBorderedEl>
           <Typography>Поиск</Typography>
@@ -22,19 +32,58 @@ export function NewProductDialog() {
           <Typography isGray className="text-center mb-3">
             категории
           </Typography>
+          <div className="flex flex-col gap-2">
+            {initialData.categories.map((category) => (
+              <Typography key={category.id} className="text-center relative">
+                {category.name}
+                {/* TODO!: заменить X на img крестик */}
+                <button
+                  className="text-[14px] absolute left-[50px]"
+                  // TODO: прилетает 500, ждем фикс
+                  onClick={() => deleteMutation(category.id)}
+                >
+                  x
+                </button>
+              </Typography>
+            ))}
+          </div>
         </div>
         <div className="w-1/3 h-full overflow-auto">
           <Typography isGray className="text-center mb-3">
             коллекции
           </Typography>
+          <div className="flex flex-col gap-2">
+            {initialData.collections.map((collection) => (
+              <Typography key={collection.id} className="text-center relative">
+                {collection.name}
+                {/* TODO: удаления коллекций еще нет */}
+                <button className="text-[14px] absolute left-[50px]">x</button>
+              </Typography>
+            ))}
+          </div>
         </div>
         <div className="w-1/3 h-full overflow-auto">
           <Typography isGray className="text-center mb-3">
             товар
           </Typography>
+          <div className="flex flex-col gap-2">
+            {initialData.products.map((product) => (
+              <Typography key={product.id} className="text-center relative">
+                {product.name}
+                <button
+                  className="text-[14px] absolute left-[50px]"
+                  // TODO!: при удалении не обновляется список 
+                  onClick={() => deleteProducts([product.id])}
+                >
+                  x
+                </button>
+              </Typography>
+            ))}
+          </div>
         </div>
       </div>
       <div className="absolute left-1/2 bottom-[40px] -translate-x-1/2">
+        {/* TODO!: сделать создание новых категорий и тд */}
         <HoverBorderedEl as="button">
           <Typography>Принять</Typography>
         </HoverBorderedEl>

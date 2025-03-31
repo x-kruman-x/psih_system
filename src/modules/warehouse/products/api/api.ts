@@ -12,7 +12,7 @@ async function getProducts(isArchived: boolean | undefined = false) {
   return response;
 }
 
-async function getProductById(productId:string) {
+async function getProductById(productId: string) {
   return instance.get(`/api/products/${productId}/`);
 }
 
@@ -20,8 +20,16 @@ async function getCategories() {
   return instance.get(`/api/products/categories/`);
 }
 
+async function getCollections() {
+  return instance.get(`api/collections/`);
+}
+
 async function deleteProducts(idsArr: number[]) {
   return instance.delete("/api/products/multiple/", { data: idsArr });
+}
+
+async function deleteCategoryById(productId: number) {
+  return instance.delete(`/api/products/categories/?product_category_id=${productId}`);
 }
 
 export const productsApi = {
@@ -44,6 +52,15 @@ export const productsApi = {
       },
     });
   },
+  getCollectionsQueryOptions: () => {
+    return queryOptions({
+      queryKey: [productsApi.basekey, "getCollections"],
+      queryFn: async () => {
+        const resp = await getCollections();
+        return resp.data;
+      },
+    });
+  },
   getProductByIdQueryOptions: (productId: string) => {
     return queryOptions({
       queryKey: [productsApi.basekey, "getProduct", productId],
@@ -56,5 +73,8 @@ export const productsApi = {
 
   deleteProducts: (idsArr: number[]) => {
     return deleteProducts(idsArr);
+  },
+  deleteCategoryById: (productId: number) => {
+    return deleteCategoryById(productId);
   },
 };

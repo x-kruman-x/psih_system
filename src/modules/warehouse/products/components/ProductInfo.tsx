@@ -3,18 +3,14 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { ProductType } from "../types/productsTypes";
-import { productsApi } from "../api/api";
-import { useQueryClient } from "@tanstack/react-query";
 import { Typography } from "@/shared/UI/Typography";
 
 export function ProductInfo({ initialData }: { initialData: ProductType }) {
-  // const queryClient = useQueryClient();
-
-  // const initialData = queryClient.getQueryData<ProductType>([
-  //   productsApi.basekey,
-  //   "getProduct",
-  // ]);
   console.log(initialData);
+  const remainsSum = initialData.modifications?.reduce((sum, modification) => {
+    const remaining = Number(modification?.remaining) || 0;
+    return sum + remaining;
+  }, 0) ?? 0;
 
   const {
     handleSubmit,
@@ -35,7 +31,7 @@ export function ProductInfo({ initialData }: { initialData: ProductType }) {
   };
 
   return (
-    // TODO: сделать кнопку для сохранения изменений 
+    // TODO: сделать кнопку для сохранения изменений
     <div className="divide-y-[1px] divide-black divide-solid">
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -140,7 +136,24 @@ export function ProductInfo({ initialData }: { initialData: ProductType }) {
       {/* <Typography isGray className="text-center">
         Артикул - {initialData?.modifications[0]?.article}
       </Typography> */}
-      <div></div>
+      <div className="flex flex-col items-center gap-[45px] mb-4">
+        <Typography isGray>модификации</Typography>
+        <div className="flex gap-5">
+          {initialData.modifications?.map((modification) => (
+            <Typography>{modification.size}</Typography>
+          ))}
+        </div>
+        <div className="flex flex-col gap-5">
+          <div className="flex gap-5">
+            {initialData.modifications?.map((modification) => (
+              <Typography isGray>
+                {modification.size} - {modification.remaining} шт.
+              </Typography>
+            ))}
+          </div>
+          <Typography>Общее количетсво - {remainsSum} шт.</Typography>
+        </div>
+      </div>
     </div>
   );
 }
