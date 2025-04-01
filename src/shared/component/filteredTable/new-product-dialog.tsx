@@ -3,18 +3,22 @@ import { useDeleteCategory } from "@/modules/warehouse/products/hooks/use-delete
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { useDeleteProducts } from "@/modules/warehouse/products/hooks/use-delete-products";
+import { HtmlHTMLAttributes, useState } from "react";
 
 export function NewProductDialog({
   initialData,
-  onClose
+  onClose,
 }: {
   initialData: ProductCombinedData;
-  onClose: () => void
+  onClose: () => void;
 }) {
   const { deleteMutation } = useDeleteCategory();
   const { deleteProducts } = useDeleteProducts();
+
+  const [isCategoryInput, setIsCategoryInput] = useState<Boolean>(true);
+  const [isCollectionInput, setIsCollectionInput] = useState<Boolean>(true);
   return (
-    <div className="border border-black border-solid rounded-md w-[75vw] h-[700px] fixed top-[20vh] left-1/2 -translate-x-1/2 bg-white z-30 flex flex-col">
+    <div className="border border-black border-solid rounded-md w-[75vw] h-[600px] fixed top-[20vh] left-1/2 -translate-x-1/2 bg-white z-30 flex flex-col">
       <div className="border-b border-black border-solid py-[12px] relative px-3 flex-shrink-0">
         <div className="flex items-center gap-6">
           <HoverBorderedEl className="cursor-pointer" onClick={onClose}>
@@ -28,7 +32,7 @@ export function NewProductDialog({
       </div>
       <div className="flex-1 flex divide-x-[1px] divide-black divide-solid">
         {/* TODO!: сделать отображение всех товаров, категорий и коллекций */}
-        <div className="w-1/3 h-full overflow-auto">
+        <div className="w-1/3 h-full overflow-auto relative">
           <Typography isGray className="text-center mb-3">
             категории
           </Typography>
@@ -47,8 +51,18 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
+          {!isCategoryInput ? (
+            <NewItemInput />
+          ) : (
+            <button
+              className="absolute left-1/2 -translate-x-1/2 bottom-[65px]"
+              onClick={() => setIsCategoryInput((prev) => !prev)}
+            >
+              +
+            </button>
+          )}
         </div>
-        <div className="w-1/3 h-full overflow-auto">
+        <div className="w-1/3 h-full overflow-auto relative">
           <Typography isGray className="text-center mb-3">
             коллекции
           </Typography>
@@ -61,8 +75,11 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
+          <button className="absolute left-1/2 -translate-x-1/2 bottom-[65px]">
+            +
+          </button>
         </div>
-        <div className="w-1/3 h-full overflow-auto">
+        <div className="w-1/3 h-full overflow-auto relative">
           <Typography isGray className="text-center mb-3">
             товар
           </Typography>
@@ -72,7 +89,7 @@ export function NewProductDialog({
                 {product.name}
                 <button
                   className="text-[14px] absolute left-[50px]"
-                  // TODO!: при удалении не обновляется список 
+                  // TODO!: при удалении не обновляется список
                   onClick={() => deleteProducts([product.id])}
                 >
                   x
@@ -80,6 +97,9 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
+          <button className="absolute left-1/2 -translate-x-1/2 bottom-[65px]">
+            +
+          </button>
         </div>
       </div>
       <div className="absolute left-1/2 bottom-[40px] -translate-x-1/2">
@@ -88,6 +108,24 @@ export function NewProductDialog({
           <Typography>Принять</Typography>
         </HoverBorderedEl>
       </div>
+    </div>
+  );
+}
+
+function NewItemInput({
+  // value,
+  // onChange,
+}: {
+  // value: string;
+  // onChange: React.ChangeEventHandler<HTMLInputElement>;
+}) {
+  return (
+    <div className="relative flex justify-center mt-2">
+      <button className="absolute left-[50px]">x</button>
+      <input
+        type="text"
+        className="border border-black border-solid rounded-md px-1 py-[2px] text-[13px] leading-[17px]"
+      />
     </div>
   );
 }
