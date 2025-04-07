@@ -1,8 +1,7 @@
 import { buyersApi } from '@/modules/warehouse/buyers/api/api'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_app/_warehouse/buyers')({
+export const Route = createFileRoute('/_app/warehouse/buyers')({
   loader: ({ context: { queryClient } }) =>
-      queryClient.ensureQueryData(buyersApi.getBuyersQueryOptions()),
+    queryClient.ensureQueryData(buyersApi.getBuyersQueryOptions()),
 })
-

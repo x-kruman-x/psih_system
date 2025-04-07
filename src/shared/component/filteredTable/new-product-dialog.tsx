@@ -55,7 +55,7 @@ export function NewProductDialog({
             <NewItemInput />
           ) : (
             <button
-              className="absolute left-1/2 -translate-x-1/2 bottom-[65px]"
+              className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
               onClick={() => setIsCategoryInput((prev) => !prev)}
             >
               +
@@ -75,7 +75,7 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
-          <button className="absolute left-1/2 -translate-x-1/2 bottom-[65px]">
+          <button className="absolute left-1/2 -translate-x-1/2 bottom-[70px]">
             +
           </button>
         </div>
@@ -97,7 +97,7 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
-          <button className="absolute left-1/2 -translate-x-1/2 bottom-[65px]">
+          <button className="absolute left-1/2 -translate-x-1/2 bottom-[70px]">
             +
           </button>
         </div>
@@ -110,6 +110,41 @@ export function NewProductDialog({
       </div>
     </div>
   );
+}
+
+function NewProductCol({initialData, deleteFn}: {initialData: ProductCombinedData, deleteFn: () => void}){
+  return (
+    <div className="w-1/3 h-full overflow-auto relative">
+          <Typography isGray className="text-center mb-3">
+            категории
+          </Typography>
+          <div className="flex flex-col gap-2">
+            {initialData.categories.map((category) => (
+              <Typography key={category.id} className="text-center relative">
+                {category.name}
+                {/* TODO!: заменить X на img крестик */}
+                <button
+                  className="text-[14px] absolute left-[50px]"
+                  // TODO: прилетает 500, ждем фикс
+                  onClick={() => deleteMutation(category.id)}
+                >
+                  x
+                </button>
+              </Typography>
+            ))}
+          </div>
+          {!isCategoryInput ? (
+            <NewItemInput />
+          ) : (
+            <button
+              className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
+              onClick={() => setIsCategoryInput((prev) => !prev)}
+            >
+              +
+            </button>
+          )}
+        </div>
+  )
 }
 
 function NewItemInput({

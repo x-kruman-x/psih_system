@@ -5,7 +5,7 @@ import { AuthData } from '../modules/auth/types/types'
 export const Route = createFileRoute('/login')({
   beforeLoad: ({ context: { queryClient } }) => {
     if (queryClient.getQueryData<AuthData>(['auth'])?.isAuth === true) {
-      throw redirect({ to: '/orders' })
+      throw redirect({ to: '/warehouse/orders' })
     }
   },
   component: Login,

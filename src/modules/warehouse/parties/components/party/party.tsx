@@ -63,7 +63,7 @@ export function Party({ partyData }: PartyProps) {
             </HoverBorderedEl>
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
-            {/* TODO!:починить баг */}
+            {/* TODO!:поменялся компонент, надо переделать */}
             <div className="flex flex-col gap-2 items-start row-span-2">
               <InputContainerWithHiddenText
                 hiddenText="email"

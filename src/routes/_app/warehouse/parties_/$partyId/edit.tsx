@@ -3,13 +3,11 @@ import { Party } from '@/modules/warehouse/parties/components/party/party'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_app/_warehouse/parties_/$partyId/edit')(
-  {
-    loader: ({ context: { queryClient }, params: { partyId } }) =>
-      queryClient.ensureQueryData(partiesApi.getPartyQueryOptions(partyId)),
-    component: RouteComponent,
-  },
-)
+export const Route = createFileRoute('/_app/warehouse/parties_/$partyId/edit')({
+  loader: ({ context: { queryClient }, params: { partyId } }) =>
+    queryClient.ensureQueryData(partiesApi.getPartyQueryOptions(partyId)),
+  component: RouteComponent,
+})
 
 function RouteComponent() {
   const partyId = Route.useParams().partyId

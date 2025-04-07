@@ -42,7 +42,7 @@ export function useColumns<T extends Record<string, any>>(
           />
           <div className="grow">
             <Link
-              to="/orders/$orderId/edit"
+              to="/warehouse/orders/$orderId/edit"
               params={{
                 orderId: row.original.id.toString(),
               }}
@@ -150,7 +150,7 @@ export function useColumns<T extends Record<string, any>>(
           />
           <div className="grow">
             <Link
-              to="/parties/$partyId/edit"
+              to="/warehouse/parties/$partyId/edit"
               params={{
                 partyId: row.original.id.toString(),
               }}
@@ -260,7 +260,7 @@ export function useColumns<T extends Record<string, any>>(
             />
             <div className="grow">
               <Link
-                to="/products/$productsId/edit/info"
+                to="/warehouse/products/$productsId/edit/info"
                 params={{
                   productsId: row.original.id,
                 }}

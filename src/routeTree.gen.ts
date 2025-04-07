@@ -13,18 +13,18 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AppImport } from './routes/_app'
-import { Route as AppWarehouseImport } from './routes/_app/_warehouse'
-import { Route as AppWarehouseProductsRemainsImport } from './routes/_app/_warehouse/productsRemains'
-import { Route as AppWarehouseProductsImport } from './routes/_app/_warehouse/products'
-import { Route as AppWarehousePartiesImport } from './routes/_app/_warehouse/parties'
-import { Route as AppWarehouseOrdersImport } from './routes/_app/_warehouse/orders'
-import { Route as AppWarehouseBuyersImport } from './routes/_app/_warehouse/buyers'
-import { Route as AppWarehouseProductsProductsIdEditImport } from './routes/_app/_warehouse/products_/$productsId/edit'
-import { Route as AppWarehousePartiesPartyIdEditImport } from './routes/_app/_warehouse/parties_/$partyId/edit'
-import { Route as AppWarehouseOrdersOrderIdEditImport } from './routes/_app/_warehouse/orders_/$orderId/edit'
-import { Route as AppWarehouseProductsProductsIdEditInfoImport } from './routes/_app/_warehouse/products_/$productsId/edit/info'
-import { Route as AppWarehouseProductsProductsIdEditHistoryImport } from './routes/_app/_warehouse/products_/$productsId/edit/history'
-import { Route as AppWarehouseProductsProductsIdEditFilesImport } from './routes/_app/_warehouse/products_/$productsId/edit/files'
+import { Route as AppWarehouseImport } from './routes/_app/warehouse'
+import { Route as AppWarehouseProductsRemainsImport } from './routes/_app/warehouse/productsRemains'
+import { Route as AppWarehouseProductsImport } from './routes/_app/warehouse/products'
+import { Route as AppWarehousePartiesImport } from './routes/_app/warehouse/parties'
+import { Route as AppWarehouseOrdersImport } from './routes/_app/warehouse/orders'
+import { Route as AppWarehouseBuyersImport } from './routes/_app/warehouse/buyers'
+import { Route as AppWarehouseProductsProductsIdEditImport } from './routes/_app/warehouse/products_/$productsId/edit'
+import { Route as AppWarehousePartiesPartyIdEditImport } from './routes/_app/warehouse/parties_/$partyId/edit'
+import { Route as AppWarehouseOrdersOrderIdEditImport } from './routes/_app/warehouse/orders_/$orderId/edit'
+import { Route as AppWarehouseProductsProductsIdEditInfoImport } from './routes/_app/warehouse/products_/$productsId/edit/info'
+import { Route as AppWarehouseProductsProductsIdEditHistoryImport } from './routes/_app/warehouse/products_/$productsId/edit/history'
+import { Route as AppWarehouseProductsProductsIdEditFilesImport } from './routes/_app/warehouse/products_/$productsId/edit/files'
 
 // Create/Update Routes
 
@@ -40,7 +40,8 @@ const AppRoute = AppImport.update({
 } as any)
 
 const AppWarehouseRoute = AppWarehouseImport.update({
-  id: '/_warehouse',
+  id: '/warehouse',
+  path: '/warehouse',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -50,9 +51,7 @@ const AppWarehouseProductsRemainsRoute =
     path: '/productsRemains',
     getParentRoute: () => AppWarehouseRoute,
   } as any).lazy(() =>
-    import('./routes/_app/_warehouse/productsRemains.lazy').then(
-      (d) => d.Route,
-    ),
+    import('./routes/_app/warehouse/productsRemains.lazy').then((d) => d.Route),
   )
 
 const AppWarehouseProductsRoute = AppWarehouseProductsImport.update({
@@ -60,7 +59,7 @@ const AppWarehouseProductsRoute = AppWarehouseProductsImport.update({
   path: '/products',
   getParentRoute: () => AppWarehouseRoute,
 } as any).lazy(() =>
-  import('./routes/_app/_warehouse/products.lazy').then((d) => d.Route),
+  import('./routes/_app/warehouse/products.lazy').then((d) => d.Route),
 )
 
 const AppWarehousePartiesRoute = AppWarehousePartiesImport.update({
@@ -68,7 +67,7 @@ const AppWarehousePartiesRoute = AppWarehousePartiesImport.update({
   path: '/parties',
   getParentRoute: () => AppWarehouseRoute,
 } as any).lazy(() =>
-  import('./routes/_app/_warehouse/parties.lazy').then((d) => d.Route),
+  import('./routes/_app/warehouse/parties.lazy').then((d) => d.Route),
 )
 
 const AppWarehouseOrdersRoute = AppWarehouseOrdersImport.update({
@@ -82,7 +81,7 @@ const AppWarehouseBuyersRoute = AppWarehouseBuyersImport.update({
   path: '/buyers',
   getParentRoute: () => AppWarehouseRoute,
 } as any).lazy(() =>
-  import('./routes/_app/_warehouse/buyers.lazy').then((d) => d.Route),
+  import('./routes/_app/warehouse/buyers.lazy').then((d) => d.Route),
 )
 
 const AppWarehouseProductsProductsIdEditRoute =
@@ -145,87 +144,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/_app/_warehouse': {
-      id: '/_app/_warehouse'
-      path: ''
-      fullPath: ''
+    '/_app/warehouse': {
+      id: '/_app/warehouse'
+      path: '/warehouse'
+      fullPath: '/warehouse'
       preLoaderRoute: typeof AppWarehouseImport
       parentRoute: typeof AppImport
     }
-    '/_app/_warehouse/buyers': {
-      id: '/_app/_warehouse/buyers'
+    '/_app/warehouse/buyers': {
+      id: '/_app/warehouse/buyers'
       path: '/buyers'
-      fullPath: '/buyers'
+      fullPath: '/warehouse/buyers'
       preLoaderRoute: typeof AppWarehouseBuyersImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/orders': {
-      id: '/_app/_warehouse/orders'
+    '/_app/warehouse/orders': {
+      id: '/_app/warehouse/orders'
       path: '/orders'
-      fullPath: '/orders'
+      fullPath: '/warehouse/orders'
       preLoaderRoute: typeof AppWarehouseOrdersImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/parties': {
-      id: '/_app/_warehouse/parties'
+    '/_app/warehouse/parties': {
+      id: '/_app/warehouse/parties'
       path: '/parties'
-      fullPath: '/parties'
+      fullPath: '/warehouse/parties'
       preLoaderRoute: typeof AppWarehousePartiesImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/products': {
-      id: '/_app/_warehouse/products'
+    '/_app/warehouse/products': {
+      id: '/_app/warehouse/products'
       path: '/products'
-      fullPath: '/products'
+      fullPath: '/warehouse/products'
       preLoaderRoute: typeof AppWarehouseProductsImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/productsRemains': {
-      id: '/_app/_warehouse/productsRemains'
+    '/_app/warehouse/productsRemains': {
+      id: '/_app/warehouse/productsRemains'
       path: '/productsRemains'
-      fullPath: '/productsRemains'
+      fullPath: '/warehouse/productsRemains'
       preLoaderRoute: typeof AppWarehouseProductsRemainsImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/orders_/$orderId/edit': {
-      id: '/_app/_warehouse/orders_/$orderId/edit'
+    '/_app/warehouse/orders_/$orderId/edit': {
+      id: '/_app/warehouse/orders_/$orderId/edit'
       path: '/orders/$orderId/edit'
-      fullPath: '/orders/$orderId/edit'
+      fullPath: '/warehouse/orders/$orderId/edit'
       preLoaderRoute: typeof AppWarehouseOrdersOrderIdEditImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/parties_/$partyId/edit': {
-      id: '/_app/_warehouse/parties_/$partyId/edit'
+    '/_app/warehouse/parties_/$partyId/edit': {
+      id: '/_app/warehouse/parties_/$partyId/edit'
       path: '/parties/$partyId/edit'
-      fullPath: '/parties/$partyId/edit'
+      fullPath: '/warehouse/parties/$partyId/edit'
       preLoaderRoute: typeof AppWarehousePartiesPartyIdEditImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/products_/$productsId/edit': {
-      id: '/_app/_warehouse/products_/$productsId/edit'
+    '/_app/warehouse/products_/$productsId/edit': {
+      id: '/_app/warehouse/products_/$productsId/edit'
       path: '/products/$productsId/edit'
-      fullPath: '/products/$productsId/edit'
+      fullPath: '/warehouse/products/$productsId/edit'
       preLoaderRoute: typeof AppWarehouseProductsProductsIdEditImport
       parentRoute: typeof AppWarehouseImport
     }
-    '/_app/_warehouse/products_/$productsId/edit/files': {
-      id: '/_app/_warehouse/products_/$productsId/edit/files'
+    '/_app/warehouse/products_/$productsId/edit/files': {
+      id: '/_app/warehouse/products_/$productsId/edit/files'
       path: '/files'
-      fullPath: '/products/$productsId/edit/files'
+      fullPath: '/warehouse/products/$productsId/edit/files'
       preLoaderRoute: typeof AppWarehouseProductsProductsIdEditFilesImport
       parentRoute: typeof AppWarehouseProductsProductsIdEditImport
     }
-    '/_app/_warehouse/products_/$productsId/edit/history': {
-      id: '/_app/_warehouse/products_/$productsId/edit/history'
+    '/_app/warehouse/products_/$productsId/edit/history': {
+      id: '/_app/warehouse/products_/$productsId/edit/history'
       path: '/history'
-      fullPath: '/products/$productsId/edit/history'
+      fullPath: '/warehouse/products/$productsId/edit/history'
       preLoaderRoute: typeof AppWarehouseProductsProductsIdEditHistoryImport
       parentRoute: typeof AppWarehouseProductsProductsIdEditImport
     }
-    '/_app/_warehouse/products_/$productsId/edit/info': {
-      id: '/_app/_warehouse/products_/$productsId/edit/info'
+    '/_app/warehouse/products_/$productsId/edit/info': {
+      id: '/_app/warehouse/products_/$productsId/edit/info'
       path: '/info'
-      fullPath: '/products/$productsId/edit/info'
+      fullPath: '/warehouse/products/$productsId/edit/info'
       preLoaderRoute: typeof AppWarehouseProductsProductsIdEditInfoImport
       parentRoute: typeof AppWarehouseProductsProductsIdEditImport
     }
@@ -293,53 +292,55 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '': typeof AppWarehouseRouteWithChildren
+  '': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
-  '/buyers': typeof AppWarehouseBuyersRoute
-  '/orders': typeof AppWarehouseOrdersRoute
-  '/parties': typeof AppWarehousePartiesRoute
-  '/products': typeof AppWarehouseProductsRoute
-  '/productsRemains': typeof AppWarehouseProductsRemainsRoute
-  '/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
-  '/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
-  '/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
-  '/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
-  '/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
-  '/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
+  '/warehouse': typeof AppWarehouseRouteWithChildren
+  '/warehouse/buyers': typeof AppWarehouseBuyersRoute
+  '/warehouse/orders': typeof AppWarehouseOrdersRoute
+  '/warehouse/parties': typeof AppWarehousePartiesRoute
+  '/warehouse/products': typeof AppWarehouseProductsRoute
+  '/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
+  '/warehouse/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
+  '/warehouse/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/warehouse/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/warehouse/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/warehouse/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/warehouse/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRoutesByTo {
-  '': typeof AppWarehouseRouteWithChildren
+  '': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
-  '/buyers': typeof AppWarehouseBuyersRoute
-  '/orders': typeof AppWarehouseOrdersRoute
-  '/parties': typeof AppWarehousePartiesRoute
-  '/products': typeof AppWarehouseProductsRoute
-  '/productsRemains': typeof AppWarehouseProductsRemainsRoute
-  '/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
-  '/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
-  '/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
-  '/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
-  '/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
-  '/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
+  '/warehouse': typeof AppWarehouseRouteWithChildren
+  '/warehouse/buyers': typeof AppWarehouseBuyersRoute
+  '/warehouse/orders': typeof AppWarehouseOrdersRoute
+  '/warehouse/parties': typeof AppWarehousePartiesRoute
+  '/warehouse/products': typeof AppWarehouseProductsRoute
+  '/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
+  '/warehouse/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
+  '/warehouse/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/warehouse/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/warehouse/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/warehouse/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/warehouse/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
-  '/_app/_warehouse': typeof AppWarehouseRouteWithChildren
-  '/_app/_warehouse/buyers': typeof AppWarehouseBuyersRoute
-  '/_app/_warehouse/orders': typeof AppWarehouseOrdersRoute
-  '/_app/_warehouse/parties': typeof AppWarehousePartiesRoute
-  '/_app/_warehouse/products': typeof AppWarehouseProductsRoute
-  '/_app/_warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
-  '/_app/_warehouse/orders_/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
-  '/_app/_warehouse/parties_/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
-  '/_app/_warehouse/products_/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
-  '/_app/_warehouse/products_/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
-  '/_app/_warehouse/products_/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
-  '/_app/_warehouse/products_/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
+  '/_app/warehouse': typeof AppWarehouseRouteWithChildren
+  '/_app/warehouse/buyers': typeof AppWarehouseBuyersRoute
+  '/_app/warehouse/orders': typeof AppWarehouseOrdersRoute
+  '/_app/warehouse/parties': typeof AppWarehousePartiesRoute
+  '/_app/warehouse/products': typeof AppWarehouseProductsRoute
+  '/_app/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
+  '/_app/warehouse/orders_/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
+  '/_app/warehouse/parties_/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/_app/warehouse/products_/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/_app/warehouse/products_/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/_app/warehouse/products_/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/_app/warehouse/products_/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRouteTypes {
@@ -347,48 +348,50 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/login'
-    | '/buyers'
-    | '/orders'
-    | '/parties'
-    | '/products'
-    | '/productsRemains'
-    | '/orders/$orderId/edit'
-    | '/parties/$partyId/edit'
-    | '/products/$productsId/edit'
-    | '/products/$productsId/edit/files'
-    | '/products/$productsId/edit/history'
-    | '/products/$productsId/edit/info'
+    | '/warehouse'
+    | '/warehouse/buyers'
+    | '/warehouse/orders'
+    | '/warehouse/parties'
+    | '/warehouse/products'
+    | '/warehouse/productsRemains'
+    | '/warehouse/orders/$orderId/edit'
+    | '/warehouse/parties/$partyId/edit'
+    | '/warehouse/products/$productsId/edit'
+    | '/warehouse/products/$productsId/edit/files'
+    | '/warehouse/products/$productsId/edit/history'
+    | '/warehouse/products/$productsId/edit/info'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
     | '/login'
-    | '/buyers'
-    | '/orders'
-    | '/parties'
-    | '/products'
-    | '/productsRemains'
-    | '/orders/$orderId/edit'
-    | '/parties/$partyId/edit'
-    | '/products/$productsId/edit'
-    | '/products/$productsId/edit/files'
-    | '/products/$productsId/edit/history'
-    | '/products/$productsId/edit/info'
+    | '/warehouse'
+    | '/warehouse/buyers'
+    | '/warehouse/orders'
+    | '/warehouse/parties'
+    | '/warehouse/products'
+    | '/warehouse/productsRemains'
+    | '/warehouse/orders/$orderId/edit'
+    | '/warehouse/parties/$partyId/edit'
+    | '/warehouse/products/$productsId/edit'
+    | '/warehouse/products/$productsId/edit/files'
+    | '/warehouse/products/$productsId/edit/history'
+    | '/warehouse/products/$productsId/edit/info'
   id:
     | '__root__'
     | '/_app'
     | '/login'
-    | '/_app/_warehouse'
-    | '/_app/_warehouse/buyers'
-    | '/_app/_warehouse/orders'
-    | '/_app/_warehouse/parties'
-    | '/_app/_warehouse/products'
-    | '/_app/_warehouse/productsRemains'
-    | '/_app/_warehouse/orders_/$orderId/edit'
-    | '/_app/_warehouse/parties_/$partyId/edit'
-    | '/_app/_warehouse/products_/$productsId/edit'
-    | '/_app/_warehouse/products_/$productsId/edit/files'
-    | '/_app/_warehouse/products_/$productsId/edit/history'
-    | '/_app/_warehouse/products_/$productsId/edit/info'
+    | '/_app/warehouse'
+    | '/_app/warehouse/buyers'
+    | '/_app/warehouse/orders'
+    | '/_app/warehouse/parties'
+    | '/_app/warehouse/products'
+    | '/_app/warehouse/productsRemains'
+    | '/_app/warehouse/orders_/$orderId/edit'
+    | '/_app/warehouse/parties_/$partyId/edit'
+    | '/_app/warehouse/products_/$productsId/edit'
+    | '/_app/warehouse/products_/$productsId/edit/files'
+    | '/_app/warehouse/products_/$productsId/edit/history'
+    | '/_app/warehouse/products_/$productsId/edit/info'
   fileRoutesById: FileRoutesById
 }
 
@@ -419,74 +422,74 @@ export const routeTree = rootRoute
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
-        "/_app/_warehouse"
+        "/_app/warehouse"
       ]
     },
     "/login": {
       "filePath": "login.tsx"
     },
-    "/_app/_warehouse": {
-      "filePath": "_app/_warehouse.tsx",
+    "/_app/warehouse": {
+      "filePath": "_app/warehouse.tsx",
       "parent": "/_app",
       "children": [
-        "/_app/_warehouse/buyers",
-        "/_app/_warehouse/orders",
-        "/_app/_warehouse/parties",
-        "/_app/_warehouse/products",
-        "/_app/_warehouse/productsRemains",
-        "/_app/_warehouse/orders_/$orderId/edit",
-        "/_app/_warehouse/parties_/$partyId/edit",
-        "/_app/_warehouse/products_/$productsId/edit"
+        "/_app/warehouse/buyers",
+        "/_app/warehouse/orders",
+        "/_app/warehouse/parties",
+        "/_app/warehouse/products",
+        "/_app/warehouse/productsRemains",
+        "/_app/warehouse/orders_/$orderId/edit",
+        "/_app/warehouse/parties_/$partyId/edit",
+        "/_app/warehouse/products_/$productsId/edit"
       ]
     },
-    "/_app/_warehouse/buyers": {
-      "filePath": "_app/_warehouse/buyers.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/buyers": {
+      "filePath": "_app/warehouse/buyers.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/orders": {
-      "filePath": "_app/_warehouse/orders.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/orders": {
+      "filePath": "_app/warehouse/orders.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/parties": {
-      "filePath": "_app/_warehouse/parties.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/parties": {
+      "filePath": "_app/warehouse/parties.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/products": {
-      "filePath": "_app/_warehouse/products.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/products": {
+      "filePath": "_app/warehouse/products.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/productsRemains": {
-      "filePath": "_app/_warehouse/productsRemains.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/productsRemains": {
+      "filePath": "_app/warehouse/productsRemains.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/orders_/$orderId/edit": {
-      "filePath": "_app/_warehouse/orders_/$orderId/edit.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/orders_/$orderId/edit": {
+      "filePath": "_app/warehouse/orders_/$orderId/edit.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/parties_/$partyId/edit": {
-      "filePath": "_app/_warehouse/parties_/$partyId/edit.tsx",
-      "parent": "/_app/_warehouse"
+    "/_app/warehouse/parties_/$partyId/edit": {
+      "filePath": "_app/warehouse/parties_/$partyId/edit.tsx",
+      "parent": "/_app/warehouse"
     },
-    "/_app/_warehouse/products_/$productsId/edit": {
-      "filePath": "_app/_warehouse/products_/$productsId/edit.tsx",
-      "parent": "/_app/_warehouse",
+    "/_app/warehouse/products_/$productsId/edit": {
+      "filePath": "_app/warehouse/products_/$productsId/edit.tsx",
+      "parent": "/_app/warehouse",
       "children": [
-        "/_app/_warehouse/products_/$productsId/edit/files",
-        "/_app/_warehouse/products_/$productsId/edit/history",
-        "/_app/_warehouse/products_/$productsId/edit/info"
+        "/_app/warehouse/products_/$productsId/edit/files",
+        "/_app/warehouse/products_/$productsId/edit/history",
+        "/_app/warehouse/products_/$productsId/edit/info"
       ]
     },
-    "/_app/_warehouse/products_/$productsId/edit/files": {
-      "filePath": "_app/_warehouse/products_/$productsId/edit/files.tsx",
-      "parent": "/_app/_warehouse/products_/$productsId/edit"
+    "/_app/warehouse/products_/$productsId/edit/files": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/files.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
     },
-    "/_app/_warehouse/products_/$productsId/edit/history": {
-      "filePath": "_app/_warehouse/products_/$productsId/edit/history.tsx",
-      "parent": "/_app/_warehouse/products_/$productsId/edit"
+    "/_app/warehouse/products_/$productsId/edit/history": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/history.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
     },
-    "/_app/_warehouse/products_/$productsId/edit/info": {
-      "filePath": "_app/_warehouse/products_/$productsId/edit/info.tsx",
-      "parent": "/_app/_warehouse/products_/$productsId/edit"
+    "/_app/warehouse/products_/$productsId/edit/info": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/info.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
     }
   }
 }

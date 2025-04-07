@@ -5,7 +5,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { toast } from 'sonner'
 
-export const Route = createLazyFileRoute('/_app/_warehouse/productsRemains')({
+export const Route = createLazyFileRoute('/_app/warehouse/productsRemains')({
   component: RouteComponent,
 })
 
@@ -19,7 +19,7 @@ function RouteComponent() {
 
   if (isProductsError) {
     console.error(productsError)
-    toast.error('Произошла ошибка загрузки'); 
+    toast.error('Произошла ошибка загрузки')
   }
 
   // if (isSuccessProducts) {

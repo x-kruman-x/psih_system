@@ -29,8 +29,8 @@ export function Order({ orderData }: OrderProps) {
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
             <Typography isGray={true}>информация доставки</Typography>
           </h2>
-          {/* TODO!:починить баг */}
-          <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
+            {/* TODO!:поменялся компонент, надо переделать */}
+            <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
             <InputContainerWithHiddenText
               hiddenText="страна"
               inputText="Россия"

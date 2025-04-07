@@ -35,7 +35,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         navText: 'Заказ - ',
         Link: (item: { id: number }) => (
           <Link
-            to="/orders/$orderId/edit"
+            to="/warehouse/orders/$orderId/edit"
             params={{
               orderId: String(item.id),
             }}
@@ -55,7 +55,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         navText: 'Партия - ',
         Link: (item: { id: number }) => (
           <Link
-            to="/parties/$partyId/edit"
+            to="/warehouse/parties/$partyId/edit"
             params={{
               partyId: String(item.id),
             }}
@@ -83,7 +83,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         navText: '',
         Link: (item: { id: number, name?: string }) => (
           <Link
-            to="/products/$productsId/edit/info"
+            to="/warehouse/products/$productsId/edit/info"
             params={{
               productsId: String(item.id)
             }}
