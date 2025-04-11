@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { LoginContainer } from "../ui/LoginContainer";
-import { Typography } from "../../../shared/UI/Text";
+import { Typography } from "../../../shared/UI/Typography";
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { useAuthApi } from "../api/api";
 import { toast } from "sonner";

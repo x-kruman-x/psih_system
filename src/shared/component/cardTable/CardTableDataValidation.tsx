@@ -14,17 +14,26 @@ export function CardTableDataValidation({
 }) {
   const [newProducts, setNewProducts] = useState<OrderTypeModification[]>(products);
   const [allDataLoaded, setAllDataLoaded] = useState<boolean>(false);
-  console.log('CardTableDataValidation: ', products)
+
+  // useEffect(() => {
+  //   console.log('CardTableDataValidation products: ', products)
+  // }, [products])
+
   const results = useQueries({
     queries: products.map((product) =>
-      productsApi.getProductById(product.modification.product_id.toString())
+      productsApi.getProductByIdQueryOptions(product.modification.product_id.toString())
     ),
   });
 
   useEffect(() => {
     const isAllDataLoaded = results.every((result) => result.isSuccess);
+    // console.log('isAllDataLoaded', isAllDataLoaded)
     setAllDataLoaded(isAllDataLoaded);
   }, [results]);
+
+  useEffect(() => {
+    console.log('allDataLoaded: ', allDataLoaded)
+  }, [allDataLoaded])
 
   useEffect(() => {
     if (allDataLoaded) {

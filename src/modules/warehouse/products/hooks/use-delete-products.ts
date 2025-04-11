@@ -16,12 +16,12 @@ export function useDeleteProducts() {
     },
     async onSettled(_, __, variables) {
       await queryClient.invalidateQueries({
-        queryKey: [productsApi.basekey, "getParties", variables],
+        queryKey: [productsApi.basekey, "getProducts", variables],
       });
     },
   });
 
   return {
-    handleDelete: deleteProductsMutation.mutate,
+    deleteProducts: deleteProductsMutation.mutate,
   };
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import arrow from "../../assets/img/arrow.svg";
 import { RemainsDropDownProps } from "../types/remainsDropDownProps";
 

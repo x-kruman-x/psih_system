@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { Order } from '../../../../../modules/warehouse/orders/components/order/Order'
 import { ordersApi } from '../../../../../modules/warehouse/orders/api/api'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 export const Route = createFileRoute('/_app/warehouse/orders_/$orderId/edit')({
   loader: ({ context: { queryClient }, params: { orderId } }) =>
@@ -11,6 +12,7 @@ export const Route = createFileRoute('/_app/warehouse/orders_/$orderId/edit')({
 
 function RouteComponent() {
   const orderId = Route.useParams().orderId
+  const navigate = useNavigate()
 
   const {
     data: orderData,
@@ -20,11 +22,13 @@ function RouteComponent() {
 
   if (isError) {
     console.error('Ошибка при загрузке данных заказа:', error)
-    return <div>Произошла ошибка при загрузке данных.</div>
+    toast.error('Ошибка при загрузке данных заказа')
+    navigate({ to: '/orders' })
   }
 
   if (!orderData) {
-    return <div>Данные заказа не найдены.</div>
+    toast.error('Данные заказа не найдены')
+    navigate({ to: '/orders' })
   }
 
   return <Order orderData={orderData} />

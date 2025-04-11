@@ -1,7 +1,7 @@
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { EditPageSettingsBar } from "@/shared/types/table/editPageSettingsBar";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { Link } from "@tanstack/react-router";
 
 interface ConfigSettingsBar {
@@ -32,10 +32,10 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
           </HoverBorderedEl>
         ),
         navStyle: "absolute left-1/2 -translate-x-1/2",
-        navText: 'Заказ',
+        navText: 'Заказ - ',
         Link: (item: { id: number }) => (
           <Link
-            to="/orders/$orderId/edit"
+            to="/warehouse/orders/$orderId/edit"
             params={{
               orderId: String(item.id),
             }}
@@ -52,10 +52,10 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
         leftEl: null,
         rightEl: null,
         navStyle: "",
-        navText: 'Партия',
+        navText: 'Партия - ',
         Link: (item: { id: number }) => (
           <Link
-            to="/parties/$partyId/edit"
+            to="/warehouse/parties/$partyId/edit"
             params={{
               partyId: String(item.id),
             }}
@@ -67,17 +67,28 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
       };
     case "product":
       return {
-        gap: "",
+        gap: "gap-[170px]",
         linkBackPath: "/products",
-        leftEl: null,
-        rightEl: null,
+        leftEl: (
+          <HoverBorderedEl>
+            <Typography>Мужское</Typography>
+          </HoverBorderedEl>
+        ),
+        rightEl: (
+          <HoverBorderedEl>
+            <Typography>Женское</Typography>
+          </HoverBorderedEl>
+        ),
         navStyle: "",
-        navText: 'Товар',
-        Link: (item: { id: number }) => (
+        navText: '',
+        Link: (item: { id: number, name?: string }) => (
           <Link
-            to=""
+            to="/warehouse/products/$productsId/edit/info"
+            params={{
+              productsId: String(item.id)
+            }}
           >
-            <Typography key={item.id}>{item.id}</Typography>
+            <Typography key={item.id}>{item.name}</Typography>
           </Link>
         ),
         cardSheetType: 'productsTable'

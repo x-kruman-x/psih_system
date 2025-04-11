@@ -2,13 +2,13 @@
 import { useCardColumns } from "@/shared/hooks/cardTable/useCardColumns";
 import { useIntegrationData } from "@/shared/hooks/cardTable/useIntergrationData";
 import { configTableType } from "@/shared/types/table/columnTableTypes";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardTableSettings } from "./CardTableSettings";
 
 export const CardTable = <T extends Record<string, any>>({
@@ -18,7 +18,6 @@ export const CardTable = <T extends Record<string, any>>({
   data: T[];
   configTable: configTableType;
 }) => {
-  console.log('CardTable: ', data)
   const columns = useCardColumns(configTable);
   const intergationData = useIntegrationData(configTable);
   const [rowSelection, setRowSelection] = useState({});
@@ -33,6 +32,11 @@ export const CardTable = <T extends Record<string, any>>({
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  // useEffect(() => {
+  //     console.log('CardTable data: ', data)
+  //   }, [data])
+
   // TODO!: при переходе между элементами таблица товаров не меняется 
   return (
     <div className="relative">

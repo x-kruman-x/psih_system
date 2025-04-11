@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/UI/sheet";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 
 export function CardSheet({
   configTable,

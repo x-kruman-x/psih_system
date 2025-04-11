@@ -1,6 +1,6 @@
 import { BorderedElement } from "../../../shared/UI/BorderedElement";
 import { LoginContainer } from "../ui/LoginContainer";
-import { Typography } from "../../../shared/UI/Text";
+import { Typography } from "../../../shared/UI/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthApi } from "../api/api";
 import { authDataType } from "../types/types";

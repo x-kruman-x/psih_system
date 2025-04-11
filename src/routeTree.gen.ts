@@ -19,8 +19,12 @@ import { Route as AppWarehouseProductsImport } from './routes/_app/warehouse/pro
 import { Route as AppWarehousePartiesImport } from './routes/_app/warehouse/parties'
 import { Route as AppWarehouseOrdersImport } from './routes/_app/warehouse/orders'
 import { Route as AppWarehouseBuyersImport } from './routes/_app/warehouse/buyers'
+import { Route as AppWarehouseProductsProductsIdEditImport } from './routes/_app/warehouse/products_/$productsId/edit'
 import { Route as AppWarehousePartiesPartyIdEditImport } from './routes/_app/warehouse/parties_/$partyId/edit'
 import { Route as AppWarehouseOrdersOrderIdEditImport } from './routes/_app/warehouse/orders_/$orderId/edit'
+import { Route as AppWarehouseProductsProductsIdEditInfoImport } from './routes/_app/warehouse/products_/$productsId/edit/info'
+import { Route as AppWarehouseProductsProductsIdEditHistoryImport } from './routes/_app/warehouse/products_/$productsId/edit/history'
+import { Route as AppWarehouseProductsProductsIdEditFilesImport } from './routes/_app/warehouse/products_/$productsId/edit/files'
 
 // Create/Update Routes
 
@@ -80,6 +84,13 @@ const AppWarehouseBuyersRoute = AppWarehouseBuyersImport.update({
   import('./routes/_app/warehouse/buyers.lazy').then((d) => d.Route),
 )
 
+const AppWarehouseProductsProductsIdEditRoute =
+  AppWarehouseProductsProductsIdEditImport.update({
+    id: '/products_/$productsId/edit',
+    path: '/products/$productsId/edit',
+    getParentRoute: () => AppWarehouseRoute,
+  } as any)
+
 const AppWarehousePartiesPartyIdEditRoute =
   AppWarehousePartiesPartyIdEditImport.update({
     id: '/parties_/$partyId/edit',
@@ -92,6 +103,27 @@ const AppWarehouseOrdersOrderIdEditRoute =
     id: '/orders_/$orderId/edit',
     path: '/orders/$orderId/edit',
     getParentRoute: () => AppWarehouseRoute,
+  } as any)
+
+const AppWarehouseProductsProductsIdEditInfoRoute =
+  AppWarehouseProductsProductsIdEditInfoImport.update({
+    id: '/info',
+    path: '/info',
+    getParentRoute: () => AppWarehouseProductsProductsIdEditRoute,
+  } as any)
+
+const AppWarehouseProductsProductsIdEditHistoryRoute =
+  AppWarehouseProductsProductsIdEditHistoryImport.update({
+    id: '/history',
+    path: '/history',
+    getParentRoute: () => AppWarehouseProductsProductsIdEditRoute,
+  } as any)
+
+const AppWarehouseProductsProductsIdEditFilesRoute =
+  AppWarehouseProductsProductsIdEditFilesImport.update({
+    id: '/files',
+    path: '/files',
+    getParentRoute: () => AppWarehouseProductsProductsIdEditRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -168,10 +200,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppWarehousePartiesPartyIdEditImport
       parentRoute: typeof AppWarehouseImport
     }
+    '/_app/warehouse/products_/$productsId/edit': {
+      id: '/_app/warehouse/products_/$productsId/edit'
+      path: '/products/$productsId/edit'
+      fullPath: '/warehouse/products/$productsId/edit'
+      preLoaderRoute: typeof AppWarehouseProductsProductsIdEditImport
+      parentRoute: typeof AppWarehouseImport
+    }
+    '/_app/warehouse/products_/$productsId/edit/files': {
+      id: '/_app/warehouse/products_/$productsId/edit/files'
+      path: '/files'
+      fullPath: '/warehouse/products/$productsId/edit/files'
+      preLoaderRoute: typeof AppWarehouseProductsProductsIdEditFilesImport
+      parentRoute: typeof AppWarehouseProductsProductsIdEditImport
+    }
+    '/_app/warehouse/products_/$productsId/edit/history': {
+      id: '/_app/warehouse/products_/$productsId/edit/history'
+      path: '/history'
+      fullPath: '/warehouse/products/$productsId/edit/history'
+      preLoaderRoute: typeof AppWarehouseProductsProductsIdEditHistoryImport
+      parentRoute: typeof AppWarehouseProductsProductsIdEditImport
+    }
+    '/_app/warehouse/products_/$productsId/edit/info': {
+      id: '/_app/warehouse/products_/$productsId/edit/info'
+      path: '/info'
+      fullPath: '/warehouse/products/$productsId/edit/info'
+      preLoaderRoute: typeof AppWarehouseProductsProductsIdEditInfoImport
+      parentRoute: typeof AppWarehouseProductsProductsIdEditImport
+    }
   }
 }
 
 // Create and export the route tree
+
+interface AppWarehouseProductsProductsIdEditRouteChildren {
+  AppWarehouseProductsProductsIdEditFilesRoute: typeof AppWarehouseProductsProductsIdEditFilesRoute
+  AppWarehouseProductsProductsIdEditHistoryRoute: typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  AppWarehouseProductsProductsIdEditInfoRoute: typeof AppWarehouseProductsProductsIdEditInfoRoute
+}
+
+const AppWarehouseProductsProductsIdEditRouteChildren: AppWarehouseProductsProductsIdEditRouteChildren =
+  {
+    AppWarehouseProductsProductsIdEditFilesRoute:
+      AppWarehouseProductsProductsIdEditFilesRoute,
+    AppWarehouseProductsProductsIdEditHistoryRoute:
+      AppWarehouseProductsProductsIdEditHistoryRoute,
+    AppWarehouseProductsProductsIdEditInfoRoute:
+      AppWarehouseProductsProductsIdEditInfoRoute,
+  }
+
+const AppWarehouseProductsProductsIdEditRouteWithChildren =
+  AppWarehouseProductsProductsIdEditRoute._addFileChildren(
+    AppWarehouseProductsProductsIdEditRouteChildren,
+  )
 
 interface AppWarehouseRouteChildren {
   AppWarehouseBuyersRoute: typeof AppWarehouseBuyersRoute
@@ -181,6 +262,7 @@ interface AppWarehouseRouteChildren {
   AppWarehouseProductsRemainsRoute: typeof AppWarehouseProductsRemainsRoute
   AppWarehouseOrdersOrderIdEditRoute: typeof AppWarehouseOrdersOrderIdEditRoute
   AppWarehousePartiesPartyIdEditRoute: typeof AppWarehousePartiesPartyIdEditRoute
+  AppWarehouseProductsProductsIdEditRoute: typeof AppWarehouseProductsProductsIdEditRouteWithChildren
 }
 
 const AppWarehouseRouteChildren: AppWarehouseRouteChildren = {
@@ -191,6 +273,8 @@ const AppWarehouseRouteChildren: AppWarehouseRouteChildren = {
   AppWarehouseProductsRemainsRoute: AppWarehouseProductsRemainsRoute,
   AppWarehouseOrdersOrderIdEditRoute: AppWarehouseOrdersOrderIdEditRoute,
   AppWarehousePartiesPartyIdEditRoute: AppWarehousePartiesPartyIdEditRoute,
+  AppWarehouseProductsProductsIdEditRoute:
+    AppWarehouseProductsProductsIdEditRouteWithChildren,
 }
 
 const AppWarehouseRouteWithChildren = AppWarehouseRoute._addFileChildren(
@@ -218,6 +302,10 @@ export interface FileRoutesByFullPath {
   '/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
   '/warehouse/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
   '/warehouse/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/warehouse/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/warehouse/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/warehouse/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/warehouse/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRoutesByTo {
@@ -231,6 +319,10 @@ export interface FileRoutesByTo {
   '/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
   '/warehouse/orders/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
   '/warehouse/parties/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/warehouse/products/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/warehouse/products/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/warehouse/products/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/warehouse/products/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRoutesById {
@@ -245,6 +337,10 @@ export interface FileRoutesById {
   '/_app/warehouse/productsRemains': typeof AppWarehouseProductsRemainsRoute
   '/_app/warehouse/orders_/$orderId/edit': typeof AppWarehouseOrdersOrderIdEditRoute
   '/_app/warehouse/parties_/$partyId/edit': typeof AppWarehousePartiesPartyIdEditRoute
+  '/_app/warehouse/products_/$productsId/edit': typeof AppWarehouseProductsProductsIdEditRouteWithChildren
+  '/_app/warehouse/products_/$productsId/edit/files': typeof AppWarehouseProductsProductsIdEditFilesRoute
+  '/_app/warehouse/products_/$productsId/edit/history': typeof AppWarehouseProductsProductsIdEditHistoryRoute
+  '/_app/warehouse/products_/$productsId/edit/info': typeof AppWarehouseProductsProductsIdEditInfoRoute
 }
 
 export interface FileRouteTypes {
@@ -260,6 +356,10 @@ export interface FileRouteTypes {
     | '/warehouse/productsRemains'
     | '/warehouse/orders/$orderId/edit'
     | '/warehouse/parties/$partyId/edit'
+    | '/warehouse/products/$productsId/edit'
+    | '/warehouse/products/$productsId/edit/files'
+    | '/warehouse/products/$productsId/edit/history'
+    | '/warehouse/products/$productsId/edit/info'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
@@ -272,6 +372,10 @@ export interface FileRouteTypes {
     | '/warehouse/productsRemains'
     | '/warehouse/orders/$orderId/edit'
     | '/warehouse/parties/$partyId/edit'
+    | '/warehouse/products/$productsId/edit'
+    | '/warehouse/products/$productsId/edit/files'
+    | '/warehouse/products/$productsId/edit/history'
+    | '/warehouse/products/$productsId/edit/info'
   id:
     | '__root__'
     | '/_app'
@@ -284,6 +388,10 @@ export interface FileRouteTypes {
     | '/_app/warehouse/productsRemains'
     | '/_app/warehouse/orders_/$orderId/edit'
     | '/_app/warehouse/parties_/$partyId/edit'
+    | '/_app/warehouse/products_/$productsId/edit'
+    | '/_app/warehouse/products_/$productsId/edit/files'
+    | '/_app/warehouse/products_/$productsId/edit/history'
+    | '/_app/warehouse/products_/$productsId/edit/info'
   fileRoutesById: FileRoutesById
 }
 
@@ -330,7 +438,8 @@ export const routeTree = rootRoute
         "/_app/warehouse/products",
         "/_app/warehouse/productsRemains",
         "/_app/warehouse/orders_/$orderId/edit",
-        "/_app/warehouse/parties_/$partyId/edit"
+        "/_app/warehouse/parties_/$partyId/edit",
+        "/_app/warehouse/products_/$productsId/edit"
       ]
     },
     "/_app/warehouse/buyers": {
@@ -360,6 +469,27 @@ export const routeTree = rootRoute
     "/_app/warehouse/parties_/$partyId/edit": {
       "filePath": "_app/warehouse/parties_/$partyId/edit.tsx",
       "parent": "/_app/warehouse"
+    },
+    "/_app/warehouse/products_/$productsId/edit": {
+      "filePath": "_app/warehouse/products_/$productsId/edit.tsx",
+      "parent": "/_app/warehouse",
+      "children": [
+        "/_app/warehouse/products_/$productsId/edit/files",
+        "/_app/warehouse/products_/$productsId/edit/history",
+        "/_app/warehouse/products_/$productsId/edit/info"
+      ]
+    },
+    "/_app/warehouse/products_/$productsId/edit/files": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/files.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
+    },
+    "/_app/warehouse/products_/$productsId/edit/history": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/history.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
+    },
+    "/_app/warehouse/products_/$productsId/edit/info": {
+      "filePath": "_app/warehouse/products_/$productsId/edit/info.tsx",
+      "parent": "/_app/warehouse/products_/$productsId/edit"
     }
   }
 }

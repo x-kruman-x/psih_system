@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "../../assets/img/logo.svg";
-import { Typography } from "../../shared/UI/Text";
+import { Typography } from "../../shared/UI/Typography";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function AppNavigation() {
@@ -10,7 +10,7 @@ export function AppNavigation() {
         <img className="h-[36px] w-[20px]" src={logo} alt="logo" />
       </Link>
       {/* TODO!: проблема с отображением текущего пути */}
-      <BorderedLink to="/warehouse/orders" matchPath="/warehouse">
+      <BorderedLink to="/warehouse/orders">
         <Typography>СКЛАД</Typography>
       </BorderedLink>
       <BorderedLink to="">

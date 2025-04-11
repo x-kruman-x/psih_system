@@ -1,4 +1,10 @@
-export type ProductType = {
+export type ProductCombinedData = {
+  products: Product[]; 
+  categories: Category[]; 
+  collections: Collection[]; 
+};
+
+type Product = {
   name: string;
   description: string;
   min_price: number;
@@ -40,4 +46,14 @@ export type ProductType = {
       product_id: number;
     },
   ];
+};
+
+type Category = {
+  name: string;
+  id: number;
+};
+
+type Collection = {
+  name: string;
+  id: number;
 };

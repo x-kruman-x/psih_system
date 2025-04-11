@@ -5,5 +5,6 @@ export const Route = createFileRoute('/_app/warehouse/products')({
   loader: ({ context: { queryClient } }) => {
     queryClient.ensureQueryData(productsApi.getProductsQueryOptions(false))
     queryClient.ensureQueryData(productsApi.getCategoriesQueryOptions())
+    queryClient.ensureQueryData(productsApi.getCollectionsQueryOptions())
   },
 })

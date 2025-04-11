@@ -1,8 +1,7 @@
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { ColumnDef } from "@tanstack/react-table";
-import { Link } from "lucide-react";
 
 export function useCardColumns<T extends Record<string, any>>(
   configTable: configTableType

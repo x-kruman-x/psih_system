@@ -1,5 +1,5 @@
 import { configTableType } from "@/shared/types/table/columnTableTypes";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 
 export function useIntegrationData(configTable: configTableType) {
   switch (configTable) {

@@ -1,6 +1,6 @@
 import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
+import { Typography } from "@/shared/UI/Typography";
 import { clearAllFilters } from "@/shared/utils/clearAllFilters";
 import { Column, Table } from "@tanstack/react-table";
 import { useState, useEffect } from "react";

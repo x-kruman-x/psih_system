@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
-import { Typography } from "../../../../../shared/UI/Text";
-import { DataContainerWithHiddenText } from "./order-data-container";
+import { Typography } from "../../../../../shared/UI/Typography";
+import { InputContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
 import { OrdersType, OrderType } from "../../types/ordersTableTypes";
 import { SelectCell } from "../../../../../shared/component/selectCell";
 import { formatDateTime } from "../../../../../shared/utils/formateDateTime";
@@ -10,6 +10,7 @@ import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { ordersApi } from "../../api/api";
 import { CardTableDataValidation } from "@/shared/component/cardTable/CardTableDataValidation";
+import { CardTable } from "@/shared/component/cardTable/CardTable";
 
 type OrderProps = {
   orderData: OrderType;
@@ -28,27 +29,28 @@ export function Order({ orderData }: OrderProps) {
           <h2 className="text-center transition opacity-0 group-hover/title:opacity-100">
             <Typography isGray={true}>информация доставки</Typography>
           </h2>
-          <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-            <DataContainerWithHiddenText
+            {/* TODO!:поменялся компонент, надо переделать */}
+            <div className="mt-[100px] grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
+            <InputContainerWithHiddenText
               hiddenText="страна"
-              infoText="Россия"
+              inputText="Россия"
             />
-            <DataContainerWithHiddenText
+            <InputContainerWithHiddenText
               hiddenText="город"
-              infoText="Москва"
+              inputText="Москва"
             />
-            <DataContainerWithHiddenText
+            <InputContainerWithHiddenText
               hiddenText="страна"
-              infoText="Россия"
+              inputText="Россия"
             />
-            <DataContainerWithHiddenText
+            <InputContainerWithHiddenText
               hiddenText="улица"
-              infoText="Кащенко"
+              inputText="Кащенко"
             />
-            <DataContainerWithHiddenText hiddenText="дом" infoText="6" />
-            <DataContainerWithHiddenText
+            <InputContainerWithHiddenText hiddenText="дом" inputText="6" />
+            <InputContainerWithHiddenText
               hiddenText="квартира | офис"
-              infoText="666"
+              inputText="666"
             />
           </div>
           <Typography className="text-center mt-[30px] text-[#494949]">
@@ -71,13 +73,13 @@ export function Order({ orderData }: OrderProps) {
           </div>
           <div className="grid grid-cols-2 grid-rows-2">
             <div className="flex flex-col gap-2 items-start row-span-2">
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="email"
-                infoText="dotdarkk@gmail.com"
+                inputText="dotdarkk@gmail.com"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="телефон"
-                infoText="89639366661"
+                inputText="89639366661"
               />
             </div>
             <div className="flex justify-end items-end">
@@ -127,6 +129,7 @@ export function Order({ orderData }: OrderProps) {
         </div>
       </div>
       <CardTableDataValidation products={orderData.modifications_in_order} configTable='orderTable' />
+      {/* <CardTable data={orderData.modifications_in_order} configTable='orderTable' /> */}
     </>
   );
 }

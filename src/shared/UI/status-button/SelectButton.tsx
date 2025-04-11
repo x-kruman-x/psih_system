@@ -1,4 +1,4 @@
-import { Typography } from "../Text";
+import { Typography } from "../Typography";
 import arrow from "../../../assets/img/arrow.svg";
 
 type SelectButtonProps = {

@@ -14,7 +14,7 @@ export function useDeleteRows(configTable: configTableType) {
     case "partiesTable":
       return (ids: number[]) => deleteParties.handleDelete(ids);
     case "productsTable":
-      return (ids: number[]) => deleteProducts.handleDelete(ids);
+      return (ids: number[]) => deleteProducts.deleteProducts(ids);
     case "remainsTable":
       return (ids: number[]) => console.log(`удалил остатки с таким ${ids}`);
   }

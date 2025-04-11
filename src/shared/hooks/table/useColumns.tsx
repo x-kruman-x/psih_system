@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Table } from "@tanstack/react-table";
 import { Link } from "@tanstack/react-router";
 import { RemainsDropDown } from "@/shared/component/remainsDropDown";
 import { SelectCell } from "@/shared/component/selectCell";
@@ -6,9 +6,10 @@ import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { RemainsDropDownProps } from "@/shared/types/remainsDropDownProps";
 import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { Typography } from "@/shared/UI/Text";
-import { filterIncludesSome } from "@/shared/utils/filterIncludesSome";
+import { Typography } from "@/shared/UI/Typography";
+import { filterIncludesSome } from "@/shared/utils/filters/filterIncludesSome";
 import { formatDateTime } from "@/shared/utils/formateDateTime";
+import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
 
 export function useColumns<T extends Record<string, any>>(
   configTable: configTableType | "categories"
@@ -41,7 +42,7 @@ export function useColumns<T extends Record<string, any>>(
           />
           <div className="grow">
             <Link
-              to="/orders/$orderId/edit"
+              to="/warehouse/orders/$orderId/edit"
               params={{
                 orderId: row.original.id.toString(),
               }}
@@ -149,7 +150,7 @@ export function useColumns<T extends Record<string, any>>(
           />
           <div className="grow">
             <Link
-              to="/parties/$partyId/edit"
+              to="/warehouse/parties/$partyId/edit"
               params={{
                 partyId: row.original.id.toString(),
               }}
@@ -241,19 +242,36 @@ export function useColumns<T extends Record<string, any>>(
       id: "Товар",
       accessorKey: "name",
       header: () => (
-        <Typography className={`${contentThStyle}`}>товар</Typography>
+        <Typography className={`${contentThStyle} pl-[27px]`}>товар</Typography>
       ),
-      cell: (props) => {
-        // console.log(props);
+      cell: ({ row }) => {
+        // console.log(row)
         return (
-          <Typography
-            className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
+          <div
+            className={`flex items-center justify-between gap-2 ${contentTdStyle} ${returnBorderStyle(row?.getIsSelected())}`}
           >
-            {props.getValue<string>()}
-          </Typography>
+            <CustomCheckbox
+              {...{
+                checked: row.getIsSelected(),
+                disabled: !row.getCanSelect(),
+                onChange: row.getToggleSelectedHandler(),
+              }}
+              className="ml-[6px]"
+            />
+            <div className="grow">
+              <Link
+                to="/warehouse/products/$productsId/edit/info"
+                params={{
+                  productsId: row.original.id,
+                }}
+              >
+                <Typography>{row.original.name}</Typography>
+              </Link>
+            </div>
+          </div>
         );
       },
-      filterFn: filterIncludesSome,
+      // filterFn: filterByCategory,
     },
     {
       id: "Коллекция",
@@ -268,7 +286,7 @@ export function useColumns<T extends Record<string, any>>(
           {props.getValue<string>()}
         </Typography>
       ),
-      filterFn: filterIncludesSome,
+      filterFn: filterByCategory,
     },
     {
       id: "Пол",
@@ -283,7 +301,7 @@ export function useColumns<T extends Record<string, any>>(
           {props.getValue<string>()}
         </Typography>
       ),
-      filterFn: filterIncludesSome,
+      // filterFn: filterByCategory,
     },
     {
       id: "Остаток",
@@ -298,7 +316,7 @@ export function useColumns<T extends Record<string, any>>(
           {props.getValue<string>()}
         </Typography>
       ),
-      filterFn: filterIncludesSome,
+      // filterFn: filterByCategory,
     },
     {
       id: "Цена",
@@ -310,10 +328,10 @@ export function useColumns<T extends Record<string, any>>(
         <Typography
           className={`${contentTdStyle} ${returnBorderStyle(props.row.getIsSelected())}`}
         >
-          {props.getValue<number>() || 0}
+          {(props.getValue<number>() || 0) + "₽"}
         </Typography>
       ),
-      filterFn: filterIncludesSome,
+      // filterFn: filterByCategory,
     },
   ];
 
@@ -327,15 +345,13 @@ export function useColumns<T extends Record<string, any>>(
       cell: ({ row }) => {
         if (Object.keys(row.original).length == 2) {
           return (
-            <HoverBorderedEl
-              key={row.original.id}
-              className={`${contentTdStyle} cursor-pointer`}
-            >
-              <Typography>{row.original.name}</Typography>
-            </HoverBorderedEl>
+            <Typography className={`${contentTdStyle} border-transparent`}>
+              {row.original.name}
+            </Typography>
           );
         }
       },
+      filterFn: filterIncludesSome,
     },
   ];
 
@@ -360,9 +376,7 @@ export function useColumns<T extends Record<string, any>>(
               className="ml-[6px]"
             />
             <div className="grow">
-            <Typography>
-              {props.getValue<string>()}
-            </Typography>
+              <Typography>{props.getValue<string>()}</Typography>
             </div>
           </div>
         );

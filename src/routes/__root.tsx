@@ -13,10 +13,10 @@ export const Route = createRootRouteWithContext<{
   component: () => {
     return (
       <>
-        <div className="absolute left-5 top-[6px] bg-black rounded-md p-2 text-white text-[13px] z-40">beta 0.0.1</div>
+        <div className="absolute left-5 top-[6px] bg-black rounded-md p-2 text-white text-[13px] z-40">beta 0.0.2</div>
         <Navigate to="/warehouse/orders" />
         <Outlet />
-        <TanStackRouterDevtools />
+        {/* <TanStackRouterDevtools /> */}
         <Toaster />
       </>
     );
