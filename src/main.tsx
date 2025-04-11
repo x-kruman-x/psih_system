@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { routeTree } from "./routeTree.gen";
 import { refreshToken } from "./modules/auth/api/api";
-import { AuthGuard } from "./modules/auth/components/AuthGuard";
 
 const queryClient = new QueryClient();
 

@@ -10,7 +10,7 @@ export function AppNavigation() {
         <img className="h-[36px] w-[20px]" src={logo} alt="logo" />
       </Link>
       {/* TODO!: проблема с отображением текущего пути */}
-      <BorderedLink to="/orders">
+      <BorderedLink to="/warehouse/orders" matchPath="/warehouse">
         <Typography>СКЛАД</Typography>
       </BorderedLink>
       <BorderedLink to="">

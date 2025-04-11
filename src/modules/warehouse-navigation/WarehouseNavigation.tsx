@@ -2,23 +2,22 @@ import { Typography } from "../../shared/UI/Text";
 import { BorderedLink } from "../../shared/UI/BorderedLink";
 
 export function WarehouseNavigation() {
-  
   return (
     <div className="sticky top-[47px] backdrop-blur-[6px] z-20">
       <nav className="flex justify-center items-center gap-[25px] py-[5px] border-b border-black">
-        <BorderedLink to="/orders">
+        <BorderedLink to="/warehouse/orders">
           <Typography>ЗАКАЗЫ</Typography>
         </BorderedLink>
-        <BorderedLink to="/products">
+        <BorderedLink to="/warehouse/products">
           <Typography>ТОВАРЫ</Typography>
         </BorderedLink>
-        <BorderedLink to="/productsRemains">
+        <BorderedLink to="/warehouse/productsRemains">
           <Typography>ОСТАТКИ</Typography>
         </BorderedLink>
-        <BorderedLink to="/parties">
+        <BorderedLink to="/warehouse/parties">
           <Typography>ПАРТИИ</Typography>
         </BorderedLink>
-        <BorderedLink to="/buyers">
+        <BorderedLink to="/warehouse/buyers">
           <Typography>ПОКУПАТЕЛИ</Typography>
         </BorderedLink>
       </nav>
