@@ -99,7 +99,7 @@ export const useAuthApi = () => {
             isAuth: true,
           });
 
-          navigate({ to: "/orders" });
+          navigate({ to: "/warehouse/orders" });
 
           return response.data;
         },
