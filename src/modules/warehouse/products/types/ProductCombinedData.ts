@@ -1,4 +1,7 @@
 export type ProductCombinedData = {
+  getState(): unknown;
+  setRowSelection(arg0: {}): unknown;
+  getAllLeafColumns(): unknown;
   products: Product[]; 
   categories: Category[]; 
   collections: Collection[]; 

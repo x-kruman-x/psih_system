@@ -15,8 +15,8 @@ export function NewProductDialog({
   const { deleteMutation } = useDeleteCategory();
   const { deleteProducts } = useDeleteProducts();
 
-  const [isCategoryInput, setIsCategoryInput] = useState<Boolean>(true);
-  const [isCollectionInput, setIsCollectionInput] = useState<Boolean>(true);
+  const [isCategoryInput, setIsCategoryInput] = useState<Boolean>(false);
+  const [isCollectionInput, setIsCollectionInput] = useState<Boolean>(false);
   return (
     <div className="border border-black border-solid rounded-md w-[75vw] h-[600px] fixed top-[20vh] left-1/2 -translate-x-1/2 bg-white z-30 flex flex-col">
       <div className="border-b border-black border-solid py-[12px] relative px-3 flex-shrink-0">
@@ -51,8 +51,8 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
-          {!isCategoryInput ? (
-            <NewItemInput />
+          {isCategoryInput ? (
+            <NewItemInput onClose={() => setIsCategoryInput(false)}/>
           ) : (
             <button
               className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
@@ -75,9 +75,16 @@ export function NewProductDialog({
               </Typography>
             ))}
           </div>
-          <button className="absolute left-1/2 -translate-x-1/2 bottom-[70px]">
-            +
-          </button>
+          {isCollectionInput ? (
+            <NewItemInput onClose={() => setIsCollectionInput(false)}/>
+          ) : (
+            <button
+              className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
+              onClick={() => setIsCollectionInput((prev) => !prev)}
+            >
+              +
+            </button>
+          )}
         </div>
         <div className="w-1/3 h-full overflow-auto relative">
           <Typography isGray className="text-center mb-3">
@@ -112,51 +119,19 @@ export function NewProductDialog({
   );
 }
 
-function NewProductCol({initialData, deleteFn}: {initialData: ProductCombinedData, deleteFn: () => void}){
-  return (
-    <div className="w-1/3 h-full overflow-auto relative">
-          <Typography isGray className="text-center mb-3">
-            категории
-          </Typography>
-          <div className="flex flex-col gap-2">
-            {initialData.categories.map((category) => (
-              <Typography key={category.id} className="text-center relative">
-                {category.name}
-                {/* TODO!: заменить X на img крестик */}
-                <button
-                  className="text-[14px] absolute left-[50px]"
-                  // TODO: прилетает 500, ждем фикс
-                  onClick={() => deleteMutation(category.id)}
-                >
-                  x
-                </button>
-              </Typography>
-            ))}
-          </div>
-          {!isCategoryInput ? (
-            <NewItemInput />
-          ) : (
-            <button
-              className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
-              onClick={() => setIsCategoryInput((prev) => !prev)}
-            >
-              +
-            </button>
-          )}
-        </div>
-  )
-}
 
 function NewItemInput({
   // value,
-  // onChange,
+  onClose
 }: {
   // value: string;
-  // onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onClose: () => void
 }) {
   return (
     <div className="relative flex justify-center mt-2">
-      <button className="absolute left-[50px]">x</button>
+      <button className="absolute left-[50px]" onClick={onClose}>
+        x
+      </button>
       <input
         type="text"
         className="border border-black border-solid rounded-md px-1 py-[2px] text-[13px] leading-[17px]"
@@ -164,3 +139,38 @@ function NewItemInput({
     </div>
   );
 }
+
+// function NewProductCol({initialData, deleteFn}: {initialData: ProductCombinedData, deleteFn: () => void}){
+//   return (
+//     <div className="w-1/3 h-full overflow-auto relative">
+//           <Typography isGray className="text-center mb-3">
+//             категории
+//           </Typography>
+//           <div className="flex flex-col gap-2">
+//             {initialData.categories.map((category) => (
+//               <Typography key={category.id} className="text-center relative">
+//                 {category.name}
+//                 {/* TODO!: заменить X на img крестик */}
+//                 <button
+//                   className="text-[14px] absolute left-[50px]"
+//                   // TODO: прилетает 500, ждем фикс
+//                   onClick={() => deleteMutation(category.id)}
+//                 >
+//                   x
+//                 </button>
+//               </Typography>
+//             ))}
+//           </div>
+//           {!isCategoryInput ? (
+//             <NewItemInput />
+//           ) : (
+//             <button
+//               className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
+//               onClick={() => setIsCategoryInput((prev) => !prev)}
+//             >
+//               +
+//             </button>
+//           )}
+//         </div>
+//   )
+// }

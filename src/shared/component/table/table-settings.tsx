@@ -4,7 +4,7 @@ import { Typography } from "../../UI/Typography";
 import { Table } from "@tanstack/react-table";
 import { stringToNumber } from "../../utils/stringToNumber";
 import { CustomCheckbox } from "../../UI/CustomCheckBox";
-import { useFilterToggle } from "@/shared/hooks/table/useFilterToggle";
+import { useFilterToggle } from "@/shared/hooks/useFilterToggle";
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { useDeleteRows } from "@/shared/hooks/table/useDeleteRows";
 // import { toast } from "sonner";

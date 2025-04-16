@@ -12,6 +12,7 @@ import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { NewProductDialog } from "./new-product-dialog";
 import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
+import { FilteredTableHeaderBar } from "./filteredTable-header-bar";
 
 // TODO!: сделать таблицу категорий
 export const FilteredTable = ({
@@ -62,69 +63,25 @@ export const FilteredTable = ({
   // console.log("categoriesTable", categoriesTable.getRowModel());
   // console.log("productTable", productTable.getRowModel());
   return (
-    <div className="relative flex">
-      {/* TODO!: сделать table bar */}
-      <table className="w-1/6">
-        <thead>
-          <tr>
-            {categoriesTable.getHeaderGroups().flatMap((headerGroup) =>
-              headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  className="w-1/6 py-[5px]"
-                >
-                  {header.isPlaceholder ? null : (
-                    <>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </>
-                  )}
-                </th>
-              ))
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {categoriesTable.getRowModel().rows.map((row, index) => {
-            const isLastCell =
-              index === categoriesTable.getRowModel().rows.length - 1;
-            return (
-              <tr key={row.id} className="group relative">
-                {row.getVisibleCells().map((cell) => {
-                  return (
-                    <td
-                      key={cell.id}
-                      className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${isLastCell ? `pb-[100vh]` : ""}`}
-                    >
-                      {/* <button
-                        onClick={() => productTable.setGlobalFilter("кепки")}
-                      > */}
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                      {/* </button> */}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="w-5/6 relative">
-        <table className="w-full">
+    <div className={`${configTable == "productsTable" ? 'relative flex flex-col' : 'absolute left-1/2 -translate-x-1/2'}`}>
+      {configTable == "productsTable" ? (
+        <FilteredTableHeaderBar
+          table={productTable}
+          configTable="productsTable"
+        />
+      ) : (
+        ""
+      )}
+      <div className="flex">
+        <table className="w-1/6">
           <thead>
             <tr>
-              {productTable.getHeaderGroups().flatMap((headerGroup) =>
+              {categoriesTable.getHeaderGroups().flatMap((headerGroup) =>
                 headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="w-1/6 py-[5px] border-l border-solid border-black"
+                    className="w-1/6 py-[5px]"
                   >
                     {header.isPlaceholder ? null : (
                       <>
@@ -140,22 +97,25 @@ export const FilteredTable = ({
             </tr>
           </thead>
           <tbody>
-            {productTable.getRowModel().rows.map((row, index) => {
+            {categoriesTable.getRowModel().rows.map((row, index) => {
               const isLastCell =
-                index === productTable.getRowModel().rows.length - 1;
+                index === categoriesTable.getRowModel().rows.length - 1;
               return (
                 <tr key={row.id} className="group relative">
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td
                         key={cell.id}
-                        className={`w-1/6 px-0 text-center border-l border-solid border-black ${isLastCell ? `pb-[100vh]` : ""}`}
+                        className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${isLastCell ? `pb-[100vh]` : ""}`}
                       >
-                        {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
+                        {/* <button
+                        onClick={() => productTable.setGlobalFilter("кепки")}
+                      > */}
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
                         )}
+                        {/* </button> */}
                       </td>
                     );
                   })}
@@ -164,19 +124,76 @@ export const FilteredTable = ({
             })}
           </tbody>
         </table>
+        <div className="w-5/6 relative">
+          <table className="w-full">
+            <thead>
+              <tr>
+                {productTable.getHeaderGroups().flatMap((headerGroup) =>
+                  headerGroup.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      className="w-1/6 py-[5px] border-l border-solid border-black"
+                    >
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </>
+                      )}
+                    </th>
+                  ))
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {productTable.getRowModel().rows.map((row, index) => {
+                const isLastCell =
+                  index === productTable.getRowModel().rows.length - 1;
+                return (
+                  <tr key={row.id} className="group relative">
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td
+                          key={cell.id}
+                          className={`w-1/6 px-0 text-center border-l border-solid border-black ${isLastCell ? `pb-[100vh]` : ""}`}
+                        >
+                          {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
         <HoverBorderedEl
           as="button"
           className="fixed bottom-4 left-[25%] -translate-x-1/2 bg-white z-20"
           onClick={() => {
-            setIsOpenNewProductDialog((prev) => !prev)
+            setIsOpenNewProductDialog((prev) => !prev);
           }}
         >
           <Typography>
             <span className="text-[16px]">+</span> Товар
           </Typography>
         </HoverBorderedEl>
-        {isOpenNewProductDialog && <NewProductDialog initialData={combinedData} onClose={() => setIsOpenNewProductDialog(false)} />}
+        {isOpenNewProductDialog && (
+          <NewProductDialog
+            initialData={combinedData}
+            onClose={() => setIsOpenNewProductDialog(false)}
+          />
+        )}
       </div>
+
       <HoverBorderedEl
         as="button"
         className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-white z-20"
