@@ -8,6 +8,9 @@ import { stringToNumber } from "@/shared/utils/stringToNumber";
 import { Table } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 import { FilteredTable } from "./filteredTable";
+import { productsApi } from "@/modules/warehouse/products/api/api";
+import { useQuery } from "@tanstack/react-query";
+import { ArchivePopup } from "./archive-popup";
 
 export function FilteredTableSettings<T extends Record<string, any>>({
   table,
@@ -16,7 +19,7 @@ export function FilteredTableSettings<T extends Record<string, any>>({
   table: Table<T>;
   configTable: configTableType;
 }) {
-  const [isShowArchive, setIsShowArchive] = useState<boolean>(false)
+  const [isShowArchive, setIsShowArchive] = useState<boolean>(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const { toggleFilter } = useFilteredTableFilterToggle();
 
@@ -78,7 +81,10 @@ export function FilteredTableSettings<T extends Record<string, any>>({
         ""
       )}
       <div className="flex items-center gap-4">
-        <HoverBorderedEl as="button">
+        <HoverBorderedEl
+          as="button"
+          onClick={() => setIsShowArchive((prev) => !prev)}
+        >
           <Typography>Архив</Typography>
         </HoverBorderedEl>
         <HoverBorderedEl
@@ -114,7 +120,7 @@ export function FilteredTableSettings<T extends Record<string, any>>({
         </HoverBorderedEl>
       </div>
       {/* TODO!: архив тут */}
-      {/* {isShowArchive && <FilteredTable combinedData={} configTable="archiveTable"/>} */}
+      {isShowArchive && <ArchivePopup isShowArchive={isShowArchive} />}
     </div>
   );
 }

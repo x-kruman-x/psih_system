@@ -22,16 +22,19 @@ export const FilteredTable = ({
   combinedData: ProductCombinedData;
   configTable: configTableType;
 }) => {
+  console.log('combinedData', combinedData)
   const { products, categories } = combinedData;
   const productColumns = useColumns(configTable);
   const categoryColumns = useColumns("categories");
+  const isArchiveTable = configTable === "archiveTable";
 
   const [productСolumnVisibility, setProductColumnVisibility] = useState({});
   const [categoryСolumnVisibility, setCategoryColumnVisibility] = useState({});
   const [productRowSelection, setProductRowSelection] = useState({});
   const [categoryFilter, setCategoryFilter] = useState<any>([]);
 
-  const [isOpenNewProductDialog, setIsOpenNewProductDialog] = useState<boolean>(false);
+  const [isOpenNewProductDialog, setIsOpenNewProductDialog] =
+    useState<boolean>(false);
 
   const productTable = useReactTable({
     data: products,
@@ -63,8 +66,8 @@ export const FilteredTable = ({
   // console.log("categoriesTable", categoriesTable.getRowModel());
   // console.log("productTable", productTable.getRowModel());
   return (
-    <div className={`${configTable == "productsTable" ? 'relative flex flex-col' : 'absolute left-1/2 -translate-x-1/2'}`}>
-      {configTable == "productsTable" ? (
+    <div className="relative flex flex-col">
+      {!isArchiveTable ? (
         <FilteredTableHeaderBar
           table={productTable}
           configTable="productsTable"
@@ -106,7 +109,7 @@ export const FilteredTable = ({
                     return (
                       <td
                         key={cell.id}
-                        className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${isLastCell ? `pb-[100vh]` : ""}`}
+                        className={`w-1/6 px-0 text-center border-l border-solid border-black first:border-none ${!isArchiveTable ? (isLastCell ? `pb-[100vh]` : "") : ""}`}
                       >
                         {/* <button
                         onClick={() => productTable.setGlobalFilter("кепки")}
@@ -158,7 +161,7 @@ export const FilteredTable = ({
                       return (
                         <td
                           key={cell.id}
-                          className={`w-1/6 px-0 text-center border-l border-solid border-black ${isLastCell ? `pb-[100vh]` : ""}`}
+                          className={`w-1/6 px-0 text-center border-l border-solid border-black ${!isArchiveTable ? (isLastCell ? `pb-[100vh]` : "") : ""}`}
                         >
                           {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
                           {flexRender(
@@ -175,17 +178,19 @@ export const FilteredTable = ({
           </table>
         </div>
 
-        <HoverBorderedEl
-          as="button"
-          className="fixed bottom-4 left-[25%] -translate-x-1/2 bg-white z-20"
-          onClick={() => {
-            setIsOpenNewProductDialog((prev) => !prev);
-          }}
-        >
-          <Typography>
-            <span className="text-[16px]">+</span> Товар
-          </Typography>
-        </HoverBorderedEl>
+        {!isArchiveTable && (
+          <HoverBorderedEl
+            as="button"
+            className="fixed bottom-4 left-[25%] -translate-x-1/2 bg-white z-20"
+            onClick={() => {
+              setIsOpenNewProductDialog((prev) => !prev);
+            }}
+          >
+            <Typography>
+              <span className="text-[16px]">+</span> Товар
+            </Typography>
+          </HoverBorderedEl>
+        )}
         {isOpenNewProductDialog && (
           <NewProductDialog
             initialData={combinedData}
