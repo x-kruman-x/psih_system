@@ -22,7 +22,7 @@ export const FilteredTable = ({
   combinedData: ProductCombinedData;
   configTable: configTableType;
 }) => {
-  console.log('combinedData', combinedData)
+  // console.log('combinedData', combinedData)
   const { products, categories } = combinedData;
   const productColumns = useColumns(configTable);
   const categoryColumns = useColumns("categories");
