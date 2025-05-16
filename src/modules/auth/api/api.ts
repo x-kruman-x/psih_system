@@ -2,7 +2,6 @@
 import { queryOptions, useQueryClient } from "@tanstack/react-query";
 import { loginInstance, refreshInstance } from "../../../shared/API/base";
 import { useNavigate } from "@tanstack/react-router";
-import { AxiosResponse } from "axios";
 
 type serverMessage = {
   data: string;

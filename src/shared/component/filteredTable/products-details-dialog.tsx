@@ -3,9 +3,9 @@ import { useDeleteCategory } from "@/modules/warehouse/products/hooks/use-delete
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { useDeleteProducts } from "@/modules/warehouse/products/hooks/use-delete-products";
-import { HtmlHTMLAttributes, useState } from "react";
+import { useState } from "react";
 
-export function NewProductDialog({
+export function ProductsDetailsDialog({
   initialData,
   onClose,
 }: {
@@ -16,7 +16,7 @@ export function NewProductDialog({
   const { deleteProducts } = useDeleteProducts();
 
   const [isCategoryInput, setIsCategoryInput] = useState<Boolean>(true);
-  const [isCollectionInput, setIsCollectionInput] = useState<Boolean>(true);
+  // const [isCollectionInput, setIsCollectionInput] = useState<Boolean>(true);
   return (
     <div className="border border-black border-solid rounded-md w-[75vw] h-[600px] fixed top-[20vh] left-1/2 -translate-x-1/2 bg-white z-30 flex flex-col">
       <div className="border-b border-black border-solid py-[12px] relative px-3 flex-shrink-0">
@@ -112,48 +112,56 @@ export function NewProductDialog({
   );
 }
 
-function NewProductCol({initialData, deleteFn}: {initialData: ProductCombinedData, deleteFn: () => void}){
-  return (
-    <div className="w-1/3 h-full overflow-auto relative">
-          <Typography isGray className="text-center mb-3">
-            категории
-          </Typography>
-          <div className="flex flex-col gap-2">
-            {initialData.categories.map((category) => (
-              <Typography key={category.id} className="text-center relative">
-                {category.name}
-                {/* TODO!: заменить X на img крестик */}
-                <button
-                  className="text-[14px] absolute left-[50px]"
-                  // TODO: прилетает 500, ждем фикс
-                  onClick={() => deleteMutation(category.id)}
-                >
-                  x
-                </button>
-              </Typography>
-            ))}
-          </div>
-          {!isCategoryInput ? (
-            <NewItemInput />
-          ) : (
-            <button
-              className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
-              onClick={() => setIsCategoryInput((prev) => !prev)}
-            >
-              +
-            </button>
-          )}
-        </div>
-  )
-}
+// function NewProductCol({
+//   initialData,
+//   deleteFn,
+// }: {
+//   initialData: ProductCombinedData;
+//   deleteFn: () => void;
+// }) {
+//   return (
+//     <div className="w-1/3 h-full overflow-auto relative">
+//       <Typography isGray className="text-center mb-3">
+//         категории
+//       </Typography>
+//       <div className="flex flex-col gap-2">
+//         {initialData.categories.map((category) => (
+//           <Typography key={category.id} className="text-center relative">
+//             {category.name}
+//             {/* TODO!: заменить X на img крестик */}
+//             <button
+//               className="text-[14px] absolute left-[50px]"
+//               // TODO: прилетает 500, ждем фикс
+//               onClick={() => deleteMutation(category.id)}
+//             >
+//               x
+//             </button>
+//           </Typography>
+//         ))}
+//       </div>
+//       {!isCategoryInput ? (
+//         <NewItemInput />
+//       ) : (
+//         <button
+//           className="absolute left-1/2 -translate-x-1/2 bottom-[70px]"
+//           onClick={() => setIsCategoryInput((prev) => !prev)}
+//         >
+//           +
+//         </button>
+//       )}
+//     </div>
+//   );
+// }
 
-function NewItemInput({
-  // value,
-  // onChange,
-}: {
-  // value: string;
-  // onChange: React.ChangeEventHandler<HTMLInputElement>;
-}) {
+function NewItemInput(
+  {
+    // value,
+    // onChange,
+  }: {
+    // value: string;
+    // onChange: React.ChangeEventHandler<HTMLInputElement>;
+  },
+) {
   return (
     <div className="relative flex justify-center mt-2">
       <button className="absolute left-[50px]">x</button>

@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Typography";
-import { DataContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
+import { InputContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
 
 export function EditDataDialog() {
   return (
@@ -20,48 +20,54 @@ export function EditDataDialog() {
                 <Typography>Закрыть</Typography>
               </button>
             </Dialog.Close>
-            <Typography className="absolute left-1/2 -translate-x-1/2">ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ</Typography>
+            <Typography className="absolute left-1/2 -translate-x-1/2">
+              ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ
+            </Typography>
           </Dialog.Title>
           <Dialog.Description>
             <Typography className="text-center">способ доставки</Typography>
           </Dialog.Description>
+          {/* TODO: доделать пропсы */}
+
           <div className="flex flex-col justify-center items-center mt-[190px]">
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="страна"
-                infoText="Россия"
-                isHiddenText={false}
-                border={true}
+                // infoText="Россия"
+                // isHiddenText={false}
+                // border={true}
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="город"
-                infoText="Москва"
-                isHiddenText={false}
-                border={true}
+                // infoText="Москва"
+                // isHiddenText={false}
+                // border={true}
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="улица"
-                infoText="Кащенко"
-                isHiddenText={false}
-                border={true}
+                // infoText="Кащенко"
+                // isHiddenText={false}
+                // border={true}
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="дом"
-                infoText="6"
-                isHiddenText={false}
-                border={true}
+                // infoText="6"
+                // isHiddenText={false}
+                // border={true}
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="квартира | офис"
-                infoText="666"
-                isHiddenText={false}
-                border={true}
+                // infoText="666"
+                // isHiddenText={false}
+                // border={true}
               />
             </div>
             <Typography className="text-center mt-[30px] text-[#494949]">
               Кащенко 666
             </Typography>
-            <Typography className="text-center mt-[66px]">Трек номер - 63936</Typography>
+            <Typography className="text-center mt-[66px]">
+              Трек номер - 63936
+            </Typography>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

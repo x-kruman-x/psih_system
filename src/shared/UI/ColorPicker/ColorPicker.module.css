@@ -1,0 +1,6 @@
+:global(.w-color-alpha-pointer) {
+    display: none !important;
+}
+:global(.w-color-alpha-vertical > div:first-child) {
+    border-radius: 5px !important;
+}

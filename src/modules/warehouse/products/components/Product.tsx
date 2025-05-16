@@ -54,7 +54,7 @@ export function Product({ productData }: { productData: ProductType }) {
           </div>
           <div className="w-[280px] mx-auto flex justify-between mb-[10px]">
             <BorderedLink
-              to="/products/$productsId/edit/info"
+              to="/warehouse/products/$productsId/edit/info"
               params={{
                 productsId: productData.id.toString(),
               }}
@@ -62,7 +62,7 @@ export function Product({ productData }: { productData: ProductType }) {
               <Typography>ДАННЫЕ ТОВАРА</Typography>
             </BorderedLink>
             <BorderedLink
-              to="/products/$productsId/edit/files"
+              to="/warehouse/products/$productsId/edit/files"
               params={{
                 productsId: productData.id.toString(),
               }}
@@ -70,7 +70,7 @@ export function Product({ productData }: { productData: ProductType }) {
               <Typography>ФАЙЛЫ</Typography>
             </BorderedLink>
             <BorderedLink
-              to="/products/$productsId/edit/history"
+              to="/warehouse/products/$productsId/edit/history"
               params={{
                 productsId: productData.id.toString(),
               }}
