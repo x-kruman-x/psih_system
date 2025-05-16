@@ -43,7 +43,7 @@ const ColorPicker = memo(function ({ className, onChange }: ColorPickerProps) {
         <div
           ref={pickerRef}
           className={classNames(
-            "absolute top-0 w-[180px] h-[120px] p-2.5 flex bg-[#B5B2B2] gap-3 justify-center items-center rounded-[8px]",
+            "absolute top-0 w-[180px] h-[120px] p-2.5 flex bg-[#B5B2B2] gap-3 justify-center items-center rounded-[8px] z-20",
             styles.root,
           )}
         >
