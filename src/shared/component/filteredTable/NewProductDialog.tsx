@@ -132,7 +132,7 @@ const NewProductDialog = memo(function NewProductDialog() {
                         isActive={value === size}
                         onClick={() => onChange(size)}
                       >
-                        <Typography>{size}</Typography>
+                        <Typography>{size.toUpperCase()}</Typography>
                       </HoverBorderedEl>
                     );
                   })}
