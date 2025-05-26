@@ -150,7 +150,7 @@ function NewItemInput({
 //             {initialData.categories.map((category) => (
 //               <Typography key={category.id} className="text-center relative">
 //                 {category.name}
-//                 {/* TODO!: заменить X на img крестик */}
+//                 {/* TODO: заменить X на img крестик */}
 //                 <button
 //                   className="text-[14px] absolute left-[50px]"
 //                   // TODO: прилетает 500, ждем фикс

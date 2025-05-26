@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import HoverBorderedEl from "../../../../../shared/UI/HoverBorderedEl";
 import { Typography } from "../../../../../shared/UI/Typography";
-import { DataContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
+import { InputContainerWithHiddenText } from "../../../../../shared/UI/InputContainerWithHiddenText";
 
 export function EditDataDialog() {
   return (
@@ -27,35 +27,25 @@ export function EditDataDialog() {
           </Dialog.Description>
           <div className="flex flex-col justify-center items-center mt-[190px]">
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="страна"
-                infoText="Россия"
-                isHiddenText={false}
-                border={true}
+                inputText="Россия"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="город"
-                infoText="Москва"
-                isHiddenText={false}
-                border={true}
+                inputText="Москва"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="улица"
-                infoText="Кащенко"
-                isHiddenText={false}
-                border={true}
+                inputText="Кащенко"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="дом"
-                infoText="6"
-                isHiddenText={false}
-                border={true}
+                inputText="6"
               />
-              <DataContainerWithHiddenText
+              <InputContainerWithHiddenText
                 hiddenText="квартира | офис"
-                infoText="666"
-                isHiddenText={false}
-                border={true}
+                inputText="666"
               />
             </div>
             <Typography className="text-center mt-[30px] text-[#494949]">

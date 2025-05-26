@@ -8,7 +8,7 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CardTableSettings } from "./CardTableSettings";
 
 export const CardTable = <T extends Record<string, any>>({

@@ -10,7 +10,6 @@ import { CardSettingsBar } from "@/shared/component/card/card-settings-bar";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { ordersApi } from "../../api/api";
 import { CardTableDataValidation } from "@/shared/component/cardTable/CardTableDataValidation";
-import { CardTable } from "@/shared/component/cardTable/CardTable";
 
 type OrderProps = {
   orderData: OrderType;
