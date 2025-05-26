@@ -3,9 +3,9 @@ import { useDeleteCategory } from "@/modules/warehouse/products/hooks/use-delete
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { useDeleteProducts } from "@/modules/warehouse/products/hooks/use-delete-products";
-import { HtmlHTMLAttributes, useState } from "react";
+import { useState } from "react";
 
-export function NewProductDialog({
+export function ProductsDetailsDialog({
   initialData,
   onClose,
 }: {

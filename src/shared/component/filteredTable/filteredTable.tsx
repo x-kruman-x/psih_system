@@ -4,18 +4,18 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { useColumns } from "@/shared/hooks/table/useColumns";
 import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
-import { NewProductDialog } from "./new-product-dialog";
+import { ProductsDetailsDialog } from "./products-details-dialog.tsx";
 import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
 import { FilteredTableHeaderBar } from "./filteredTable-header-bar";
 
 // TODO!: сделать таблицу категорий
-export const FilteredTable = ({
+export const FilteredTable = memo(function ({
   combinedData,
   configTable,
 }: {
@@ -28,10 +28,10 @@ export const FilteredTable = ({
   const categoryColumns = useColumns("categories");
   const isArchiveTable = configTable === "archiveTable";
 
-  const [productСolumnVisibility, setProductColumnVisibility] = useState({});
-  const [categoryСolumnVisibility, setCategoryColumnVisibility] = useState({});
+  const [productColumnVisibility, setProductColumnVisibility] = useState({});
+  const [categoryColumnVisibility, setCategoryColumnVisibility] = useState({});
   const [productRowSelection, setProductRowSelection] = useState({});
-  const [categoryFilter, setCategoryFilter] = useState<any>([]);
+  const [_, setCategoryFilter] = useState<any>([]);
 
   const [isOpenNewProductDialog, setIsOpenNewProductDialog] =
     useState<boolean>(false);
@@ -40,7 +40,7 @@ export const FilteredTable = ({
     data: products,
     columns: productColumns,
     state: {
-      columnVisibility: productСolumnVisibility,
+      columnVisibility: productColumnVisibility,
       rowSelection: productRowSelection,
       // globalFilter: categoryFilter,
     },
@@ -56,7 +56,7 @@ export const FilteredTable = ({
     data: categories,
     columns: categoryColumns,
     state: {
-      columnVisibility: categoryСolumnVisibility,
+      columnVisibility: categoryColumnVisibility,
     },
     onColumnVisibilityChange: setCategoryColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
@@ -213,4 +213,4 @@ export const FilteredTable = ({
       </HoverBorderedEl>
     </div>
   );
-};
+});

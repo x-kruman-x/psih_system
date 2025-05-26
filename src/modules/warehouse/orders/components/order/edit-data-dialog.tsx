@@ -20,38 +20,54 @@ export function EditDataDialog() {
                 <Typography>Закрыть</Typography>
               </button>
             </Dialog.Close>
-            <Typography className="absolute left-1/2 -translate-x-1/2">ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ</Typography>
+            <Typography className="absolute left-1/2 -translate-x-1/2">
+              ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ
+            </Typography>
           </Dialog.Title>
           <Dialog.Description>
             <Typography className="text-center">способ доставки</Typography>
           </Dialog.Description>
+          {/* TODO: доделать пропсы */}
+
           <div className="flex flex-col justify-center items-center mt-[190px]">
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
               <InputContainerWithHiddenText
                 hiddenText="страна"
-                inputText="Россия"
+                infoText="Россия"
+                isHiddenText={false}
+                border={true}
               />
               <InputContainerWithHiddenText
                 hiddenText="город"
-                inputText="Москва"
+                infoText="Москва"
+                isHiddenText={false}
+                border={true}
               />
               <InputContainerWithHiddenText
                 hiddenText="улица"
-                inputText="Кащенко"
+                infoText="Кащенко"
+                isHiddenText={false}
+                border={true}
               />
               <InputContainerWithHiddenText
                 hiddenText="дом"
-                inputText="6"
+                infoText="6"
+                isHiddenText={false}
+                border={true}
               />
               <InputContainerWithHiddenText
                 hiddenText="квартира | офис"
-                inputText="666"
+                infoText="666"
+                isHiddenText={false}
+                border={true}
               />
             </div>
             <Typography className="text-center mt-[30px] text-[#494949]">
               Кащенко 666
             </Typography>
-            <Typography className="text-center mt-[66px]">Трек номер - 63936</Typography>
+            <Typography className="text-center mt-[66px]">
+              Трек номер - 63936
+            </Typography>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

@@ -16,6 +16,7 @@
     "@tanstack/react-query-devtools": "^5.65.1",
     "@tanstack/react-router": "^1.97.3",
     "@tanstack/react-table": "^8.20.6",
+    "@uiw/react-color": "^2.5.4",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
@@ -28,7 +29,8 @@
     "react-hook-form": "^7.55.0",
     "sonner": "^2.0.1",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
