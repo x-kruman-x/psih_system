@@ -23,12 +23,12 @@ function RouteComponent() {
   if (isError) {
     console.error('Ошибка при загрузке данных заказа:', error)
     toast.error('Ошибка при загрузке данных заказа')
-    navigate({ to: '/orders' })
+    navigate({ to: '/warehouse/orders' })
   }
 
   if (!orderData) {
     toast.error('Данные заказа не найдены')
-    navigate({ to: '/orders' })
+    navigate({ to: '/warehouse/orders' })
   }
 
   return <Order orderData={orderData} />

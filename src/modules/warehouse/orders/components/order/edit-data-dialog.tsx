@@ -33,33 +33,23 @@ export function EditDataDialog() {
             <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-2">
               <InputContainerWithHiddenText
                 hiddenText="страна"
-                infoText="Россия"
-                isHiddenText={false}
-                border={true}
+                inputText="Россия"
               />
               <InputContainerWithHiddenText
                 hiddenText="город"
-                infoText="Москва"
-                isHiddenText={false}
-                border={true}
+                inputText="Москва"
               />
               <InputContainerWithHiddenText
                 hiddenText="улица"
-                infoText="Кащенко"
-                isHiddenText={false}
-                border={true}
+                inputText="Кащенко"
               />
               <InputContainerWithHiddenText
                 hiddenText="дом"
-                infoText="6"
-                isHiddenText={false}
-                border={true}
+                inputText="6"
               />
               <InputContainerWithHiddenText
                 hiddenText="квартира | офис"
-                infoText="666"
-                isHiddenText={false}
-                border={true}
+                inputText="666"
               />
             </div>
             <Typography className="text-center mt-[30px] text-[#494949]">
