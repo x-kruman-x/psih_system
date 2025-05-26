@@ -45,7 +45,7 @@ export function CardSettingsBar<
     setIsOpenMenu((prev) => !prev);
   };
 
-  // TODO!: доделать клик вне области
+  // TODO: доделать клик вне области
   // const handleOutsideClick = (event: MouseEvent) => {
   //   const target = event.target as HTMLElement;
   //   console.log(target.closest('navbutton'))
@@ -70,7 +70,7 @@ export function CardSettingsBar<
   // }, [isOpenMenu]);
 
   return (
-    // TODO!: переделать верстку под новый дизайн
+    //  TODO: переделать верстку под новый дизайн
     <div className="flex items-center justify-between py-[10px] px-[30px] relative border-b border-black border-solid">
       <div className={`flex ${configObj.gap}`}>
         <HoverBorderedEl>

@@ -17,5 +17,9 @@ export function useDeleteRows(configTable: configTableType) {
       return (ids: number[]) => deleteProducts.deleteProducts(ids);
     case "remainsTable":
       return (ids: number[]) => console.log(`удалил остатки с таким ${ids}`);
+    default:
+      return () => {
+        console.error(`Неизвестный тип таблицы: ${configTable}`);
+      };
   }
 }

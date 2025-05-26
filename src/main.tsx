@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./shared/config/tailwind-css/index.css";
@@ -28,7 +27,7 @@ declare module "@tanstack/react-router" {
 try {
   if (localStorage.getItem("access_token")) {
     await refreshToken();
-    const keysWithInfiniteGcTime = ["auth", "isFilter"];
+    const keysWithInfiniteGcTime = ["auth", "isFilter", 'isFilteredTableFilter'];
   
     keysWithInfiniteGcTime.forEach((key) => {
       queryClient.setQueryDefaults([key], { gcTime: Infinity });
@@ -36,6 +35,9 @@ try {
   
     queryClient.setQueryData(["auth"], { isAuth: true });
     queryClient.setQueryData(["isFilter"], { isFilterOpen: false });
+    queryClient.setQueryData(["isFilteredTableFilter"], {
+      isFilteredTableFilterOpen: false,
+    });
   }
 } catch(e) {
   console.log(e)

@@ -12,7 +12,7 @@ export function useDeleteProducts() {
       toast.error('Произошла ошибка при удалении партий'); 
     },
     onSuccess: () => {
-      toast.success('Партии успешно удалены');
+      toast.success('Товары успешно удалены');
     },
     async onSettled(_, __, variables) {
       await queryClient.invalidateQueries({
