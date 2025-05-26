@@ -31,7 +31,7 @@ export const FilteredTable = ({
   const [productRowSelection, setProductRowSelection] = useState({});
   const [_, setCategoryFilter] = useState<any>([]);
 
-  const [isOpenNewProductDialog, setIsOpenNewProductDialog] =
+  const [, setIsOpenNewProductDialog] =
     useState<boolean>(false);
 
   const productTable = useReactTable({

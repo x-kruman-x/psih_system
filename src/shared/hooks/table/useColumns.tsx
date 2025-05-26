@@ -1,11 +1,10 @@
-import { ColumnDef, Table } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Link } from "@tanstack/react-router";
 import { RemainsDropDown } from "@/shared/component/remainsDropDown";
 import { SelectCell } from "@/shared/component/selectCell";
 import { configTableType } from "@/shared/types/table/columnTableTypes";
 import { RemainsDropDownProps } from "@/shared/types/remainsDropDownProps";
 import { CustomCheckbox } from "@/shared/UI/CustomCheckBox";
-import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { filterIncludesSome } from "@/shared/utils/filters/filterIncludesSome";
 import { formatDateTime } from "@/shared/utils/formateDateTime";

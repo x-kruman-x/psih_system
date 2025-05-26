@@ -5,7 +5,7 @@ import { Table } from "@tanstack/react-table";
 
 export function CardTableSettings<T extends Record<string, any>>({
   table,
-  configTable,
+  // configTable,
 }: {
   table: Table<T>;
   configTable: configTableType;

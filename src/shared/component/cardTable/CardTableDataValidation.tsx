@@ -42,7 +42,7 @@ export function CardTableDataValidation({
   
         
         const filteredModification = productInfo.modifications?.filter(
-          (modification) => modification.id === product.modification.id
+          (modification: any) => modification.id === product.modification.id
         );
   
         return {
