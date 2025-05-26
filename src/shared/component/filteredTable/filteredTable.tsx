@@ -4,29 +4,27 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { memo, useState } from "react";
+import { useState } from "react";
 import { configTableType } from "../../types/table/columnTableTypes";
 import { useColumns } from "@/shared/hooks/table/useColumns";
 import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
+import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
-import { ProductsDetailsDialog } from "./products-details-dialog.tsx";
-import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
 import { FilteredTableHeaderBar } from "./filteredTable-header-bar";
 
 // TODO!: сделать таблицу категорий
-export const FilteredTable = memo(function ({
+export const FilteredTable = ({
   combinedData,
   configTable,
 }: {
   combinedData: ProductCombinedData;
   configTable: configTableType;
 }) => {
-  // console.log('combinedData', combinedData)
   const { products, categories } = combinedData;
   const productColumns = useColumns(configTable);
   const categoryColumns = useColumns("categories");
-  const isArchiveTable = configTable === "archiveTable";
+  const isArchiveTable = configTable === "popupTable";
 
   const [productColumnVisibility, setProductColumnVisibility] = useState({});
   const [categoryColumnVisibility, setCategoryColumnVisibility] = useState({});
@@ -191,12 +189,11 @@ export const FilteredTable = memo(function ({
             </Typography>
           </HoverBorderedEl>
         )}
-        {isOpenNewProductDialog && (
+        {/* {isOpenNewProductDialog && (
           <NewProductDialog
-            initialData={combinedData}
             onClose={() => setIsOpenNewProductDialog(false)}
           />
-        )}
+        )} */}
       </div>
 
       <HoverBorderedEl
@@ -213,4 +210,4 @@ export const FilteredTable = memo(function ({
       </HoverBorderedEl>
     </div>
   );
-});
+};

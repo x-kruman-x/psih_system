@@ -20,7 +20,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
     case "order":
       return {
         gap: "gap-[170px]",
-        linkBackPath: "/orders",
+        linkBackPath: "/warehouse/orders",
         leftEl: (
           <HoverBorderedEl>
             <Typography>CDEK</Typography>
@@ -48,7 +48,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
     case "party":
       return {
         gap: "",
-        linkBackPath: "/parties",
+        linkBackPath: "/warehouse/parties",
         leftEl: null,
         rightEl: null,
         navStyle: "",
@@ -68,7 +68,7 @@ export function useConfigCardSettingsBar(pageType: EditPageSettingsBar): ConfigS
     case "product":
       return {
         gap: "gap-[170px]",
-        linkBackPath: "/products",
+        linkBackPath: "/warehouse/products",
         leftEl: (
           <HoverBorderedEl>
             <Typography>Мужское</Typography>

@@ -47,7 +47,7 @@ export function ArchivePopup({ isShowArchive }: { isShowArchive: boolean }) {
 
   return (
     <div className="absolute h-[300px] left-1/2 -translate-x-1/2 top-[300px] bg-white border border-black border-solid rounded-md">
-      <FilteredTable combinedData={combinedData} configTable="archiveTable" />
+      <FilteredTable combinedData={combinedData} configTable="popupTable" />
     </div>
   );
 }
