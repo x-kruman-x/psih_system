@@ -22,7 +22,11 @@ type NewProductFields = {
   sizes: string[];
 };
 
-const NewProductDialog = memo(function NewProductDialog() {
+const NewProductDialog = memo(function NewProductDialog({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const sizes = ["xss", "xs", "s", "m", "l", "xl", "xxl", "xxxl"];
 
   const { handleSubmit, register, control, setValue, getValues, watch } =
@@ -51,7 +55,7 @@ const NewProductDialog = memo(function NewProductDialog() {
     <div className="fixed left-1/2 top-1/2 w-[90vw] max-w-[1600px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white border border-black border-solid">
       <div className="border-b border-solid border-black flex items-center px-4 py-2 relative">
         <button className="border border-solid border-black rounded-md p-[6px]">
-          <Typography>Закрыть</Typography>
+          <Typography onClick={onClose}>Закрыть</Typography>
         </button>
         <Typography className="absolute left-1/2 -translate-x-1/2">
           ЗАПОЛНИТЕ ВСЮ ИНФОРМАЦИЮ
