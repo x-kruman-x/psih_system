@@ -5,7 +5,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 import { cn } from "../config/lib/utils"
 
 
-// TODO!: правильно добавить tolltip
+// TODO: правильно добавить tolltip
 const TooltipProvider = TooltipPrimitive.Provider
 
 const Tooltip = TooltipPrimitive.Root

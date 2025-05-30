@@ -3,8 +3,7 @@ import { Filter } from "@/shared/UI/Filter";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
 import { clearAllFilters } from "@/shared/utils/clearAllFilters";
-import { Column, Table } from "@tanstack/react-table";
-import { useState, useEffect } from "react";
+import { Table } from "@tanstack/react-table";
 
 export function TableFilter<T extends Record<string, any>>({
   table,

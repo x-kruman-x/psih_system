@@ -7,9 +7,6 @@ import { Typography } from "@/shared/UI/Typography";
 import { stringToNumber } from "@/shared/utils/stringToNumber";
 import { Table } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
-import { FilteredTable } from "./filteredTable";
-import { productsApi } from "@/modules/warehouse/products/api/api";
-import { useQuery } from "@tanstack/react-query";
 import { ArchivePopup } from "./archive-popup";
 
 export function FilteredTableSettings<T extends Record<string, any>>({

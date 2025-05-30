@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
 
 export function useDeleteOrder() {
-  const navigate = useNavigate({ from: "/orders/$orderId/edit" });
+  const navigate = useNavigate({ from: "/warehouse/orders/$orderId/edit" });
 
   const deleteOrderMutation = useMutation({
     mutationFn: ordersApi.deleteOrder,
@@ -16,7 +16,7 @@ export function useDeleteOrder() {
       toast.success("Заказ успешно удален");
     },
     async onSettled() {
-      navigate({ to: "/orders" });
+      navigate({ to: "/warehouse/orders" });
     },
   });
   
