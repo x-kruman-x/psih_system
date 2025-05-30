@@ -10,33 +10,35 @@ import { useColumns } from "@/shared/hooks/table/useColumns";
 import { filterByCategory } from "@/shared/utils/filters/filterByCategory";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
 import { Typography } from "@/shared/UI/Typography";
-import { NewProductDialog } from "./new-product-dialog";
+import { ProductsDetailsDialog } from "./products-details-dialog.tsx";
 import { ProductCombinedData } from "@/modules/warehouse/products/types/ProductCombinedData";
+import { NewProductDialog } from "@/shared/component/filteredTable/NewProductDialog.tsx";
+import { observer } from "mobx-react";
+import { dialogStore, DialogId } from "@/features/modalManager/dialogStore.ts";
 
 // TODO!: сделать таблицу категорий
-export const FilteredTable = ({
+export const FilteredTable = observer(function ({
   combinedData,
   configTable,
 }: {
   combinedData: ProductCombinedData;
   configTable: configTableType;
-}) => {
+}) {
+  const { isDialogOpen, closeDialog, openDialog } = dialogStore;
   const { products, categories } = combinedData;
   const productColumns = useColumns(configTable);
   const categoryColumns = useColumns("categories");
 
-  const [productСolumnVisibility, setProductColumnVisibility] = useState({});
-  const [categoryСolumnVisibility, setCategoryColumnVisibility] = useState({});
+  const [productColumnVisibility, setProductColumnVisibility] = useState({});
+  const [categoryColumnVisibility, setCategoryColumnVisibility] = useState({});
   const [productRowSelection, setProductRowSelection] = useState({});
-  const [categoryFilter, setCategoryFilter] = useState<any>([]);
-
-  const [isOpenNewProductDialog, setIsOpenNewProductDialog] = useState<boolean>(false);
+  const [_, setCategoryFilter] = useState<any>([]);
 
   const productTable = useReactTable({
     data: products,
     columns: productColumns,
     state: {
-      columnVisibility: productСolumnVisibility,
+      columnVisibility: productColumnVisibility,
       rowSelection: productRowSelection,
       // globalFilter: categoryFilter,
     },
@@ -52,7 +54,7 @@ export const FilteredTable = ({
     data: categories,
     columns: categoryColumns,
     state: {
-      columnVisibility: categoryСolumnVisibility,
+      columnVisibility: categoryColumnVisibility,
     },
     onColumnVisibilityChange: setCategoryColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
@@ -63,6 +65,7 @@ export const FilteredTable = ({
   // console.log("productTable", productTable.getRowModel());
   return (
     <div className="relative flex">
+      {/*<EditDataDialog />*/}
       {/* TODO!: сделать table bar */}
       <table className="w-1/6">
         <thead>
@@ -78,12 +81,12 @@ export const FilteredTable = ({
                     <>
                       {flexRender(
                         header.column.columnDef.header,
-                        header.getContext()
+                        header.getContext(),
                       )}
                     </>
                   )}
                 </th>
-              ))
+              )),
             )}
           </tr>
         </thead>
@@ -104,7 +107,7 @@ export const FilteredTable = ({
                       > */}
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                       {/* </button> */}
                     </td>
@@ -130,12 +133,12 @@ export const FilteredTable = ({
                       <>
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                       </>
                     )}
                   </th>
-                ))
+                )),
               )}
             </tr>
           </thead>
@@ -154,7 +157,7 @@ export const FilteredTable = ({
                         {/* TODO!: сделать отдельный компонент для фильта, чтоб передавать туда table и менять фильтр категорий */}
                         {flexRender(
                           cell.column.columnDef.cell,
-                          cell.getContext()
+                          cell.getContext(),
                         )}
                       </td>
                     );
@@ -167,15 +170,21 @@ export const FilteredTable = ({
         <HoverBorderedEl
           as="button"
           className="fixed bottom-4 left-[25%] -translate-x-1/2 bg-white z-20"
-          onClick={() => {
-            setIsOpenNewProductDialog((prev) => !prev)
-          }}
+          onClick={() => openDialog(DialogId.PRODUCT_DETAILS)}
         >
           <Typography>
             <span className="text-[16px]">+</span> Товар
           </Typography>
         </HoverBorderedEl>
-        {isOpenNewProductDialog && <NewProductDialog initialData={combinedData} onClose={() => setIsOpenNewProductDialog(false)} />}
+        {isDialogOpen(DialogId.PRODUCT_DETAILS) && (
+          <ProductsDetailsDialog
+            initialData={combinedData}
+            onClose={() => closeDialog()}
+          />
+        )}
+        {isDialogOpen(DialogId.NEW_PRODUCT) && (
+          <NewProductDialog onClose={() => closeDialog()} />
+        )}
       </div>
       <HoverBorderedEl
         as="button"
@@ -191,4 +200,4 @@ export const FilteredTable = ({
       </HoverBorderedEl>
     </div>
   );
-};
+});
