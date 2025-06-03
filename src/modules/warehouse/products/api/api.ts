@@ -32,6 +32,20 @@ async function deleteCategoryById(productId: number) {
   return instance.delete(`/api/products/categories/?product_category_id=${productId}`);
 }
 
+async function uploadProductImg(productId: number, file: any) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  return instance.post(`/api/products/${productId}/upload-image/`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+}
+
 export const productsApi = {
   basekey: "products",
   getProductsQueryOptions: (isArchived?: boolean) => {
@@ -77,4 +91,7 @@ export const productsApi = {
   deleteCategoryById: (productId: number) => {
     return deleteCategoryById(productId);
   },
+  uploadProductImg: (productId: number, file: any) => {
+    return uploadProductImg(productId, file)
+  }
 };

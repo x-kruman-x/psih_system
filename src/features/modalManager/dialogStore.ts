@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 export const DialogId = {
   NEW_PRODUCT: "NEW_PRODUCT",
   PRODUCT_DETAILS: "PRODUCT_DETAILS",
+  PRODUCTS_PHOTO: 'PRODUCTS_PHOTO'
 } as const;
 
 export type DialogIdType = keyof typeof DialogId;

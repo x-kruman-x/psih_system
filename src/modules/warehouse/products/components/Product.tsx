@@ -4,11 +4,21 @@ import { productsApi } from "../api/api";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Typography } from "@/shared/UI/Typography";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BorderedLink } from "@/shared/UI/BorderedLink";
 import { Outlet } from "@tanstack/react-router";
+import { BorderedElement } from "@/shared/UI/BorderedElement";
+import { DialogId, dialogStore } from "@/features/modalManager/dialogStore";
+import { observer } from "mobx-react";
+import { ProductDialog } from "./ProductDialog";
+import getImgName from "@/shared/utils/getImgName";
+import getFullImageUrl from "@/shared/utils/getFullImgName";
 
-export function Product({ productData }: { productData: ProductType }) {
+export const Product = observer(function ({
+  productData,
+}: {
+  productData: ProductType;
+}) {
   const queryClient = useQueryClient();
 
   const cachedProducts = queryClient.getQueryData<ProductType>([
@@ -20,7 +30,8 @@ export function Product({ productData }: { productData: ProductType }) {
     : useSuspenseQuery(productsApi.getProductsQueryOptions());
 
   const [colourState, setColourState] = useState<"dark" | "pink">("pink");
-
+  const { isDialogOpen, closeDialog, openDialog } = dialogStore;
+  // useEffect(() => console.log('productData: ', productData), [productData])
   return (
     <>
       <CardSettingsBar<ProductType, ProductType>
@@ -29,10 +40,34 @@ export function Product({ productData }: { productData: ProductType }) {
         itemsData={productData}
       />
       <div className="flex divide-x-[1px] divide-black divide-solid border-b-[1px] border-b-black border-solid">
-        <div className="w-1/2">
+        <div className="w-1/2 flex flex-col">
           <Typography isGray={true} className="text-center">
             все фото
           </Typography>
+          <div className="flex flex-wrap flex-grow overflow-y-auto">
+            {productData?.images?.map((img) => (
+              <div key={img.id} className="w-[299px] h-[299px] relative">
+                {/* <button
+                  className="absolute right-0 top-0 bg-white"
+                  onClick={() => handleRemoveImage(index)}
+                >
+                  X
+                </button> */}
+                <img src={getFullImageUrl(img.url)} alt="img" className="w-full h-full" />
+              </div>
+            ))}
+          </div>
+          <div className="mb-2 flex justify-center">
+            <HoverBorderedEl
+              as="button"
+              onClick={() => openDialog(DialogId.PRODUCTS_PHOTO)}
+            >
+              Редактировать
+            </HoverBorderedEl>
+          </div>
+          {isDialogOpen(DialogId.PRODUCTS_PHOTO) && (
+            <ProductDialog onClose={() => closeDialog()} productId={productData.id} />
+          )}
         </div>
         <div className="w-1/2">
           <Typography isGray={true} className="text-center mb-4">
@@ -88,4 +123,4 @@ export function Product({ productData }: { productData: ProductType }) {
       </div>
     </>
   );
-}
+});

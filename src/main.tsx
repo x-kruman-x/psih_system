@@ -24,7 +24,7 @@ declare module "@tanstack/react-router" {
 }
 
 // TODO!: при неправильном токене все равно пропускает в таблицу, а при обновлении страницы уже на логин перебрасывает
-async () => {
+// async () => {
   try {
     if (localStorage.getItem("access_token")) {
       await refreshToken();
@@ -47,7 +47,7 @@ async () => {
   } catch (e) {
     console.log(e);
   }
-};
+// };
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
