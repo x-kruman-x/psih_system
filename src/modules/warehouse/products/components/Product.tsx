@@ -4,14 +4,12 @@ import { productsApi } from "../api/api";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Typography } from "@/shared/UI/Typography";
 import HoverBorderedEl from "@/shared/UI/HoverBorderedEl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BorderedLink } from "@/shared/UI/BorderedLink";
 import { Outlet } from "@tanstack/react-router";
-import { BorderedElement } from "@/shared/UI/BorderedElement";
 import { DialogId, dialogStore } from "@/features/modalManager/dialogStore";
 import { observer } from "mobx-react";
 import { ProductDialog } from "./ProductDialog";
-import getImgName from "@/shared/utils/getImgName";
 import getFullImageUrl from "@/shared/utils/getFullImgName";
 
 export const Product = observer(function ({
