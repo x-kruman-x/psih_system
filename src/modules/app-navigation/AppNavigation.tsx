@@ -12,9 +12,19 @@ export function AppNavigation() {
       <BorderedLink to="/warehouse/orders" matchPath="/warehouse">
         <Typography>СКЛАД</Typography>
       </BorderedLink>
-      <BorderedLink to="">
+      <button
+        type="button"
+        className="p-[6px] border-solid border-[1px] opacity-70 border-transparent rounded-md hover:border-black hover:opacity-100"
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+        onClick={() => {
+          const access = localStorage.getItem("access_token");
+          const refresh = localStorage.getItem("refresh_token");
+          const url = `http://82.202.143.118:8080/?access=${encodeURIComponent(access ?? "")}&refresh=${encodeURIComponent(refresh ?? "")}`;
+          window.location.href = url;
+        }}
+      >
         <Typography>СООБЩЕНИЯ</Typography>
-      </BorderedLink>
+      </button>
       <BorderedLink to="">
         <Typography>САЙТ</Typography>
       </BorderedLink>
